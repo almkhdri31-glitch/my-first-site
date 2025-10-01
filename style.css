@@ -1,1 +1,55 @@
+/* تنسيقات أساسية للجسم والخطوط */
+body {
+    /* اختيار نوع خط عربي مناسب (بديل للـ Arial إذا لم يتوفر) */
+    font-family: 'Arial', sans-serif;
+    /* لون خلفية فاتح لكامل الصفحة */
+    background-color: #f4f4f9;
+    /* لون النص الأساسي */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    /* التأكد من اتجاه النص من اليمين لليسار */
+    direction: rtl;
+    text-align: right;
+    /* خصائص لمركزة المحتوى في منتصف الصفحة تماماً */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* جعل ارتفاع الصفحة 100% من ارتفاع الشاشة */
+    min-height: 100vh;
+}
+
+/* تنسيقات الحاوية الرئيسية للمحتوى (الـ div class="container") */
+.container {
+    /* خلفية بيضاء للمحتوى */
+    background-color: #ffffff;
+    /* مساحة داخلية للمحتوى */
+    padding: 40px;
+    /* زوايا مستديرة للمربع */
+    border-radius: 12px;
+    /* إضافة ظل خفيف لإبراز المربع */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* تحديد أقصى عرض للحاوية */
+    max-width: 600px;
+    width: 90%;
+    text-align: right;
+}
+
+/* تنسيقات العنوان الرئيسي (الـ h1) */
+h1 {
+    /* لون أزرق جذاب */
+    color: #007bff;
+    /* خط تحت العنوان لفصله */
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* تنسيقات الفقرات (الـ p) */
+p {
+    /* تباعد مريح بين السطور */
+    line-height: 1.6;
+    /* حجم الخط */
+    font-size: 1.1em;
+}
 
