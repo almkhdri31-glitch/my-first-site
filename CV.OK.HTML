@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>السيرة الذاتية - CV</title>
     <style>
-        /* التنسيقات الأساسية */
+        /* التنسيقات الأساسية وتغيير الخط للكل */
         body {
-            font-family: 'Tahoma', 'Trebuchet MS', 'Arial', sans-serif;
+            /* تطبيق خط Arial الواضح والرسمي */
+            font-family: 'Arial', 'Helvetica Neue', sans-serif; 
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
@@ -16,7 +17,7 @@
             direction: rtl; 
         }
         
-        /* تنسيق مدخلات النموذج */
+        /* تنسيق مدخلات النموذج (لشاشة الإدخال) */
         input[type="text"], input[type="email"], input[type="tel"], textarea {
             width: calc(100% - 22px);
             padding: 10px;
@@ -33,7 +34,7 @@
         }
 
         /* ************************************** */
-        /* تنسيقات الرأس والذيل */
+        /* تنسيقات الرأس والذيل (لشاشة الإدخال) */
         /* ************************************** */
         header {
             background-color: #17202A;
@@ -104,7 +105,7 @@
             border: 2px solid #28a745; 
         }
 
-        /* إخفاء حقل تحميل الملف */
+        /* إخفاء حقل تحميل الملف (يبقى الحقل مخفياً) */
         .image-upload-container input[type="file"] {
             display: none;
         }
@@ -130,6 +131,7 @@
 
         .section-content {
             margin-bottom: 20px;
+            padding-right: 15px;
         }
         
         /* تنسيق زر الطباعة (الزر الأخضر) */
@@ -160,130 +162,188 @@
         #printable-cv {
             display: none; 
         }
+        
+        /* تنسيق قائمة المهارات في النموذج */
+        .skills-options div {
+             display: inline-block;
+             margin-left: 10px;
+             margin-bottom: 5px;
+        }
+
 
         /* الجزء الخاص بتنسيق الطباعة (ميديا كويري) */
         @media print {
             
             /* ********************************************************* */
-            /* التصحيح: تقليل هوامش الصفحة الأساسية إلى أدنى حد */
+            /* 1. إعدادات الطباعة الأساسية - هامة جداً */
             /* ********************************************************* */
             @page {
-                margin: 0.4cm; /* تم تقليل الهامش لزيادة المساحة المتاحة */
+                /* إجبار المتصفح على استخدام هوامش ضيقة */
+                margin: 0.5cm !important; 
+                padding: 0 !important;
             }
 
-            /* ********************************************************* */
-            /* إخفاء عناصر الإدخال والأزرار عند الطباعة */
-            /* ********************************************************* */
+            body {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* إخفاء عناصر الإدخال والأزرار والرأس والذيل عند الطباعة */
             .print-area, form, .print-actions, .print-button-on-form, header, footer { 
                 display: none !important;
             }
             
-            /* الإطار الأزرق القديم المُحسَّن */
+            /* إظهار المحتوى - أهم التعديلات هنا */
             #printable-cv {
                 display: block !important; 
-                border: 4px solid #007bff; 
-                padding: 5px; /* تم تقليل البادئة مجدداً */
+                padding: 0; 
+                /* استخدام width 100% ليتكيف مع منطقة الطباعة المتاحة */
+                width: 100% !important; 
+                min-height: 100%; 
                 margin: 0 !important; 
                 box-shadow: none;
-                width: calc(100% - 10px); /* يتوافق مع البادئة الجديدة */
-                min-height: 100vh;
                 position: relative; 
                 background: white;
-                margin-bottom: 0 !important; /* ضمان عدم وجود هامش سفلي */
-            }
-
-            /* إزالة الخلفية والظل */
-            body {
-                background: none;
-                margin: 0;
-                padding: 0;
-                margin-bottom: 0 !important;
-            }
-
-            /* تنسيق العنوان CV (المتوسط والأكبر) */
-            .print-main-title {
-                 display: block;
-                 text-align: center;
-                 font-size: 38px; 
-                 font-weight: 900;
-                 color: #000 !important; 
-                 margin: 5px 0; 
-                 padding: 0; 
-                 letter-spacing: 8px; 
-            }
-
-            /* إظهار حاوية الصورة في نسخة الطباعة */
-            .image-upload-container-print {
-                display: block !important;
-                position: absolute; 
-                top: 55px; 
-                left: 15px; 
-                right: auto;
-                width: 90px; 
             }
             
+            /* ********************************************************* */
+            /* 2. الإطار الداخلي لـ CV (تعديل الهوامش الآمنة) */
+            /* ********************************************************* */
+            .print-page-frame {
+                border: none; /* إزالة الإطار */
+                width: 100%; 
+                min-height: 100%; 
+                margin: 0; 
+                box-sizing: border-box;
+                position: relative;
+                overflow: hidden; 
+                /* إضافة هامش داخلي كبير لضمان الأمان من القص */
+                padding: 40px; 
+            }
+            
+            /* تم إلغاء الشريط العمودي */
+            .print-page-frame::before {
+                content: none;
+            }
+            
+            /* ********************************************************* */
+            /* 3. تطبيق الهوامش والمحاذاة داخل الإطار */
+            /* ********************************************************* */
+            
+            /* حاوية علوية لتوسيط العنوان CV */
+            .print-header-top {
+                display: block;
+                text-align: center; 
+                padding-top: 0; 
+                margin-bottom: 30px; 
+                padding: 0; 
+                position: relative;
+                z-index: 2; 
+            }
+
+            /* تنسيق العنوان "CV" في الطباعة وتكبيره */
+            .print-main-title {
+                 display: inline-block;
+                 text-align: center; 
+                 font-size: 36px; 
+                 font-weight: 900;
+                 color: #000 !important; 
+                 margin: 0; 
+                 padding: 0; 
+                 letter-spacing: 6px; 
+            }
+
+            /* حاوية لتموضع الصورة ومعلومات الاتصال */
+            .print-contact-section {
+                 display: flex;
+                 flex-direction: row-reverse; 
+                 justify-content: space-between; 
+                 align-items: flex-start;
+                 margin-bottom: 25px; 
+                 padding: 0; 
+                 position: relative;
+                 z-index: 2;
+            }
+            
+            /* حاوية الصورة */
+            .image-upload-container-print {
+                display: block !important;
+                width: 70px; 
+                height: 70px;
+                flex-shrink: 0; 
+                margin: 0; 
+                position: relative; 
+                z-index: 3; 
+            }
+
             /* تحديد حجم ثابت للصورة */
             #print-image-display {
-                width: 90px; 
-                height: 90px; 
+                width: 70px; 
+                height: 70px; 
                 border-radius: 50%; 
                 object-fit: cover; 
-                border: 2px solid #007bff;
+                border: 2px solid #007bff; 
+                margin: 0; 
             }
 
             /* تنسيق حاوية معلومات التواصل */
             .print-contact-info {
-                position: absolute;
-                top: 55px; 
-                right: 15px; 
-                left: 110px; /* تم تقليله أيضاً لزيادة المساحة */
+                flex-grow: 1; 
                 text-align: right;
-                font-size: 15px; 
+                font-size: 15px; /* تم زيادته قليلاً */
                 color: #333;
-                
+                margin-top: 0; 
+                margin-left: 20px; 
             }
             
             /* تنسيق الاسم في الطباعة ليكون واضحاً */
             .print-contact-info h1 {
-                font-size: 28px; 
+                font-size: 26px; /* تم زيادته قليلاً */
                 font-weight: bold;
-                color: #000;
+                color: #000; 
                 margin-top: 0;
                 margin-bottom: 3px; 
                 text-align: right;
             }
 
-            /* تصغير حجم الخطوط للتفاصيل */
+            /* تلوين معلومات الاتصال */
              .print-contact-info p {
-                margin: 2px 0; 
-                font-size: 12px; 
-                color: #555;
+                margin: 1px 0; 
+                font-size: 13px; /* تم زيادته قليلاً */
+                color: #333; 
                 text-align: right;
             }
+             /* تلوين الرموز فقط */
+             .print-contact-info p strong span {
+                 color: #007bff !important; 
+             }
 
 
-            /* تقليل بداية محتوى السيرة الذاتية */
+            /* بداية محتوى السيرة الذاتية (الملخص والأقسام) */
             #print-content {
-                padding-top: 130px; 
+                padding-top: 0; 
                 max-width: 100%; 
                 box-sizing: border-box; 
-                padding-left: 10px; 
-                padding-right: 10px; 
+                padding: 0; 
                 margin: 0 auto; 
+                position: relative;
+                z-index: 2;
             }
             
             /* ********************************************************* */
-            /* العناوين العصرية (الشريط القصير) */
+            /* 4. الشكل العصري (العناوين والمهارات) */
             /* ********************************************************* */
             #printable-cv h2 {
                 color: #000 !important;
                 border-bottom: none; 
-                font-size: 17px; 
+                font-size: 17px; /* تم زيادته قليلاً */
                 padding-bottom: 2px; 
-                margin-top: 8px; 
-                margin-bottom: 4px; 
+                margin-top: 15px; 
+                margin-bottom: 5px; 
                 font-weight: bold;
                 position: relative; 
+                padding-right: 0; 
             }
 
             /* إضافة الخط العصري (شريط أزرق قصير وسميك) */
@@ -294,37 +354,43 @@
                 height: 3px; 
                 background-color: #007bff; 
                 position: absolute;
-                bottom: -3px; 
+                bottom: -5px; 
                 right: 0; 
             }
             
             /* تقليل مسافة قسم المحتوى */
             #print-content .section-content {
-                margin-bottom: 4px !important; /* تم تقليل هذا الهامش بشكل كبير */
+                margin-bottom: 5px; 
+                padding-right: 0; 
             }
             
-            /* تنسيق قائمة المهارات */
+            /* عرض قائمة المهارات أفقياً (13px) */
             .soft-skills-list {
-                list-style: none;
-                padding-right: 0;
-                margin-top: 5px;
-                margin-bottom: 0 !important;
+                list-style: none; 
+                padding: 0;
+                margin: 0;
+                display: flex; 
+                flex-wrap: wrap; 
+                text-align: right;
+                justify-content: flex-end; 
             }
+            
             .soft-skills-list li {
                 display: inline-block; 
-                background-color: #eee;
-                border: 1px solid #ddd;
-                padding: 3px 6px; 
-                margin: 0 4px 4px 0; 
+                background-color: #f0f8ff; 
+                border: 1px solid #cceeff; 
                 border-radius: 4px;
-                font-size: 12px; 
+                padding: 2px 7px; 
+                margin: 0 0 4px 7px; 
+                font-size: 12px; /* تم زيادته قليلاً */
+                white-space: nowrap; 
             }
             
-            /* التخفيف من تباعد الفقرات في الطباعة */
+            /* حجم خط الفقرات */
              #print-content p {
-                 margin: 2px 0; 
-                 font-size: 12px; 
-                 line-height: 1.3; 
+                 margin: 1px 0; 
+                 font-size: 13px; /* تم زيادته قليلاً */
+                 line-height: 1.4; 
              }
         }
     </style>
@@ -332,8 +398,8 @@
 <body>
     
     <header>
-        <div> </div>
-        <nav>
+        <div class="header-logo"> </div>
+        <nav class="header-nav">
             <a href="#">الرئيسية</a>
             <a href="#">عنّا</a>
             <a href="#footer">التواصل بنا (المطور)</a> 
@@ -341,7 +407,15 @@
     </header>
     <div class="container">
     <div class="header-area print-area">
-        <h1 class="cv-title">إنشاء سيرة ذاتية</h1>
+        <h1 class="cv-title">CV</h1>
+
+        <div class="image-upload-container">
+            <img id="profile-image" src="" alt="صورة شخصية (اختياري)">
+            <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload()">
+            <label for="image-upload" class="upload-label">
+                اختياري: لتحميل صورة شخصية اضغط هنا
+            </label>
+        </div>
     </div>
 
     <form id="cv-form">
@@ -369,14 +443,6 @@
 
             <label for="summary">الملخص المهني / الهدف:</label>
             <textarea id="summary" name="summary" rows="4" placeholder="اكتب ملخصاً قصيراً عنك وعن أهدافك المهنية"></textarea>
-            
-            <div class="image-upload-container">
-                <img id="profile-image" src="" alt="صورة شخصية (اختياري)">
-                <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload()">
-                <label for="image-upload" class="upload-label">
-                    اختياري: لتحميل صورة شخصية اضغط هنا
-                </label>
-            </div>
         </div>
 
         <h2>الخبرة العملية</h2>
@@ -429,31 +495,28 @@
                 <label for="skill8">حل المشكلات واتخاذ القرارات</label>
             </div>
         </div>
-
-        <h2>اللغات</h2>
-        <div class="section-content">
-            <label for="languages">أدخل اللغات التي تتقنها ومستوى إتقانك:</label>
-            <textarea id="languages" name="languages" rows="3" placeholder="مثال: العربية (اللغة الأم)، الإنجليزية (متوسط)"></textarea>
-        </div>
-        
         <button type="button" class="print-button-on-form" onclick="prepareAndPrint()">
             الضغط للطباعة المباشرة
         </button>
     </form>
 
     <div id="printable-cv" style="display: none;">
-        
-        <h1 class="print-main-title">CV</h1>
-        
-        <div class="image-upload-container-print" style="display: none;">
-            <img id="print-image-display" src="" alt="صورة شخصية">
-        </div>
-        
-        <div class="print-contact-info">
-             </div>
-
-        <div id="print-content">
+        <div class="print-page-frame">
+            
+            <div class="print-header-top">
+                <div class="print-main-title">CV</div>
             </div>
+            
+            <div class="print-contact-section">
+                <div class="image-upload-container-print" style="display: none;">
+                    <img id="print-image-display" src="" alt="صورة شخصية">
+                </div>
+                <div class="print-contact-info">
+                </div>
+            </div>
+            <div id="print-content">
+            </div>
+        </div>
     </div>
 </div>
 
@@ -507,9 +570,10 @@
         
         // تنسيق معلومات الاتصال
         let contactHTML = `<h1>${name || 'الاسم الكامل'}</h1>`;
-        if (cityCountry) contactHTML += `<p><strong><span style="font-size:14px; color:#007bff;">&#9900;</span> المدينة:</strong> ${cityCountry}</p>`;
-        if (email) contactHTML += `<p><strong><span style="font-size:14px; color:#007bff;">&#9993;</span> البريد:</strong> ${email}</p>`;
-        if (phone) contactHTML += `<p><strong><span style="font-size:14px; color:#007bff;">&#9742;</span> الهاتف:</strong> ${phone}</p>`;
+        // تم تغيير لون الرموز والنص إلى الأزرق عبر CSS المخصص لـ .print-contact-info p
+        if (cityCountry) contactHTML += `<p><strong><span style="font-size:14px;">&#9900;</span> المدينة:</strong> ${cityCountry}</p>`;
+        if (email) contactHTML += `<p><strong><span style="font-size:14px;">&#9993;</span> البريد:</strong> ${email}</p>`;
+        if (phone) contactHTML += `<p><strong><span style="font-size:14px;">&#9742;</span> الهاتف:</strong> ${phone}</p>`;
         printContactInfo.innerHTML = contactHTML;
 
 
@@ -547,7 +611,7 @@
                 <div class="section-content">
                     <div class="print-detail-entry">
                         <p style="font-weight: bold; margin-bottom: 0;">${degree || 'مؤهل غير محدد'}</p>
-                        <p style="color: #007bff; margin: 3px 0;">${university}</p>
+                        <p style="color: #333; margin: 3px 0; font-size: 13px;">${university}</p>
                     </div>
                 </div>
             `;
@@ -570,19 +634,7 @@
             `;
         }
         
-        // 6. **تجهيز اللغات**
-        const languagesText = document.getElementById('languages').value.trim();
-        if (languagesText) {
-            printContent.innerHTML += `
-                <h2>اللغات</h2>
-                <div class="section-content">
-                    <p style="white-space: pre-wrap; margin-right: 0;">${languagesText}</p>
-                </div>
-            `;
-        }
-
-        
-        // 7. **إطلاق أمر الطباعة**
+        // 6. **إطلاق أمر الطباعة**
         window.print();
     }
 </script>
