@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية - CV</title>
+    <style>
+        /* التنسيقات الأساسية */
+        body {
+            font-family: 'Tahoma', 'Trebuchet MS', 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 0; 
+            margin: 0;
+            direction: rtl; 
+        }
+        
+        /* تنسيق مدخلات النموذج */
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            display: block;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* ************************************** */
+        /* تنسيقات الرأس والذيل */
+        /* ************************************** */
+        header {
+            background-color: #17202A;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+        }
+        footer {
+            background-color: #17202A;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px; 
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto; 
+            background: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* تنسيق العنوان المطلوب CV (في وضع الإدخال) */
+        .cv-title {
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: #17202A;
+            margin-bottom: 5px;
+            letter-spacing: 5px;
+        }
+
+        /* تنسيق المنطقة العلوية لتحتوي العنوان وحقل الصورة */
+        .header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        /* تنسيق شكل الصورة */
+        #profile-image {
+            width: 100px !important;
+            height: 100px !important;
+            max-width: 100px !important; 
+            max-height: 100px !important; 
+            background-color: #e9ecef; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid #007bff;
+            display: block; 
+            margin: 0 auto 10px auto; 
+            opacity: 0.7; 
+        }
+        
+        #profile-image[src]:not([src=""]) {
+            opacity: 1; 
+            border: 2px solid #28a745; 
+        }
+
+        /* إخفاء حقل تحميل الملف */
+        .image-upload-container input[type="file"] {
+            display: none;
+        }
+
+        /* تنسيق زر تحميل الصورة (النص الذي يضغط عليه المستخدم) */
+        .upload-label {
+            display: block;
+            cursor: pointer;
+            color: #007bff;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        
+        /* تنسيقات العناوين h2 في النموذج */
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            font-size: 20px; 
+            font-weight: 600; 
+        }
+
+        .section-content {
+            margin-bottom: 20px;
+            padding-right: 15px;
+        }
+        
+        /* تنسيق زر الطباعة (الزر الأخضر) */
+        .print-button-on-form {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 25px;
+            transition: background-color 0.3s;
+        }
+
+        /* *************** إظهار النموذج وعدم إخفائه *************** */
+        .print-area {
+             display: flex !important; 
+        }
+        form {
+             display: block !important; 
+        }
+        /* ****************************************************** */
+        
+        /* إخفاء المعاينة في الوضع الطبيعي */
+        #printable-cv {
+            display: none; 
+        }
+
+        /* الجزء الخاص بتنسيق الطباعة (ميديا كويري) */
+        @media print {
+            
+            /* ********************************************************* */
+            /* التصحيح 1: تقليل هوامش الصفحة الأساسية أكثر لدمج الإطار */
+            /* ********************************************************* */
+            @page {
+                margin: 0.7cm; 
+            }
+
+            /* ********************************************************* */
+            /* إخفاء عناصر الإدخال والأزرار عند الطباعة */
+            /* ********************************************************* */
+            .print-area, form, .print-actions, .print-button-on-form, header, footer { 
+                display: none !important;
+            }
+            
+            /* التصحيح 2: تقليل بادئة الإطار لزيادة مساحة المحتوى */
+            #printable-cv {
+                display: block !important; 
+                border: 4px solid #007bff; 
+                padding: 8px; /* تم تقليل البادئة */
+                margin: 0 !important; 
+                box-shadow: none;
+                width: calc(100% - 16px); 
+                min-height: 100vh;
+                position: relative; 
+                background: white;
+            }
+
+            /* إزالة الخلفية والظل */
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* تنسيق العنوان CV (المتوسط والأكبر) */
+            .print-main-title {
+                 display: block;
+                 text-align: center;
+                 font-size: 38px; 
+                 font-weight: 900;
+                 color: #000 !important; 
+                 margin: 5px 0; 
+                 padding: 0; 
+                 letter-spacing: 8px; 
+            }
+
+            /* إظهار حاوية الصورة في نسخة الطباعة */
+            .image-upload-container-print {
+                display: block !important;
+                position: absolute; 
+                top: 55px; 
+                left: 15px; 
+                right: auto;
+                width: 90px; 
+            }
+            
+            /* تحديد حجم ثابت للصورة */
+            #print-image-display {
+                width: 90px; 
+                height: 90px; 
+                border-radius: 50%; 
+                object-fit: cover; 
+                border: 2px solid #007bff;
+            }
+
+            /* تنسيق حاوية معلومات التواصل */
+            .print-contact-info {
+                position: absolute;
+                top: 55px; 
+                right: 15px; 
+                left: 120px; 
+                text-align: right;
+                font-size: 15px; 
+                color: #333;
+                
+            }
+            
+            /* تنسيق الاسم في الطباعة ليكون واضحاً */
+            .print-contact-info h1 {
+                font-size: 28px; 
+                font-weight: bold;
+                color: #000;
+                margin-top: 0;
+                margin-bottom: 3px; 
+                text-align: right;
+            }
+
+            /* تصغير حجم الخطوط للتفاصيل */
+             .print-contact-info p {
+                margin: 2px 0; 
+                font-size: 12px; 
+                color: #555;
+                text-align: right;
+            }
+
+
+            /* تقليل بداية محتوى السيرة الذاتية */
+            #print-content {
+                padding-top: 130px; 
+                max-width: 100%; 
+                box-sizing: border-box; 
+                padding-left: 10px; 
+                padding-right: 10px; 
+                margin: 0 auto; 
+            }
+            
+            /* ********************************************************* */
+            /* التعديل الجوهري: جعل الخط تحت العنوان عصرياً وأقصراً */
+            /* ********************************************************* */
+            #printable-cv h2 {
+                color: #000 !important;
+                border-bottom: none; /* إلغاء الخط المتصل */
+                font-size: 17px; 
+                padding-bottom: 2px; /* تخفيف البادئة */
+                margin-top: 8px; 
+                margin-bottom: 4px; 
+                font-weight: bold;
+                position: relative; /* لتمكين وضع الخط العصري تحته */
+            }
+
+            /* إضافة الخط العصري (شريط أزرق قصير وسميك) */
+            #printable-cv h2::after {
+                content: '';
+                display: block;
+                width: 50px; /* طول الشريط */
+                height: 3px; /* سمك الشريط */
+                background-color: #007bff; /* اللون الأزرق */
+                position: absolute;
+                bottom: -3px; /* وضعه تحت العنوان مباشرة */
+                right: 0; /* يبدأ من اليمين */
+            }
+            
+            /* تقليل مسافة قسم المحتوى */
+            #print-content .section-content {
+                margin-bottom: 8px; 
+            }
+            
+            /* تقليل مسافة قائمة المهارات */
+            .soft-skills-list li {
+                padding: 3px 6px; 
+                margin: 0 4px 4px 0; 
+                font-size: 12px; 
+            }
+            
+            /* التخفيف من تباعد الفقرات في الطباعة */
+             #print-content p {
+                 margin: 2px 0; 
+                 font-size: 12px; 
+                 line-height: 1.3; 
+             }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="header-logo"> </div>
+        <nav class="header-nav">
+            <a href="#">الرئيسية</a>
+            <a href="#">عنّا</a>
+            <a href="#footer">التواصل بنا (المطور)</a> 
+        </nav>
+    </header>
+    <div class="container">
+    <div class="header-area print-area">
+        <h1 class="cv-title">CV</h1>
+
+        <div class="image-upload-container">
+            <img id="profile-image" src="" alt="صورة شخصية (اختياري)">
+            <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload()">
+            <label for="image-upload" class="upload-label">
+                اختياري: لتحميل صورة شخصية اضغط هنا
+            </label>
+        </div>
+    </div>
+
+    <form id="cv-form">
+        <h2>المعلومات الشخصية</h2>
+        <div class="section-content">
+            <div class="form-group-contact">
+                <label for="name">الاسم الكامل:</label>
+                <input type="text" id="name" name="name" placeholder="أدخل اسمك الكامل" required>
+            </div>
+            
+            <div class="form-group-contact">
+                <label for="city-country">المدينة والدولة:</label>
+                <input type="text" id="city-country" name="city-country" placeholder="مثال: الرياض، السعودية">
+            </div>
+
+            <div class="form-group-contact">
+                <label for="email">البريد الإلكتروني:</label>
+                <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+            </div>
+
+            <div class="form-group-contact">
+                <label for="phone">رقم الهاتف:</label>
+                <input type="tel" id="phone" name="phone" placeholder="+966 5x xxx xx xx">
+            </div>
+
+            <label for="summary">الملخص المهني / الهدف:</label>
+            <textarea id="summary" name="summary" rows="4" placeholder="اكتب ملخصاً قصيراً عنك وعن أهدافك المهنية"></textarea>
+        </div>
+
+        <h2>الخبرة العملية</h2>
+        <div id="experience-section-content" class="section-content">
+            <label for="experience-free-text">أدخل خبراتك العملية بتفصيل (المسمى، الشركة، المدة، المهام):</label>
+            <textarea id="experience-free-text" name="experience-free-text" rows="8"></textarea>
+        </div>
+        
+        <h2>التعليم والمؤهلات</h2>
+        <div class="section-content">
+            <label for="degree">المؤهل العلمي (مثال: بكالوريوس هندسة):</label>
+            <input type="text" id="degree" name="degree" placeholder="أدخل مؤهلك العلمي">
+
+            <label for="university">الجامعة / الجهة المانحة:</label>
+            <input type="text" id="university" name="university" placeholder="اسم الجامعة">
+        </div>
+
+        <h2>المهارات الشخصية والقيم (اختر ما ينطبق عليك)</h2>
+        <div class="section-content skills-options">
+            <div>
+                <input type="checkbox" id="skill1" name="soft_skill" value="العمل الجماعي الفعّال">
+                <label for="skill1">العمل الجماعي الفعّال</label>
+            </div>
+            <div>
+                <input type="checkbox" id="skill2" name="soft_skill" value="الالتزام بالمواعيد النهائية">
+                <label for="skill2">الالتزام بالمواعيد النهائية</label>
+            </div>
+            <div>
+                <input type="checkbox" id="skill3" name="soft_skill" value="الابتكار والتفكير الإبداعي">
+                <label for="skill3">الابتكار والتفكير الإبداعي</label>
+            </div>
+            <div>
+                <input type="checkbox" id="skill4" name="soft_skill" value="حب التطوير المستمر">
+                <label for="skill4">حب التطوير المستمر</label>
+            </div>
+            <div>
+                <input type="checkbox" id="skill5" name="soft_skill" value="قابلية عالية للتعلم">
+                <label for="skill5">قابلية عالية للتعلم</label>
+            </div>
+            <div>
+                <input type="checkbox" id="skill6" name="soft_skill" value="مهارات تواصل قوية">
+                <label for="skill6">مهارات تواصل قوية</label>
+            </div>
+             <div>
+                <input type="checkbox" id="skill7" name="soft_skill" value="القيادة وتحمل المسؤولية">
+                <label for="skill7">القيادة وتحمل المسؤولية</label>
+            </div>
+            <div>
+                <input type="checkbox" id="skill8" name="soft_skill" value="حل المشكلات واتخاذ القرارات">
+                <label for="skill8">حل المشكلات واتخاذ القرارات</label>
+            </div>
+        </div>
+        <button type="button" class="print-button-on-form" onclick="prepareAndPrint()">
+            الضغط للطباعة المباشرة
+        </button>
+    </form>
+
+    <div id="printable-cv" style="display: none;">
+        
+        <h1 class="print-main-title">CV</h1>
+        
+        <div class="image-upload-container-print" style="display: none;">
+            <img id="print-image-display" src="" alt="صورة شخصية">
+        </div>
+        
+        <div class="print-contact-info">
+             </div>
+
+        <div id="print-content">
+            </div>
+    </div>
+</div>
+
+    <footer id="footer">
+        &copy; 2025 جميع الحقوق محفوظة | تصميم المهندس محمدالمخدري.
+    </footer>
+
+<script>
+    
+    // دالة التعامل مع تحميل الصورة
+    function handleImageUpload() {
+        const fileInput = document.getElementById('image-upload');
+        const profileImage = document.getElementById('profile-image');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                profileImage.src = e.target.result; 
+            };
+            
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+    
+    // الدالة الرئيسية لتجهيز محتوى الطباعة والبدء بالطباعة
+    function prepareAndPrint() {
+        const printCV = document.getElementById('printable-cv');
+        const printContent = document.getElementById('print-content');
+        const printContactInfo = document.querySelector('.print-contact-info');
+        const printImageDisplay = document.getElementById('print-image-display');
+        
+        // مسح المحتوى القديم
+        printContent.innerHTML = '';
+        printContactInfo.innerHTML = '';
+
+        // 1. **تجهيز معلومات الاتصال والصورة**
+        const name = document.getElementById('name').value.trim();
+        const cityCountry = document.getElementById('city-country').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const profileImage = document.getElementById('profile-image');
+
+        // نقل الصورة
+        if (profileImage.src && profileImage.src.includes('data:image')) {
+            printImageDisplay.src = profileImage.src;
+            document.querySelector('.image-upload-container-print').style.display = 'block';
+        } else {
+             document.querySelector('.image-upload-container-print').style.display = 'none';
+        }
+        
+        // تنسيق معلومات الاتصال
+        let contactHTML = `<h1>${name || 'الاسم الكامل'}</h1>`;
+        if (cityCountry) contactHTML += `<p><strong><span style="font-size:14px; color:#007bff;">&#9900;</span> المدينة:</strong> ${cityCountry}</p>`;
+        if (email) contactHTML += `<p><strong><span style="font-size:14px; color:#007bff;">&#9993;</span> البريد:</strong> ${email}</p>`;
+        if (phone) contactHTML += `<p><strong><span style="font-size:14px; color:#007bff;">&#9742;</span> الهاتف:</strong> ${phone}</p>`;
+        printContactInfo.innerHTML = contactHTML;
+
+
+        // 2. **تجهيز الملخص المهني**
+        const summary = document.getElementById('summary').value.trim();
+        if (summary) {
+            printContent.innerHTML += `
+                <h2>الملخص المهني</h2>
+                <div class="section-content">
+                    <p style="text-align: justify; padding-right: 0;">${summary.replace(/\n/g, '<br>')}</p>
+                </div>
+            `;
+        }
+
+        // 3. **تجهيز الخبرة العملية**
+        const experienceFreeText = document.getElementById('experience-free-text').value.trim();
+        
+        if (experienceFreeText) {
+            printContent.innerHTML += `
+                <h2>الخبرة العملية</h2>
+                <div class="section-content">
+                    <p style="text-align: justify; white-space: pre-wrap; margin-right: 0;">${experienceFreeText}</p>
+                </div>
+            `;
+        }
+
+
+        // 4. **تجهيز التعليم والمؤهلات**
+        const degree = document.getElementById('degree').value.trim();
+        const university = document.getElementById('university').value.trim();
+
+        if (degree || university) {
+            printContent.innerHTML += `
+                <h2>التعليم والمؤهلات</h2>
+                <div class="section-content">
+                    <div class="print-detail-entry">
+                        <p style="font-weight: bold; margin-bottom: 0;">${degree || 'مؤهل غير محدد'}</p>
+                        <p style="color: #007bff; margin: 3px 0;">${university}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 5. **تجهيز المهارات الشخصية**
+        const selectedSkills = Array.from(document.querySelectorAll('input[name="soft_skill"]:checked'))
+                                    .map(checkbox => checkbox.value);
+        
+        if (selectedSkills.length > 0) {
+            const skillsListHTML = selectedSkills.map(skill => `<li>${skill}</li>`).join('');
+            
+            printContent.innerHTML += `
+                <h2>المهارات الشخصية</h2>
+                <div class="section-content">
+                    <ul class="soft-skills-list">
+                        ${skillsListHTML}
+                    </ul>
+                </div>
+            `;
+        }
+        
+        // 6. **إطلاق أمر الطباعة**
+        window.print();
+    }
+</script>
+</body>
+</html>
