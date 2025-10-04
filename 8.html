@@ -262,7 +262,7 @@
     </footer>
 
 <script>
-    // التفاعلية والتحقق من الحقول (JavaScript)
+    // 🚨 كتلة JavaScript مُنقَّحة لضمان عدم وجود أي كود مُتداخل يعرض رسالة Netlify 🚨
     
     // إضافة السنة الحالية تلقائياً في التذييل
     document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -273,9 +273,8 @@
     const emailError = document.getElementById('emailError');
     const passwordError = document.getElementById('passwordError');
     const togglePassword = document.getElementById('togglePassword');
-    const submitButton = document.getElementById('submitButton'); 
 
-    // معالج إرسال النموذج المُنقَّح (يعتمد على التحقق المحلي فقط)
+    // معالج إرسال النموذج (يعتمد فقط على التحقق المحلي قبل الإرسال)
     form.addEventListener('submit', function(event) {
         
         let isValid = true;
@@ -295,11 +294,11 @@
         }
 
         if (!isValid) {
-            // إذا لم يكن التحقق صحيحاً، نمنع الإرسال
+            // إذا لم يكن التحقق صحيحاً، نمنع الإرسال لـ Web3Forms
             event.preventDefault();
         }
         
-        // إذا كان التحقق صحيحاً، سيتم إرسال النموذج تلقائياً إلى Web3Forms عبر خاصية action
+        // إذا كان isValid = true، سيتم تنفيذ الإرسال بشكل طبيعي إلى Web3Forms
     });
 
     // إخفاء رسالة الخطأ عند بدء الكتابة
@@ -314,15 +313,8 @@
     // وظيفة إظهار/إخفاء كلمة المرور
     togglePassword.addEventListener('click', function() {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        
         passwordInput.setAttribute('type', type);
-
-        // تبديل الأيقونة
-        if (type === 'text') {
-            this.textContent = '🔒'; 
-        } else {
-            this.textContent = '👁️';
-        }
+        this.textContent = (type === 'text') ? '🔒' : '👁️';
     });
 </script>
 
