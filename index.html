@@ -11,7 +11,7 @@
         /* ********************************************************* */
         body {
             font-family: 'Cairo', 'Arial', 'Helvetica Neue', sans-serif; 
-            background-color: #212529; /* اللون الداكن للخلفية */
+            background-color: #212529; /* اللون الداكن للخلفية - يطابق موقعك الرئيسي */
             color: #f8f9fa; /* لون النص الفاتح العام */
             line-height: 1.6;
             padding: 0; 
@@ -219,7 +219,7 @@
             
             /* إخفاء عناصر النموذج الأساسية */
             .print-area, form, .print-actions, .print-button-on-form, header, footer, .container { 
-                display: none !important; /* تم إضافة .container لضمان اختفائه */
+                display: none !important;
             }
             
             #printable-cv {
@@ -577,7 +577,6 @@
         const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
         
-        // تم تعيين قيمة profileUrl فارغة هنا، حيث تم إزالة الحقل من الـ HTML
         const profileUrl = ''; 
         
         const summary = document.getElementById('summary').value.trim();
@@ -629,7 +628,6 @@
         
         if (phone) contactHTML += `<p>📞 الهاتف: <strong>${phone}</strong></p>`; 
         if (email) contactHTML += `<p>✉️ البريد: <strong>${email}</strong></p>`; 
-        // لن يتم إظهار رابط الملف التعريفي في الطباعة حيث أن profileUrl فارغة الآن
         if (profileUrl) contactHTML += `<p>🔗 رابط: <strong>${profileUrl}</strong></p>`; 
         if (cityCountry) contactHTML += `<p>📍 الموقع: <strong>${cityCountry}</strong></p>`; 
         
@@ -644,8 +642,8 @@
                 langHTML += `
                     <div class="language-entry-print">
                         <span class="lang-name-print">${lang.name} - ${level}%</span>
-                        <div class="lang-bar-container">
-                            <div class="lang-bar-fill" style="width: ${level}%;"></div>
+                        <div class="lang-bar-container" style="background-color: #495057; height: 6px; border-radius: 3px;">
+                            <div class="lang-bar-fill" style="width: ${level}%; height: 100%; border-radius: 3px;"></div>
                         </div>
                     </div>
                 `;
@@ -654,9 +652,12 @@
             sidebarHTML += langHTML;
         }
 
-        // د. المهارات الشخصية (Soft Skills)
-        const selectedSkills = Array.from(document.querySelectorAll('input[name="soft_skill"]:checked'))
-                                    .map(checkbox => checkbox.value);
+        // د. المهارات الشخصية (Soft Skills) - تم التأكد من قراءتها بطريقة آمنة
+        const selectedSkills = [];
+        document.querySelectorAll('input[name="soft_skill"]:checked').forEach(checkbox => {
+            selectedSkills.push(checkbox.value);
+        });
+        
         if (selectedSkills.length > 0) {
             const skillsListHTML = selectedSkills.map(skill => `<p>- ${skill}</p>`).join('');
             sidebarHTML += `
@@ -671,9 +672,9 @@
         if (hobbies) {
              const hobbiesList = hobbies.split(',').map(h => h.trim()).filter(h => h.length > 0);
              if (hobbiesList.length > 0) {
-                  let hobbiesHTML = '<h2>الهوايات</h2><div class="section-content"><ul class="hobbies-list">';
+                  let hobbiesHTML = '<h2>الهوايات</h2><div class="section-content"><ul class="hobbies-list" style="list-style-type: none; padding-right: 0;">';
                   hobbiesList.forEach(hobby => {
-                      hobbiesHTML += `<li>${hobby}</li>`;
+                      hobbiesHTML += `<li>- ${hobby}</li>`;
                   });
                   hobbiesHTML += '</ul></div>';
                   sidebarHTML += hobbiesHTML;
