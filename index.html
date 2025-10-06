@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>السيرة الذاتية - CV</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* ********************************************************* */
-        /* تنسيقات النموذج (صفحة الإدخال) - مُعدَّلة للنمط الداكن والوضوح */
+        /* تنسيقات النموذج (صفحة الإدخال) - بدون تغيير */
         /* ********************************************************* */
         body {
-            font-family: 'Cairo', 'Arial', 'Helvetica Neue', sans-serif; 
-            background-color: #212529; /* اللون الداكن للخلفية - يطابق موقعك الرئيسي */
-            color: #f8f9fa; /* لون النص الفاتح العام */
+            font-family: 'Arial', 'Helvetica Neue', sans-serif; 
+            background-color: #f4f4f4;
+            color: #333;
             line-height: 1.6;
             padding: 0; 
             margin: 0;
@@ -23,23 +22,15 @@
             width: calc(100% - 22px);
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ffc107; /* حدود ذهبية لتمييز الحقل بوضوح */
+            border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box; 
             display: block;
-            background-color: #495057; /* خلفية حقول الإدخال أفتح قليلاً للتباين */
-            color: #ffffff; /* نص الإدخال أبيض ناصع */
         }
-        
-        input[type="text"]::placeholder, input[type="email"]::placeholder, textarea::placeholder {
-            color: #adb5bd; /* لون للنص المؤقت (Placeholder) */
-        }
-        
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: #ffc107; /* لون ذهبي للمسميات */
         }
 
         header {
@@ -68,16 +59,16 @@
         .container {
             max-width: 900px;
             margin: 20px auto; 
-            background: #343a40; /* خلفية الحاوية الرئيسية داكنة (تباين مع الخلفية الأساسية) */
+            background: #fff;
             padding: 30px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* ظل داكن */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .cv-title {
             text-align: center;
             font-size: 40px;
             font-weight: bold;
-            color: #ffc107; /* اللون الذهبي */
+            color: #17202A;
             margin-bottom: 5px;
             letter-spacing: 5px;
         }
@@ -94,10 +85,10 @@
             height: 100px !important;
             max-width: 100px !important; 
             max-height: 100px !important; 
-            background-color: #495057; /* خلفية داكنة للصورة */
+            background-color: #e9ecef; 
             border-radius: 50%; 
             object-fit: cover; 
-            border: 2px solid #ffc107; /* حدود ذهبية */
+            border: 2px solid #007bff;
             display: block; 
             margin: 0 auto 10px auto; 
             opacity: 0.7; 
@@ -115,24 +106,23 @@
         .upload-label {
             display: block;
             cursor: pointer;
-            color: #ffc107; /* لون ذهبي للرابط */
+            color: #007bff;
             font-size: 14px;
             text-decoration: underline;
         }
         
         h2 {
-            color: #ffc107; /* اللون الذهبي للعناوين الرئيسية */
-            border-bottom: 2px solid #ffc107; /* خط ذهبي */
+            color: #007bff;
+            border-bottom: 2px solid #007bff; /* الخط الأزرق الذي سيتم تعديله في الطباعة */
             padding-bottom: 5px;
             margin-top: 25px;
-            font-size: 24px; 
-            font-weight: 700; 
+            font-size: 20px; 
+            font-weight: 600; 
         }
 
         .section-content {
             margin-bottom: 20px;
             padding-right: 15px;
-            color: #f8f9fa; /* ضمان لون نص فاتح في الأقسام */
         }
         
         .print-button-on-form {
@@ -149,39 +139,6 @@
             transition: background-color 0.3s;
         }
 
-        /* تنسيق الأزرار الثانوية (إضافة لغة/مرجع) */
-        .language-entry, .reference-entry {
-            border: 1px solid #495057;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            background-color: #212529; /* خلفية داكنة جداً للتباين */
-        }
-        
-        .language-entry input[type="text"], 
-        .language-entry input[type="number"] {
-            width: calc(50% - 15px);
-            display: inline-block;
-            margin-left: 10px;
-        }
-        .reference-entry input {
-            margin-bottom: 10px;
-        }
-        
-        button[type="button"] {
-            background-color: #6c757d; /* لون زر الإضافة رمادي داكن */
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-        button[type="button"]:hover {
-             background-color: #5a6268;
-        }
-        
         .print-area {
              display: flex !important; 
         }
@@ -199,6 +156,23 @@
              margin-bottom: 5px;
         }
 
+        .language-entry, .reference-entry {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .language-entry input[type="text"], 
+        .language-entry input[type="number"] {
+            width: calc(50% - 15px);
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .reference-entry input {
+            margin-bottom: 10px;
+        }
+        
         /* ********************************************************* */
         /* تنسيقات صفحة الطباعة (الحل الهندسي لمشاكل التقطيع والوضوح) */
         /* ********************************************************* */
@@ -218,7 +192,7 @@
             }
             
             /* إخفاء عناصر النموذج الأساسية */
-            .print-area, form, .print-actions, .print-button-on-form, header, footer, .container { 
+            .print-area, form, .print-actions, .print-button-on-form, header, footer { 
                 display: none !important;
             }
             
@@ -577,6 +551,7 @@
         const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
         
+        // تم تعيين قيمة profileUrl فارغة هنا، حيث تم إزالة الحقل من الـ HTML
         const profileUrl = ''; 
         
         const summary = document.getElementById('summary').value.trim();
@@ -628,6 +603,7 @@
         
         if (phone) contactHTML += `<p>📞 الهاتف: <strong>${phone}</strong></p>`; 
         if (email) contactHTML += `<p>✉️ البريد: <strong>${email}</strong></p>`; 
+        // لن يتم إظهار رابط الملف التعريفي في الطباعة حيث أن profileUrl فارغة الآن
         if (profileUrl) contactHTML += `<p>🔗 رابط: <strong>${profileUrl}</strong></p>`; 
         if (cityCountry) contactHTML += `<p>📍 الموقع: <strong>${cityCountry}</strong></p>`; 
         
@@ -642,8 +618,8 @@
                 langHTML += `
                     <div class="language-entry-print">
                         <span class="lang-name-print">${lang.name} - ${level}%</span>
-                        <div class="lang-bar-container" style="background-color: #495057; height: 6px; border-radius: 3px;">
-                            <div class="lang-bar-fill" style="width: ${level}%; height: 100%; border-radius: 3px;"></div>
+                        <div class="lang-bar-container">
+                            <div class="lang-bar-fill" style="width: ${level}%;"></div>
                         </div>
                     </div>
                 `;
@@ -652,12 +628,9 @@
             sidebarHTML += langHTML;
         }
 
-        // د. المهارات الشخصية (Soft Skills) - تم التأكد من قراءتها بطريقة آمنة
-        const selectedSkills = [];
-        document.querySelectorAll('input[name="soft_skill"]:checked').forEach(checkbox => {
-            selectedSkills.push(checkbox.value);
-        });
-        
+        // د. المهارات الشخصية (Soft Skills)
+        const selectedSkills = Array.from(document.querySelectorAll('input[name="soft_skill"]:checked'))
+                                    .map(checkbox => checkbox.value);
         if (selectedSkills.length > 0) {
             const skillsListHTML = selectedSkills.map(skill => `<p>- ${skill}</p>`).join('');
             sidebarHTML += `
@@ -672,9 +645,9 @@
         if (hobbies) {
              const hobbiesList = hobbies.split(',').map(h => h.trim()).filter(h => h.length > 0);
              if (hobbiesList.length > 0) {
-                  let hobbiesHTML = '<h2>الهوايات</h2><div class="section-content"><ul class="hobbies-list" style="list-style-type: none; padding-right: 0;">';
+                  let hobbiesHTML = '<h2>الهوايات</h2><div class="section-content"><ul class="hobbies-list">';
                   hobbiesList.forEach(hobby => {
-                      hobbiesHTML += `<li>- ${hobby}</li>`;
+                      hobbiesHTML += `<li>${hobby}</li>`;
                   });
                   hobbiesHTML += '</ul></div>';
                   sidebarHTML += hobbiesHTML;
