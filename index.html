@@ -6,12 +6,12 @@
     <title>السيرة الذاتية - CV</title>
     <style>
         /* ********************************************************* */
-        /* تنسيقات النموذج (صفحة الإدخال) - بدون تغيير */
+        /* تنسيقات النموذج (صفحة الإدخال) - تصميم داكن مُحدَّث */
         /* ********************************************************* */
         body {
             font-family: 'Arial', 'Helvetica Neue', sans-serif; 
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #1a1a1a; /* خلفية داكنة */
+            color: #f4f4f4; /* نص فاتح */
             line-height: 1.6;
             padding: 0; 
             margin: 0;
@@ -22,10 +22,12 @@
             width: calc(100% - 22px);
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #555; /* حدود داكنة */
             border-radius: 4px;
             box-sizing: border-box; 
             display: block;
+            background-color: #333; /* خلفية الإدخال داكنة */
+            color: #fff; /* نص الإدخال أبيض */
         }
         label {
             display: block;
@@ -34,7 +36,7 @@
         }
 
         header {
-            background-color: #17202A;
+            background-color: #000000; /* شريط تنقل أسود */
             color: white;
             padding: 15px 20px;
             display: flex;
@@ -42,12 +44,12 @@
             align-items: center;
         }
         .header-nav a {
-            color: white;
+            color: #FFC107; /* لون أصفر/ذهبي للروابط */
             text-decoration: none;
             margin-right: 25px;
         }
         footer {
-            background-color: #17202A;
+            background-color: #000000;
             color: white;
             text-align: center;
             padding: 10px 0;
@@ -59,16 +61,16 @@
         .container {
             max-width: 900px;
             margin: 20px auto; 
-            background: #fff;
+            background: #222222; /* خلفية الصندوق داكنة */
             padding: 30px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); 
         }
 
         .cv-title {
             text-align: center;
             font-size: 40px;
             font-weight: bold;
-            color: #17202A;
+            color: #FFC107; /* عنوان CV ذهبي */
             margin-bottom: 5px;
             letter-spacing: 5px;
         }
@@ -85,18 +87,18 @@
             height: 100px !important;
             max-width: 100px !important; 
             max-height: 100px !important; 
-            background-color: #e9ecef; 
+            background-color: #444; /* خلفية داكنة للصورة */
             border-radius: 50%; 
             object-fit: cover; 
-            border: 2px solid #007bff;
+            border: 2px solid #FFC107; /* إطار ذهبي */
             display: block; 
             margin: 0 auto 10px auto; 
-            opacity: 0.7; 
+            opacity: 0.8; 
         }
         
         #profile-image[src]:not([src=""]) {
             opacity: 1; 
-            border: 2px solid #28a745; 
+            border: 2px solid #FFC107; 
         }
 
         .image-upload-container input[type="file"] {
@@ -106,31 +108,47 @@
         .upload-label {
             display: block;
             cursor: pointer;
-            color: #007bff;
+            color: #FFC107; /* نص التحميل ذهبي */
             font-size: 14px;
             text-decoration: underline;
         }
         
         h2 {
-            color: #007bff;
-            border-bottom: 2px solid #007bff; /* الخط الأزرق الذي سيتم تعديله في الطباعة */
+            color: #FFC107; /* العناوين الرئيسية ذهبية */
+            border-bottom: 2px solid #FFC107; 
             padding-bottom: 5px;
             margin-top: 25px;
             font-size: 20px; 
             font-weight: 600; 
         }
+        /* الأزرار الصغيرة لإضافة عناصر */
+        button[type="button"] {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="button"]:hover {
+            background-color: #FFC107;
+            color: #1a1a1a;
+        }
+
 
         .section-content {
             margin-bottom: 20px;
             padding-right: 15px;
         }
         
+        /* هذا هو زر الطباعة الرئيسي */
         .print-button-on-form {
             display: block;
             width: 100%;
             padding: 15px;
-            background-color: #28a745;
-            color: white;
+            background-color: #FFC107; /* لون ذهبي بارز */
+            color: #1a1a1a; /* نص داكن */
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -138,43 +156,12 @@
             margin-top: 25px;
             transition: background-color 0.3s;
         }
-
-        .print-area {
-             display: flex !important; 
-        }
-        form {
-             display: block !important; 
-        }
-        
-        #printable-cv {
-            display: none; 
-        }
-        
-        .skills-options div {
-             display: inline-block;
-             margin-left: 10px;
-             margin-bottom: 5px;
+        .print-button-on-form:hover {
+            background-color: #e6b800;
         }
 
-        .language-entry, .reference-entry {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-        }
-        .language-entry input[type="text"], 
-        .language-entry input[type="number"] {
-            width: calc(50% - 15px);
-            display: inline-block;
-            margin-left: 10px;
-        }
-        .reference-entry input {
-            margin-bottom: 10px;
-        }
-        
         /* ********************************************************* */
-        /* تنسيقات صفحة الطباعة (الحل الهندسي لمشاكل التقطيع والوضوح) */
+        /* تنسيقات صفحة الطباعة (مُنَسَّقة لتبدو مطبوعة على ورق أبيض) */
         /* ********************************************************* */
         @media print {
             
@@ -225,8 +212,8 @@
             
             /* العمود الجانبي الملون (Sidebar - على اليمين) */
             .sidebar-column {
-                background-color: #5B4F46 !important; 
-                color: #FFFFFF !important; /* النص العادي: أبيض ناصع لتباين ممتاز */
+                background-color: #5B4F46 !important; /* اللون البني الغامق */
+                color: #FFFFFF !important; 
                 padding: 20px 10px 10px 10px !important; 
                 order: 1; 
             }
@@ -238,25 +225,25 @@
                 background: white;
             }
 
-            /* منع قطع المحتوى داخل الأقسام (الحل الرئيسي لمشكلة التقطيع) */
+            /* منع قطع المحتوى */
             .main-content-column h2, 
             .sidebar-column h2,
             .section-content,
             .language-entry-print,
             .reference-entry-print {
-                page-break-inside: avoid !important; /* للطباعة */
-                -webkit-column-break-inside: avoid !important; /* لمتصفحات كروم */
-                break-inside: avoid !important; /* للجميع */
+                page-break-inside: avoid !important; 
+                -webkit-column-break-inside: avoid !important; 
+                break-inside: avoid !important; 
             }
             
             /* ********************************************************* */
-            /* 2. تحسين وضوح العناوين في العمود الرئيسي (اللون الأبيض) */
+            /* 2. تحسين وضوح العناوين في العمود الرئيسي (الأبيض) */
             /* ********************************************************* */
             
             /* العناوين في العمود الرئيسي (أسود داكن مع خط رمادي) */
             .main-content-column h2 {
-                color: #17202A !important; /* لون النص: أسود داكن */
-                border-bottom: 2px solid #6c757d !important; /* لون الخط السفلي: رمادي غامق احترافي */
+                color: #17202A !important; 
+                border-bottom: 2px solid #6c757d !important; 
                 padding-bottom: 3px !important; 
                 margin-top: 15px !important; 
                 font-size: 16px !important; 
@@ -266,19 +253,15 @@
                 padding-left: 0 !important;
             }
             
-            .main-content-column h2::after {
-                display: none !important; 
-            }
-            
             /* تنسيق عنوان "CV" في العمود الرئيسي (على اليسار) */
             #cv-print-header {
-                 text-align: left !important; /* كلمة CV على اليسار */
+                 text-align: left !important; 
                  font-size: 30px !important; 
                  margin-bottom: 10px !important;
                  letter-spacing: 5px !important; 
-                 border-bottom: 2px solid #6c757d !important; /* رمادي غامق */
+                 border-bottom: 2px solid #6c757d !important; 
                  padding-bottom: 5px;
-                 color: #17202A !important; /* أسود داكن */
+                 color: #17202A !important; 
             }
             
             /* ********************************************************* */
@@ -292,8 +275,8 @@
             }
              
             .sidebar-column h2 {
-                color: #f8f9fa !important; /* العناوين الفرعية داخل البني: رمادي فاتح (أنيق وجذاب) */
-                border-bottom: 1px solid #f8f9fa !important; /* خط فاصل رمادي فاتح */
+                color: #f8f9fa !important; 
+                border-bottom: 1px solid #f8f9fa !important; 
             }
 
             .image-upload-container-print {
@@ -311,18 +294,8 @@
                 border: 2px solid #fff !important; 
             }
             
-            .header-sidebar-container-print h1 {
-                font-size: 18px !important; 
-                margin: 5px 0 0 0 !important;
-            }
-            
-            .header-sidebar-container-print h3 {
-                font-size: 12px !important; 
-                margin: 2px 0 0 0 !important;
-            }
-            
             .lang-bar-fill {
-                 background-color: #f8f9fa !important; /* لون ملء شريط اللغة: رمادي فاتح */
+                 background-color: #f8f9fa !important; 
             }
              
              .main-content-column .section-content {
@@ -331,7 +304,7 @@
             .main-content-column p, .main-content-column li {
                 font-size: 12px !important;
                 line-height: 1.4 !important;
-                color: #333 !important; /* ضمان أن النص في العمود الأبيض أسود داكن */
+                color: #333 !important; 
             }
         }
     </style>
@@ -551,7 +524,6 @@
         const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
         
-        // تم تعيين قيمة profileUrl فارغة هنا، حيث تم إزالة الحقل من الـ HTML
         const profileUrl = ''; 
         
         const summary = document.getElementById('summary').value.trim();
@@ -560,7 +532,6 @@
         const university = document.getElementById('university').value.trim();
         const hobbies = document.getElementById('hobbies').value.trim(); 
         
-        // جلب مصدر الصورة لمرة واحدة
         const profileImage = document.getElementById('profile-image');
         const imageSrc = profileImage.src && !profileImage.src.includes('صورة شخصية (اختياري)') ? profileImage.src : '';
         
@@ -603,7 +574,6 @@
         
         if (phone) contactHTML += `<p>📞 الهاتف: <strong>${phone}</strong></p>`; 
         if (email) contactHTML += `<p>✉️ البريد: <strong>${email}</strong></p>`; 
-        // لن يتم إظهار رابط الملف التعريفي في الطباعة حيث أن profileUrl فارغة الآن
         if (profileUrl) contactHTML += `<p>🔗 رابط: <strong>${profileUrl}</strong></p>`; 
         if (cityCountry) contactHTML += `<p>📍 الموقع: <strong>${cityCountry}</strong></p>`; 
         
