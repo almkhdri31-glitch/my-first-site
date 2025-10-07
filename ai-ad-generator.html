@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولّد أفكار الإعلانات الذكي بالذكاء الاصطناعي</title>
+    <script src="https://unpkg.com/@google/genai@latest/dist/client.js"></script>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f4f9; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
+        h3 { color: #333; text-align: center; margin-bottom: 25px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+        input[type="text"] { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1.1em; transition: background-color 0.3s; }
+        button:hover { background-color: #0056b3; }
+        #results { margin-top: 30px; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px; background-color: #f9f9f9; min-height: 100px; white-space: pre-wrap; }
+        #results h3 { color: #28a745; margin-top: 0; }
+        /* تصميم بسيط لعرض Markdown بشكل أفضل */
+        #results strong { color: #007bff; } 
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="ai-ad-tool">
+            <h3>مولّد أفكار الإعلانات القصيرة بالذكاء الاصطناعي</h3>
+            
+            <label for="product_name">اسم المنتج/الخدمة:</label>
+            <input type="text" id="product_name" placeholder="مثال: خدمة حماية سحابية" value="خدمة جدار حماية سريعة">
+            
+            <label for="product_feature">الجمهور والميزة (مثال: الشركات الصغيرة، حماية فورية 24/7):</label>
+            <input type="text" id="product_feature" placeholder="اذكر أهم فائدة و الجمهور" value="رواد الأعمال، حماية من الهجمات دون إبطاء في السرعة">
+            
+            <button onclick="generateAdIdeas()">ابدأ التوليد الآن</button>
+            
+            <div id="results">
+                </div>
+        </div>
+    </div>
+
+<script>
+    // **تحذير: هذا المفتاح يجب أن يتم إخفاؤه في الخادم الخلفي (Vercel)**
+    // تم وضع المفتاح هنا مؤقتاً لتسهيل عملية النشر المباشر من الهاتف.
+    const API_KEY = 'Napi_41s38jvbpfvk2dv1lv3bh4o30o4byp8iaccqms04a6uhwz45tlzbelk8haz9kz3g'; 
+    
+    // إنشاء كائن الاتصال بالذكاء الاصطناعي
+    const ai = new GoogleGenAI({ apiKey: API_KEY });
+
+    async function generateAdIdeas() {
+        const productName = document.getElementById('product_name').value;
+        const productFeature = document.getElementById('product_feature').value;
+        const resultsDiv = document.getElementById('results');
+        
+        if (!productName || !productFeature) {
+            resultsDiv.innerHTML = "<p style='color: red; text-align: center;'>الرجاء إكمال جميع الحقول لبدء التوليد.</p>";
+            return;
+        }
+
+        resultsDiv.innerHTML = "<p style='text-align: center;'>جاري توليد الأفكار... قد يستغرق الأمر بضع ثوانٍ ⏳</p>";
+        
+        // بناء الـ Prompt الهندسي
+        const prompt = `
+            أنت خبير تسويق إعلاني متمرس متخصص في صياغة سيناريوهات سريعة وفعالة لمنصات الفيديو القصيرة (TikTok/Reels/Shorts). مهمتك هي توليد 3 أفكار إعلانية متفردة وغير تقليدية بناءً على المدخلات التالية.
+            
+            المدخلات:
+            * المنتج/الخدمة: ${productName}
+            * الجمهور والميزة المحورية: ${productFeature}
+
+            المخرجات المطلوبة (يجب أن تكون المدة الإجمالية لكل فكرة أقل من 10 ثوانٍ):
+            قم بتقديم الأفكار الـ 3 بتنسيق Markdown (يجب استخدام عناوين بولدية و نقاط). ويجب أن تتضمن كل فكرة الأجزاء التالية بدقة:
+            1.  **مشهد الجذب (Hook):** وصف دقيق للمشهد المرئي في أول 3 ثوانٍ لضمان عدم التخطي.
+            2.  **إظهار الميزة/الحل:** وصف لقطة عملية للمنتج وهو يحل مشكلة الجمهور المستهدف.
+            3.  **النص على الشاشة (CTA):** عبارة دعوة لاتخاذ إجراء قصيرة جداً ومقنعة تظهر في النهاية.
+
+            ملاحظة إضافية: يجب أن تكون الأفكار إبداعية وتناسب العصر الرقمي السريع.
+        `;
+        
+        try {
+            // الاتصال الفعلي بـ Gemini
+            const response = await ai.models.generateContent({
+                model: "gemini-2.5-flash", 
+                contents: prompt,
+            });
+
+            const adIdeas = response.text.replace(/\*\*/g, '<strong>').replace(/\n/g, '<br>'); // تعديل بسيط لعرض Markdown
+            
+            // عرض النتيجة
+            resultsDiv.innerHTML = `<h3>💡 أفكار إعلانية مقترحة:</h3><p>${adIdeas}</p>`;
+            
+        } catch (error) {
+            console.error('Gemini API Error:', error);
+            resultsDiv.innerHTML = "<p style='color: red; text-align: center;'>فشل الاتصال بنظام الذكاء الاصطناعي. تأكد من أن مفتاح API صحيح.</p>";
+        }
+    }
+</script>
+
+</body>
+</html>
