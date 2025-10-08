@@ -5,13 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>السيرة الذاتية - CV</title>
     <style>
+        /*
+        ========================================================================= */
+        /* 🎨 المتغيرات (Variables) - لتطبيق ألوان الموقع الرئيسي */
+        /* ========================================================================= */
+        :root {
+            /* ألوان الموقع الرئيسي */
+            --color-bg-main: #111111;    
+            --color-bg-secondary: #1c1c1c; 
+            --color-bg-card: #2c3e50;    
+            --color-text-light: #f1f1f1;  
+            --color-text-subtle: #bdc3c7; 
+            --color-brand-primary: #FFC300; /* الذهبي */
+            --color-accent-secondary: #f39c12; /* البرتقالي */
+            
+            /* ألوان خاصة بالنموذج الداكن */
+            --color-form-bg: var(--color-bg-card); /* خلفية النموذج (أزرق داكن/رمادي غامق) */
+            --color-input-bg: #34495e; /* خلفية حقول الإدخال */
+            --color-input-text: var(--color-text-light); /* نص حقول الإدخال */
+            --color-heading: var(--color-brand-primary); /* لون عناوين الأقسام */
+        }
+
         /* ********************************************************* */
-        /* تنسيقات النموذج (صفحة الإدخال) - بدون تغيير */
+        /* تنسيقات النموذج (صفحة الإدخال) - تم تطبيق التنسيق الداكن */
         /* ********************************************************* */
         body {
-            font-family: 'Arial', 'Helvetica Neue', sans-serif; 
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Cairo', sans-serif; /* تغيير الخط ليتناسب مع موقعك */
+            background-color: var(--color-bg-main); /* خلفية سوداء/داكنة */
+            color: var(--color-text-light); /* لون النص الأساسي فاتح */
             line-height: 1.6;
             padding: 0; 
             margin: 0;
@@ -22,33 +43,45 @@
             width: calc(100% - 22px);
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #6c757d; /* إطار أفتح قليلاً */
             border-radius: 4px;
             box-sizing: border-box; 
             display: block;
+            background-color: var(--color-input-bg); /* خلفية داكنة للحقول */
+            color: var(--color-input-text); /* نص فاتح في الحقول */
         }
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            color: var(--color-text-subtle); /* لون للـ Label */
         }
 
         header {
-            background-color: #17202A;
-            color: white;
+            background-color: var(--color-bg-secondary); /* يتناسب مع هيدر الموقع */
+            color: var(--color-text-light);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+        /* تعديل هنا: لتطبيق التعديل على جميع الروابط داخل الهيدر */
+        header a {
+             color: var(--color-text-light);
+             text-decoration: none;
+             transition: color 0.3s;
+        }
         .header-nav a {
-            color: white;
-            text-decoration: none;
             margin-right: 25px;
         }
+        header a:hover {
+            color: var(--color-brand-primary); /* لون ذهبي عند المرور */
+        }
+        /* نهاية تعديل الهيدر */
+        
         footer {
-            background-color: #17202A;
-            color: white;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-subtle);
             text-align: center;
             padding: 10px 0;
             margin-top: 30px; 
@@ -59,16 +92,17 @@
         .container {
             max-width: 900px;
             margin: 20px auto; 
-            background: #fff;
+            background: var(--color-form-bg); /* خلفية النموذج داكنة */
             padding: 30px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
         }
 
         .cv-title {
             text-align: center;
             font-size: 40px;
             font-weight: bold;
-            color: #17202A;
+            color: var(--color-brand-primary); /* عنوان CV باللون الذهبي */
             margin-bottom: 5px;
             letter-spacing: 5px;
         }
@@ -78,6 +112,8 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 20px;
+            border-bottom: 2px solid var(--color-bg-secondary); /* خط فاصل خفيف */
+            padding-bottom: 15px;
         }
 
         #profile-image {
@@ -85,10 +121,10 @@
             height: 100px !important;
             max-width: 100px !important; 
             max-height: 100px !important; 
-            background-color: #e9ecef; 
+            background-color: #34495e; 
             border-radius: 50%; 
             object-fit: cover; 
-            border: 2px solid #007bff;
+            border: 2px solid var(--color-accent-secondary); /* برتقالي */
             display: block; 
             margin: 0 auto 10px auto; 
             opacity: 0.7; 
@@ -96,7 +132,7 @@
         
         #profile-image[src]:not([src=""]) {
             opacity: 1; 
-            border: 2px solid #28a745; 
+            border: 2px solid var(--color-brand-primary); /* ذهبي عند التحميل */
         }
 
         .image-upload-container input[type="file"] {
@@ -106,37 +142,58 @@
         .upload-label {
             display: block;
             cursor: pointer;
-            color: #007bff;
+            color: var(--color-brand-primary); /* لون ذهبي للرابط */
             font-size: 14px;
             text-decoration: underline;
+            text-align: center;
         }
         
         h2 {
-            color: #007bff;
-            border-bottom: 2px solid #007bff; /* الخط الأزرق الذي سيتم تعديله في الطباعة */
+            color: var(--color-heading); /* العناوين باللون الذهبي */
+            border-bottom: 2px solid var(--color-heading); 
             padding-bottom: 5px;
             margin-top: 25px;
             font-size: 20px; 
-            font-weight: 600; 
+            font-weight: 700; 
         }
 
         .section-content {
             margin-bottom: 20px;
-            padding-right: 15px;
+            padding-right: 5px;
         }
         
-        .print-button-on-form {
+        .print-button-on-form, 
+        .section-content button {
             display: block;
             width: 100%;
-            padding: 15px;
-            background-color: #28a745;
-            color: white;
+            padding: 10px 15px;
+            background-color: var(--color-brand-primary); /* زر الطباعة بالذهبي */
+            color: var(--color-bg-main);
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 18px;
-            margin-top: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
             transition: background-color 0.3s;
+        }
+        
+        .section-content button {
+             width: auto;
+             display: inline-block;
+             background-color: var(--color-accent-secondary); /* أزرار الإضافة بالبرتقالي */
+             color: var(--color-bg-main);
+             padding: 8px 15px;
+             margin-bottom: 15px;
+             font-size: 14px;
+        }
+        
+        .section-content button:hover {
+            background-color: var(--color-brand-hover);
+        }
+
+        .print-button-on-form:hover {
+            background-color: var(--color-brand-hover);
         }
 
         .print-area {
@@ -155,13 +212,17 @@
              margin-left: 10px;
              margin-bottom: 5px;
         }
+        
+        .skills-options label {
+            color: var(--color-text-light); /* نص أبيض لخيارات المهارات */
+        }
 
         .language-entry, .reference-entry {
-            border: 1px solid #ddd;
+            border: 1px solid #495057; /* إطار داكن */
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 4px;
-            background-color: #f9f9f9;
+            background-color: #34495e; /* خلفية داكنة للبطاقات الفرعية */
         }
         .language-entry input[type="text"], 
         .language-entry input[type="number"] {
@@ -174,7 +235,7 @@
         }
         
         /* ********************************************************* */
-        /* تنسيقات صفحة الطباعة (الحل الهندسي لمشاكل التقطيع والوضوح) */
+        /* تنسيقات صفحة الطباعة (لم يتم المساس بها لتبقى بيضاء ومهنية) */
         /* ********************************************************* */
         @media print {
             
@@ -225,8 +286,8 @@
             
             /* العمود الجانبي الملون (Sidebar - على اليمين) */
             .sidebar-column {
-                background-color: #5B4F46 !important; 
-                color: #FFFFFF !important; /* النص العادي: أبيض ناصع لتباين ممتاز */
+                background-color: #5B4F46 !important; /* لون جانبي بني/داكن احترافي */
+                color: #FFFFFF !important; 
                 padding: 20px 10px 10px 10px !important; 
                 order: 1; 
             }
@@ -255,8 +316,8 @@
             
             /* العناوين في العمود الرئيسي (أسود داكن مع خط رمادي) */
             .main-content-column h2 {
-                color: #17202A !important; /* لون النص: أسود داكن */
-                border-bottom: 2px solid #6c757d !important; /* لون الخط السفلي: رمادي غامق احترافي */
+                color: #17202A !important; 
+                border-bottom: 2px solid #6c757d !important; 
                 padding-bottom: 3px !important; 
                 margin-top: 15px !important; 
                 font-size: 16px !important; 
@@ -272,13 +333,13 @@
             
             /* تنسيق عنوان "CV" في العمود الرئيسي (على اليسار) */
             #cv-print-header {
-                 text-align: left !important; /* كلمة CV على اليسار */
+                 text-align: left !important; 
                  font-size: 30px !important; 
                  margin-bottom: 10px !important;
                  letter-spacing: 5px !important; 
-                 border-bottom: 2px solid #6c757d !important; /* رمادي غامق */
+                 border-bottom: 2px solid #6c757d !important; 
                  padding-bottom: 5px;
-                 color: #17202A !important; /* أسود داكن */
+                 color: #17202A !important; 
             }
             
             /* ********************************************************* */
@@ -292,8 +353,8 @@
             }
              
             .sidebar-column h2 {
-                color: #f8f9fa !important; /* العناوين الفرعية داخل البني: رمادي فاتح (أنيق وجذاب) */
-                border-bottom: 1px solid #f8f9fa !important; /* خط فاصل رمادي فاتح */
+                color: #f8f9fa !important; 
+                border-bottom: 1px solid #f8f9fa !important; 
             }
 
             .image-upload-container-print {
@@ -322,7 +383,7 @@
             }
             
             .lang-bar-fill {
-                 background-color: #f8f9fa !important; /* لون ملء شريط اللغة: رمادي فاتح */
+                 background-color: #f8f9fa !important; 
             }
              
              .main-content-column .section-content {
@@ -331,7 +392,7 @@
             .main-content-column p, .main-content-column li {
                 font-size: 12px !important;
                 line-height: 1.4 !important;
-                color: #333 !important; /* ضمان أن النص في العمود الأبيض أسود داكن */
+                color: #333 !important; 
             }
         }
     </style>
@@ -339,9 +400,12 @@
 <body>
     
     <header>
-        <div class="header-logo"> </div>
+        <a href="https://almkhdri31-glitch.github.io/web/" class="header-logo" style="color: var(--color-brand-primary); font-weight: bold; font-size: 20px;">
+            منصة الأمن السيبراني
+        </a>
+        
         <nav class="header-nav">
-            <a href="#">الرئيسية</a>
+            <a href="https://almkhdri31-glitch.github.io/web/">الرئيسية</a>
             <a href="#">عنّا</a>
             <a href="#footer">التواصل بنا (المطور)</a> 
         </nav>
