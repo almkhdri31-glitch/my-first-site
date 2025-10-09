@@ -7,7 +7,7 @@
     <style>
         /*
         ========================================================================= */
-        /* 🎨 المتغيرات (Variables) */
+        /* 🎨 المتغيرات (Variables) - تم توحيد ألوان حقول الإدخال وضمان الأسود */
         /* ========================================================================= */
         :root {
             /* ألوان الموقع الرئيسي */
@@ -18,31 +18,31 @@
             --color-text-subtle: #bdc3c7; 
             --color-brand-primary: #FFC300; /* الذهبي */
             --color-accent-secondary: #f39c12; /* البرتقالي */
+            --color-brand-hover: #ffb700; /* ذهبي أغمق قليلًا عند التمرير */
             
-            /* ألوان خاصة بالنموذج الداكن */
-            --color-form-bg: var(--color-bg-card); 
-            --color-input-bg: var(--color-bg-card); /* موحد مع لون البطاقات #2c3e50 */
-            --color-input-text: var(--color-text-light); 
-            --color-heading: var(--color-brand-primary); 
+            /* ألوان خاصة بالنموذج الداكن (تم التوحيد هنا) */
+            --color-form-bg: var(--color-bg-card); /* خلفية الحاوية الرئيسية */
+            --color-input-bg: var(--color-bg-card); /* خلفية حقول الإدخال */
+            --color-input-text: var(--color-text-light); /* نص حقول الإدخال */
+            --color-heading: var(--color-brand-primary); /* لون عناوين الأقسام */
         }
 
         /* ********************************************************* */
-        /* تنسيقات النموذج (صفحة الإدخال) - تم تطبيق التوحيد */
+        /* تنسيقات النموذج (صفحة الإدخال) - تم تطبيق التنسيق الداكن */
         /* ********************************************************* */
-        
-        /* فرض اللون الأسود الداكن على HTML و BODY */
-        html {
-            background-color: var(--color-bg-main) !important; /* فرض اللون هنا */
-        }
-        
         body {
             font-family: 'Cairo', sans-serif; 
-            background-color: var(--color-bg-main) !important; /* فرض اللون هنا */
+            background-color: var(--color-bg-main); /* ضمان الخلفية السوداء الداكنة هنا */
             color: var(--color-text-light); 
             line-height: 1.6;
             padding: 0; 
             margin: 0;
             direction: rtl; 
+        }
+        
+        /* إضافة تنسيق للعنصر html لضمان تغطية كاملة للخلفية */
+        html {
+            background-color: var(--color-bg-main);
         }
         
         /* تطبيق التوحيد على حقول الإدخال */
@@ -61,6 +61,9 @@
             display: block;
             background-color: var(--color-input-bg); /* موحد مع لون البطاقات #2c3e50 */
             color: var(--color-input-text); 
+            /* لضمان أن النصوص التوضيحية (placeholder) فاتحة ومرئية */
+            /* -webkit-text-fill-color: var(--color-text-light); */
+            /* opacity: 0.7; */
         }
         
         /* إضافة تأثير التركيز (Focus) باللون الذهبي */
@@ -73,6 +76,12 @@
             border-color: var(--color-brand-primary); /* إطار ذهبي بارز */
             box-shadow: 0 0 0 2px rgba(255, 195, 0, 0.4); /* ظل خفيف باللون الذهبي */
             outline: none; 
+        }
+        
+        /* تحسين لون placeholder ليكون مرئيًا على الخلفية الداكنة */
+        ::placeholder {
+            color: var(--color-text-subtle); 
+            opacity: 1; /* للتأكد من أن اللون يظهر */
         }
 
         label {
@@ -414,8 +423,18 @@
                 margin: 2px 0 0 0 !important;
             }
             
+            .lang-bar-container {
+                background: rgba(255, 255, 255, 0.3) !important; /* شريط خلفي فاتح */
+                height: 5px !important;
+                border-radius: 5px !important;
+                margin-top: 5px !important;
+                overflow: hidden !important;
+            }
+            
             .lang-bar-fill {
-                 background-color: #f8f9fa !important; 
+                 background-color: #f8f9fa !important; /* لون شريط التقدم باللون الأبيض */
+                 height: 100% !important;
+                 display: block !important;
             }
              
              .main-content-column .section-content {
@@ -425,6 +444,11 @@
                 font-size: 12px !important;
                 line-height: 1.4 !important;
                 color: #333 !important; 
+            }
+            
+            .reference-entry-print p, .reference-entry-print strong {
+                 font-size: 12px !important;
+                 margin: 0 !important;
             }
         }
     </style>
