@@ -7,58 +7,83 @@
     <style>
         /*
         ========================================================================= */
-        /* 🎨 المتغيرات (Variables) - لتطبيق ألوان الموقع الرئيسي */
+        /* 🎨 المتغيرات (Variables) */
         /* ========================================================================= */
         :root {
             /* ألوان الموقع الرئيسي */
-            --color-bg-main: #111111;    
+            --color-bg-main: #111111;    /* اللون الأسود الداكن جداً للخلفية الأساسية */
             --color-bg-secondary: #1c1c1c; 
-            --color-bg-card: #2c3e50;    
+            --color-bg-card: #2c3e50;    /* لون البطاقات البارزة وحقول الإدخال */
             --color-text-light: #f1f1f1;  
             --color-text-subtle: #bdc3c7; 
             --color-brand-primary: #FFC300; /* الذهبي */
             --color-accent-secondary: #f39c12; /* البرتقالي */
             
             /* ألوان خاصة بالنموذج الداكن */
-            --color-form-bg: var(--color-bg-card); /* خلفية النموذج (أزرق داكن/رمادي غامق) */
-            --color-input-bg: #34495e; /* خلفية حقول الإدخال */
-            --color-input-text: var(--color-text-light); /* نص حقول الإدخال */
-            --color-heading: var(--color-brand-primary); /* لون عناوين الأقسام */
+            --color-form-bg: var(--color-bg-card); 
+            --color-input-bg: var(--color-bg-card); /* موحد مع لون البطاقات #2c3e50 */
+            --color-input-text: var(--color-text-light); 
+            --color-heading: var(--color-brand-primary); 
         }
 
         /* ********************************************************* */
-        /* تنسيقات النموذج (صفحة الإدخال) - تم تطبيق التنسيق الداكن */
+        /* تنسيقات النموذج (صفحة الإدخال) - تم تطبيق التوحيد */
         /* ********************************************************* */
+        
+        /* فرض اللون الأسود الداكن على HTML و BODY */
+        html {
+            background-color: var(--color-bg-main) !important; /* فرض اللون هنا */
+        }
+        
         body {
-            font-family: 'Cairo', sans-serif; /* تغيير الخط ليتناسب مع موقعك */
-            background-color: var(--color-bg-main); /* خلفية سوداء/داكنة */
-            color: var(--color-text-light); /* لون النص الأساسي فاتح */
+            font-family: 'Cairo', sans-serif; 
+            background-color: var(--color-bg-main) !important; /* فرض اللون هنا */
+            color: var(--color-text-light); 
             line-height: 1.6;
             padding: 0; 
             margin: 0;
             direction: rtl; 
         }
         
-        input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="url"], textarea {
+        /* تطبيق التوحيد على حقول الإدخال */
+        input[type="text"], 
+        input[type="email"], 
+        input[type="tel"], 
+        input[type="number"], 
+        input[type="url"], 
+        textarea {
             width: calc(100% - 22px);
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #6c757d; /* إطار أفتح قليلاً */
+            border: 1px solid #6c757d; 
             border-radius: 4px;
             box-sizing: border-box; 
             display: block;
-            background-color: var(--color-input-bg); /* خلفية داكنة للحقول */
-            color: var(--color-input-text); /* نص فاتح في الحقول */
+            background-color: var(--color-input-bg); /* موحد مع لون البطاقات #2c3e50 */
+            color: var(--color-input-text); 
         }
+        
+        /* إضافة تأثير التركيز (Focus) باللون الذهبي */
+        input[type="text"]:focus, 
+        input[type="email"]:focus, 
+        input[type="tel"]:focus, 
+        input[type="number"]:focus, 
+        input[type="url"]:focus, 
+        textarea:focus {
+            border-color: var(--color-brand-primary); /* إطار ذهبي بارز */
+            box-shadow: 0 0 0 2px rgba(255, 195, 0, 0.4); /* ظل خفيف باللون الذهبي */
+            outline: none; 
+        }
+
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: var(--color-text-subtle); /* لون للـ Label */
+            color: var(--color-text-subtle); 
         }
 
         header {
-            background-color: var(--color-bg-secondary); /* يتناسب مع هيدر الموقع */
+            background-color: var(--color-bg-secondary); 
             color: var(--color-text-light);
             padding: 15px 20px;
             display: flex;
@@ -98,7 +123,7 @@
         .container {
             max-width: 900px;
             margin: 20px auto; 
-            background: var(--color-form-bg); /* خلفية النموذج داكنة */
+            background: var(--color-form-bg); /* خلفية النموذج داكنة #2c3e50 */
             padding: 30px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             border-radius: 8px;
@@ -127,7 +152,7 @@
             height: 100px !important;
             max-width: 100px !important; 
             max-height: 100px !important; 
-            background-color: #34495e; 
+            background-color: var(--color-bg-card); /* موحد مع لون البطاقات */
             border-radius: 50%; 
             object-fit: cover; 
             border: 2px solid var(--color-accent-secondary); /* برتقالي */
@@ -223,12 +248,13 @@
             color: var(--color-text-light); /* نص أبيض لخيارات المهارات */
         }
 
+        /* توحيد خلفية البطاقات الفرعية لتطابق لون العناصر البارزة #2c3e50 */
         .language-entry, .reference-entry {
-            border: 1px solid #495057; /* إطار داكن */
+            border: 1px solid #495057; 
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 4px;
-            background-color: #34495e; /* خلفية داكنة للبطاقات الفرعية */
+            background-color: var(--color-bg-card); 
         }
         .language-entry input[type="text"], 
         .language-entry input[type="number"] {
