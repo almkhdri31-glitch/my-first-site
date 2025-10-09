@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل فحص الشبكة (Nmap) للمبتدئين | المنصة الرقمية المتكاملة</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* تنسيقات خاصة للمقالة تعتمد على الخلفية الداكنة والأخضر من الـ style.css */
+        .article-container {
+            padding: 40px 20px;
+            background-color: #1c1c1c; 
+            color: #ecf0f1;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            margin-top: 80px;
+        }
+        .article-container h3 {
+            color: #2ecc71; 
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-weight: 700;
+        }
+        .code-block {
+            background-color: #34495e; 
+            color: #ffc107; 
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        .tip-box-sec {
+            background-color: #27ae60;
+            color: #111;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container d-flex justify-content-between align-items-center">
+             <a href="index.html" class="logo">المنصة الرقمية المتكاملة</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="article-container">
+            
+            <h1 class="text-center section-title">
+                <i class="fas fa-search me-2" style="color: #2ecc71;"></i> 
+                دليل فحص المنافذ: كيف تستخدم أداة Nmap (أو بدائلها على الأندرويد)
+            </h1>
+            <p class="text-center section-subtitle">
+                <i class="fas fa-calendar-alt me-1"></i> تاريخ النشر: 10 أكتوبر 2025 | <i class="fas fa-user-circle me-1"></i> بواسطة: محمد المخدري
+            </p>
+
+            <p class="lead">
+                أداة **Nmap (Network Mapper)** هي الأداة السويسرية في جيب كل خبير أمن. مهمتها الأساسية هي **استكشاف شبكتك** لمعرفة ما يراه المهاجم بالضبط عند محاولة اختراقها. لا تقلق، سنتعلم كيف نستخدمها أو نستخدم بدائلها المتاحة بسهولة على الهواتف الذكية.
+            </p>
+            
+            <h3><i class="fas fa-cogs me-2"></i> 1. الإعداد السريع: خياراتك على الأندرويد</h3>
+            <p>
+                إذا كنت تعمل على جهاز كمبيوتر، يمكنك تثبيت **Nmap** مباشرةً. لكن بما أننا نركز على الهواتف الذكية، لديك خياران ممتازان:
+            </p>
+            <ul>
+                <li><strong>الخيار السهل (الموصى به):</strong> استخدام تطبيقات **ماسحات الشبكة (Network Scanners)** المتاحة على متجر جوجل بلاي، مثل **Fing** أو **Net Analyzer**. هذه التطبيقات توفر واجهة رسومية سهلة لمعظم وظائف مسح الشبكة الأساسية.</li>
+                <li><strong>الخيار المتقدم (سطر الأوامر):</strong> يمكن تشغيل Nmap عبر بيئات طرفية (Terminal) متخصصة للأندرويد مثل **Termux**، وهو خيار للمستخدمين المتقدمين.</li>
+            </ul>
+            
+            <h3><i class="fas fa-terminal me-2"></i> 2. المبدأ الأساسي: ماذا نبحث؟</h3>
+            <p>
+                سواء استخدمت Nmap مباشرةً أو تطبيق مثل Fing، المبدأ واحد: نحن نبحث عن **المنافذ المفتوحة (Open Ports)**. المنافذ المفتوحة هي "أبواب" تسمح للجهاز بالاتصال بالعالم الخارجي. معرفة هذه الأبواب أمر حيوي.
+            </p>
+            
+            <h4 style="color: #2ecc71; margin-top: 15px;">كيف تقرأ النتائج في التطبيقات (مثل Fing):</h4>
+            <p>
+                عندما تفحص جهازًا، سيعطيك التطبيق قائمة بالخدمات. ركز على:
+            </p>
+            <div class="code-block">
+                Port 80 (HTTP) = Open <br>
+                Port 443 (HTTPS) = Open <br>
+                Port 23 (Telnet) = **Warning: Open**
+            </div>
+            <p>
+                إذا رأيت منافذ لا تحتاجها مفتوحة (مثل Telnet 23 الذي يعتبر غير آمن)، فهذه إشارة لبدء التحصين.
+            </p>
+            
+            <h3><i class="fas fa-graduation-cap me-2"></i> 3. نصائح الخبراء: الأمن أولاً</h3>
+            <ul>
+                <li>**الإصدارات هي المفتاح:** حاول دائماً معرفة إصدار الخدمة التي تعمل على المنفذ المفتوح (ستجد هذه المعلومة في إعدادات الراوتر أو في نتائج Nmap المتقدمة). الإصدارات القديمة تحمل ثغرات معروفة (CVEs).</li>
+                <li>**لا تترك منافذ الإدارة مفتوحة:** تأكد من أن منافذ التحكم في جهاز الراوتر الخاص بك لا يمكن الوصول إليها إلا من داخل شبكتك المنزلية.</li>
+            </ul>
+            
+            <div class="tip-box-sec">
+                <i class="fas fa-link me-2"></i> **ربط الخدمة المجانية:** استخدم **<a href="https://my-first-site-gold-seven.vercel.app/network-scanner.html" target="_blank" style="color: #111;">مدقق الشبكة والأمان (الأداة المجانية على موقعنا)</a>** لتقييم المخاطر بشكل أسرع وأسهل.
+            </div>
+
+            <div class="text-center mt-5">
+                <h3 style="color: #ecf0f1;">هل لديك أسئلة حول فحص شبكتك؟</h3>
+                <p>شاركنا استفساراتك لنساعدك على التحصين ضد المخاطر.</p>
+                <a href="index.html#guides" class="main-cta-button" style="background-color: #2ecc71;">
+                    <i class="fas fa-arrow-left me-2"></i> العودة لأدلة الإرشاد
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer text-center">
+        <p class="mb-0">جميع الحقوق محفوظة &copy; 2025 | المنصة الرقمية المتكاملة</p>
+    </footer>
+
+</body>
+</html>

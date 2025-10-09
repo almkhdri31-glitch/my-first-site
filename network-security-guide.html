@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأمين شبكتك المنزلية بـ خبرة CCNA-CCNP-CCIE</title>
+    <meta name="description" content="شرح لثغرات الراوتر وكيفية إعداد المنافذ وتفعيل المصادقة الثنائية (MFA) لتأمين شبكتك بأعلى المعايير.">
+    
+    <link rel="icon" type="image/png" href="favicon.png"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /*
+        ========================================================================= */
+        /* 🎨 المتغيرات (Variables) - نفس متغيرات الصفحات الأخرى */
+        /* ========================================================================= */
+        :root {
+            --color-bg-main: #0A0A0A;    
+            --color-bg-secondary: #1A1A1A; 
+            --color-bg-card: #1D2B35;    
+            --color-text-light: #f1f1f1;  
+            --color-text-subtle: #bdc3c7; 
+            --color-brand-primary: #FFC300;  
+            --color-brand-hover: #DAA520;   
+            --color-accent-secondary: #f39c12;
+            --color-network-guide: #3498db; /* لون جديد للشبكات */
+        }
+
+
+        /* ========================================================================= */
+        /* الإعدادات الأساسية وتنسيق الخطوط العامة (مطابقة للـ index) */
+        /* ========================================================================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.7;
+            color: var(--color-text-light); 
+            background-color: var(--color-bg-main);
+            overflow-x: hidden; 
+            font-size: 16px; 
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .section-title {
+            font-size: 28px; 
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-text-light);
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        .main-header {
+            background: var(--color-bg-main); 
+            color: var(--color-text-light);
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px; 
+            font-weight: 900;
+            color: var(--color-brand-primary);
+            text-align: left !important;
+        }
+        
+        /* ========================================================================= */
+        /* تنسيق محتوى الدليل الإرشادي */
+        /* ========================================================================= */
+        .guide-content {
+            padding: 50px 0 80px;
+            background-color: var(--color-bg-secondary); 
+            min-height: 80vh;
+        }
+
+        .guide-content h2 {
+            font-size: 24px;
+            color: var(--color-brand-primary);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--color-bg-card);
+        }
+
+        .guide-content h3 {
+            font-size: 20px;
+            color: var(--color-text-light);
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .guide-content p {
+            margin-bottom: 20px;
+            color: var(--color-text-subtle);
+        }
+        
+        .guide-content ul {
+            list-style: disc;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .guide-content li {
+            margin-bottom: 10px;
+            color: var(--color-text-subtle);
+        }
+        
+        .important-tip {
+            background-color: var(--color-bg-card);
+            border-right: 5px solid var(--color-network-guide);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .important-tip i {
+            color: var(--color-network-guide);
+            margin-left: 10px;
+        }
+
+        .highlight-text {
+            color: var(--color-brand-primary); 
+            font-weight: bold;
+        }
+
+
+        /* ========================================================================= */
+        /* الفوتر (Footer) - مطابقة للـ index */
+        /* ========================================================================= */
+        .main-footer {
+            background-color: var(--color-bg-secondary); 
+            color: var(--color-text-light);
+            padding: 20px 0; 
+            border-top: 1px solid #333; 
+            text-align: center;
+        }
+        /* ... باقي تنسيقات الهيدر والفوتر في CSS السابقة */
+
+        /* ========================================================================= */
+        /* تنسيقات الاستجابة (Media Queries) */
+        /* ========================================================================= */
+        @media (max-width: 992px) {
+            .main-header .container {
+                justify-content: space-between;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: var(--color-bg-secondary);
+                box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+                padding-bottom: 10px;
+                z-index: 999; 
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .main-nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            
+            <a class="logo" href="index.html" style="font-size: 24px; text-align: left;">
+                <span style="display: block; font-size: 24px; font-weight: 900; color: var(--color-brand-primary);">
+                    أمن المعلومات
+                </span> 
+                <span style="display: block; font-size: 18px; font-weight: 700; color: var(--color-text-light); margin-top: -5px;"> 
+                    INFORMATION SECURITY
+                </span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#home">الرؤية والهدف</a></li>
+                    <li><a href="index.html#about">من نحن</a></li> 
+                    <li><a href="index.html#guides" class="active">أدلة الإرشاد</a></li>
+                    
+                    <li><a href="password-tool.html" style="color: var(--color-brand-primary); font-weight: bold;">أداة فحص كلمة المرور</a></li>
+                    <li><a href="summarizer-tool.html" style="color: var(--color-ai-tool); font-weight: bold;">مُلَخِّص النصوص الذكي</a></li>
+                    <li><a href="https://my-first-site-gold-seven.vercel.app/network-scanner.html" target="_blank" style="color: var(--color-accent-secondary); font-weight: bold;">الأدوات المجانية (مدقق الشبكة)</a></li>
+                    
+                    <li><a href="contact.html">إرسال مقترحات (غير فنية)</a></li> 
+                </ul>
+            </nav>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+    
+    <section class="guide-content">
+        <div class="container">
+            <h1 class="section-title" style="margin-bottom: 40px;">دليل تأمين الشبكة المنزلية: خطوات المحترفين (CCNA-CCNP)</h1>
+            
+            <p style="font-size: 18px; color: var(--color-brand-primary); margin-bottom: 30px;">
+                الراوتر المنزلي هو البوابة الأولى لشبكتك. إليك الخطوات الأساسية لتأمينه بأسلوب مهني.
+            </p>
+
+            <h2>الخطوة الأولى: تأمين جهاز الراوتر الأساسي</h2>
+            
+            <h3>1. تغيير بيانات تسجيل الدخول الافتراضية</h3>
+            <p>المهاجمون يعرفون جيداً كلمات المرور الافتراضية مثل (admin/admin). يجب تغيير اسم المستخدم وكلمة المرور الخاصة بالراوتر فوراً إلى بيانات قوية لا يمكن تخمينها.</p>
+            <ul>
+                <li>تجنب استخدام بيانات شخصية ككلمة مرور.</li>
+                <li>استخدم توليد كلمات المرور العشوائية (تطبيق **أداة مولد كلمات المرور** لديك).</li>
+            </ul>
+
+            <h3>2. تفعيل المصادقة الثنائية (MFA) إن أمكن</h3>
+            <p>إذا كان جهاز الراوتر يدعم المصادقة الثنائية، قم بتفعيلها فوراً. هذا يضيف طبقة حماية ثانية تتطلب رمزاً يتم إرساله إلى هاتفك حتى لو تم سرقة كلمة مرورك.</p>
+            
+            <div class="important-tip">
+                <i class="fas fa-lightbulb"></i> <span class="highlight-text">نصيحة الخبراء:</span> يفضل عدم استخدام اسم الشبكة الافتراضي (SSID)؛ قم بتغييره لاسم لا يكشف عن نوع جهازك أو موقعك.
+            </div>
+
+            <h2>الخطوة الثانية: إعداد الشبكة اللاسلكية (Wi-Fi)</h2>
+            
+            <h3>1. استخدام تشفير WPA3</h3>
+            <p>تأكد أن إعدادات شبكتك تستخدم أعلى معايير التشفير المتاحة، وهي <span class="highlight-text">WPA3</span>. إذا لم يكن متوفراً، استخدم WPA2 (AES). تجنب WEP و WPA.</p>
+            
+            <h3>2. إيقاف بث SSID (إخفاء اسم الشبكة)</h3>
+            <p>على الرغم من أنها ليست طريقة حماية قوية جداً، إلا أن إيقاف بث اسم الشبكة يجعل اكتشافها صعباً على المتطفلين الذين يستخدمون أدوات الفحص العادية.</p>
+
+            <h2>الخطوة الثالثة: إدارة المنافذ والأجهزة المتصلة</h2>
+            
+            <h3>1. إغلاق المنافذ غير المستخدمة</h3>
+            <p>قم بمراجعة إعدادات الراوتر وتأكد من إغلاق أي منافذ (Port Forwarding) غير مستخدمة أو قمت بفتحها في السابق (مثل Port 80, 443, 22). يجب إبقاء المنافذ مغلقة قدر الإمكان.</p>
+            
+            <h3>2. فصل الأجهزة غير المستخدمة</h3>
+            <p>راجع قائمة الأجهزة المتصلة بالشبكة (DHCP List) وافصل أي جهاز لم تعد تستخدمه، وقم بتغيير كلمات مرور الأجهزة الذكية مثل الكاميرات والطابعات.</p>
+
+            <div class="important-tip" style="border-right-color: var(--color-brand-primary);">
+                <i class="fas fa-tools" style="color: var(--color-brand-primary);"></i> <span class="highlight-text">أداة مرتبطة:</span> استخدم أداة **مدقق الشبكة** (الموجودة في القائمة) لفحص المنافذ المفتوحة في شبكتك ورؤيتها بعين المهاجم.
+            </div>
+            
+        </div>
+    </section>
+
+    <footer class="main-footer" id="contact-footer">
+        <div class="container">
+            <div class="social-links mb-3">
+                <a href="https://twitter.com" target="_blank" class="mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="mx-2"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                <a href="https://wa.me" target="_blank" class="mx-2"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            
+            <p class="mb-1">
+            للتواصل
+                <a href="mailto:F@hotmail.hu" class="highlight-text" style="font-weight: bold;">F@hotmail.hu</a>
+            </p>
+            
+            <p class="mb-0">
+                <a href="index.html#home" class="highlight-text" style="font-weight: bold; margin-left: 10px;">العودة للصفحة الرئيسية</a>
+                | جميع الحقوق محفوظة &copy; 2025 | تصميم وتطوير  | <span class="highlight-text">الخبير التقني محمد المخدري</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('.main-nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
