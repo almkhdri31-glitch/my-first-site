@@ -7,32 +7,33 @@
     <style>
         /*
         ========================================================================= */
-        /* 🎨 المتغيرات (Variables) - تم توحيد ألوان حقول الإدخال وضمان الأسود */
+        /* 🎨 المتغيرات (Variables) - تم تطبيق ألوان أهدأ وأكثر راحة للعين */
         /* ========================================================================= */
         :root {
-            /* ألوان الموقع الرئيسي */
-            --color-bg-main: #111111;    /* اللون الأسود الداكن جداً للخلفية الأساسية */
-            --color-bg-secondary: #1c1c1c; 
-            --color-bg-card: #2c3e50;    /* لون البطاقات البارزة وحقول الإدخال */
-            --color-text-light: #f1f1f1;  
-            --color-text-subtle: #bdc3c7; 
+            /* ألوان الموقع الرئيسية لراحة العين */
+            --color-bg-body: #212121;    /* 1. الخلفية الخارجية (رمادي فاحم دافئ ومريح) */
+            --color-bg-secondary: #1A1A1A; /* 2. خلفية الهيدر والفوتر (أغمق قليلاً) */
+            --color-bg-card: #2A2A2A;    /* 3. لون البطاقات البارزة والحاوية الرئيسية (رمادي متوسط) */
+            --color-bg-input-field: #1A1A1A; /* 4. لون حقول الإدخال الفعلية (أغمق لزيادة التباين) */
+            
+            --color-text-light: #f1f1f1;  /* نص فاتح جداً */
+            --color-text-subtle: #bdc3c7; /* نص ثانوي */
             --color-brand-primary: #FFC300; /* الذهبي */
             --color-accent-secondary: #f39c12; /* البرتقالي */
-            --color-brand-hover: #ffb700; /* ذهبي أغمق قليلًا عند التمرير */
-            
-            /* ألوان خاصة بالنموذج الداكن (تم التوحيد هنا) */
+            --color-brand-hover: #e6b800; /* الذهبي عند المرور */
+
+            /* ألوان خاصة بالنموذج الداكن */
             --color-form-bg: var(--color-bg-card); /* خلفية الحاوية الرئيسية */
-            --color-input-bg: var(--color-bg-card); /* خلفية حقول الإدخال */
             --color-input-text: var(--color-text-light); /* نص حقول الإدخال */
             --color-heading: var(--color-brand-primary); /* لون عناوين الأقسام */
         }
 
         /* ********************************************************* */
-        /* تنسيقات النموذج (صفحة الإدخال) - تم تطبيق التنسيق الداكن */
+        /* تنسيقات النموذج (صفحة الإدخال) */
         /* ********************************************************* */
         body {
             font-family: 'Cairo', sans-serif; 
-            background-color: var(--color-bg-main); /* ضمان الخلفية السوداء الداكنة هنا */
+            background-color: var(--color-bg-body); 
             color: var(--color-text-light); 
             line-height: 1.6;
             padding: 0; 
@@ -40,12 +41,11 @@
             direction: rtl; 
         }
         
-        /* إضافة تنسيق للعنصر html لضمان تغطية كاملة للخلفية */
         html {
-            background-color: var(--color-bg-main);
+            background-color: var(--color-bg-body);
         }
         
-        /* تطبيق التوحيد على حقول الإدخال */
+        /* تطبيق التباين: حقول الإدخال الآن أغمق من الخلفية المحيطة بها */
         input[type="text"], 
         input[type="email"], 
         input[type="tel"], 
@@ -55,15 +55,13 @@
             width: calc(100% - 22px);
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #6c757d; 
+            border: 1px solid #495057; 
             border-radius: 4px;
             box-sizing: border-box; 
             display: block;
-            background-color: var(--color-input-bg); /* موحد مع لون البطاقات #2c3e50 */
+            /* التعديل هنا: استخدام اللون الأغمق المخصص للحقول */
+            background-color: var(--color-bg-input-field); /* #1A1A1A */
             color: var(--color-input-text); 
-            /* لضمان أن النصوص التوضيحية (placeholder) فاتحة ومرئية */
-            /* -webkit-text-fill-color: var(--color-text-light); */
-            /* opacity: 0.7; */
         }
         
         /* إضافة تأثير التركيز (Focus) باللون الذهبي */
@@ -73,15 +71,9 @@
         input[type="number"]:focus, 
         input[type="url"]:focus, 
         textarea:focus {
-            border-color: var(--color-brand-primary); /* إطار ذهبي بارز */
-            box-shadow: 0 0 0 2px rgba(255, 195, 0, 0.4); /* ظل خفيف باللون الذهبي */
+            border-color: var(--color-brand-primary); 
+            box-shadow: 0 0 0 2px rgba(255, 195, 0, 0.4); 
             outline: none; 
-        }
-        
-        /* تحسين لون placeholder ليكون مرئيًا على الخلفية الداكنة */
-        ::placeholder {
-            color: var(--color-text-subtle); 
-            opacity: 1; /* للتأكد من أن اللون يظهر */
         }
 
         label {
@@ -99,7 +91,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        /* تعديل هنا: لتطبيق التعديل على جميع الروابط داخل الهيدر */
         header a {
              color: var(--color-text-light);
              text-decoration: none;
@@ -109,12 +100,11 @@
             margin-right: 25px;
         }
         header a:hover {
-            color: var(--color-brand-primary); /* لون ذهبي عند المرور */
+            color: var(--color-brand-primary); 
         }
-        /* نهاية تعديل الهيدر */
         
         footer {
-            background-color: var(--color-bg-secondary);
+            background-color: var(--color-bg-secondary); 
             color: var(--color-text-subtle);
             text-align: center;
             padding: 10px 0;
@@ -123,7 +113,6 @@
             width: 100%;
         }
         
-        /* الرابط في الفوتر (تم إضافته لربطه بصفحة التواصل) */
         footer a {
             color: var(--color-brand-primary);
             text-decoration: underline;
@@ -132,7 +121,7 @@
         .container {
             max-width: 900px;
             margin: 20px auto; 
-            background: var(--color-form-bg); /* خلفية النموذج داكنة #2c3e50 */
+            background: var(--color-form-bg); /* #2A2A2A */
             padding: 30px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             border-radius: 8px;
@@ -142,7 +131,7 @@
             text-align: center;
             font-size: 40px;
             font-weight: bold;
-            color: var(--color-brand-primary); /* عنوان CV باللون الذهبي */
+            color: var(--color-brand-primary); 
             margin-bottom: 5px;
             letter-spacing: 5px;
         }
@@ -152,7 +141,7 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--color-bg-secondary); /* خط فاصل خفيف */
+            border-bottom: 2px solid var(--color-bg-secondary); 
             padding-bottom: 15px;
         }
 
@@ -161,10 +150,10 @@
             height: 100px !important;
             max-width: 100px !important; 
             max-height: 100px !important; 
-            background-color: var(--color-bg-card); /* موحد مع لون البطاقات */
+            background-color: var(--color-bg-card); 
             border-radius: 50%; 
             object-fit: cover; 
-            border: 2px solid var(--color-accent-secondary); /* برتقالي */
+            border: 2px solid var(--color-accent-secondary); 
             display: block; 
             margin: 0 auto 10px auto; 
             opacity: 0.7; 
@@ -172,7 +161,7 @@
         
         #profile-image[src]:not([src=""]) {
             opacity: 1; 
-            border: 2px solid var(--color-brand-primary); /* ذهبي عند التحميل */
+            border: 2px solid var(--color-brand-primary); 
         }
 
         .image-upload-container input[type="file"] {
@@ -182,14 +171,14 @@
         .upload-label {
             display: block;
             cursor: pointer;
-            color: var(--color-brand-primary); /* لون ذهبي للرابط */
+            color: var(--color-brand-primary); 
             font-size: 14px;
             text-decoration: underline;
             text-align: center;
         }
         
         h2 {
-            color: var(--color-heading); /* العناوين باللون الذهبي */
+            color: var(--color-heading); 
             border-bottom: 2px solid var(--color-heading); 
             padding-bottom: 5px;
             margin-top: 25px;
@@ -207,8 +196,8 @@
             display: block;
             width: 100%;
             padding: 10px 15px;
-            background-color: var(--color-brand-primary); /* زر الطباعة بالذهبي */
-            color: var(--color-bg-main);
+            background-color: var(--color-brand-primary); 
+            color: var(--color-bg-secondary); 
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -221,19 +210,19 @@
         .section-content button {
              width: auto;
              display: inline-block;
-             background-color: var(--color-accent-secondary); /* أزرار الإضافة بالبرتقالي */
-             color: var(--color-bg-main);
+             background-color: var(--color-accent-secondary); 
+             color: var(--color-bg-secondary);
              padding: 8px 15px;
              margin-bottom: 15px;
              font-size: 14px;
         }
         
         .section-content button:hover {
-            background-color: var(--color-brand-hover);
+            background-color: #e67e22; 
         }
 
         .print-button-on-form:hover {
-            background-color: var(--color-brand-hover);
+            background-color: var(--color-brand-hover); 
         }
 
         .print-area {
@@ -254,29 +243,33 @@
         }
         
         .skills-options label {
-            color: var(--color-text-light); /* نص أبيض لخيارات المهارات */
+            color: var(--color-text-light); 
         }
 
-        /* توحيد خلفية البطاقات الفرعية لتطابق لون العناصر البارزة #2c3e50 */
+        /* تم تعديل البطاقات الفرعية: خلفيتها هي نفس خلفية الـ container */
         .language-entry, .reference-entry {
             border: 1px solid #495057; 
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 4px;
-            background-color: var(--color-bg-card); 
+            /* التعديل هنا: لتبقى بنفس لون الحاوية الرئيسية (بدلًا من أن تكون حقول الإدخال بنفس اللون) */
+            background-color: var(--color-bg-card); /* #2A2A2A */
         }
+        
+        /* تعديل لعرض حقول اللغات بشكل سليم في سطر واحد */
         .language-entry input[type="text"], 
         .language-entry input[type="number"] {
             width: calc(50% - 15px);
             display: inline-block;
             margin-left: 10px;
         }
+        
         .reference-entry input {
             margin-bottom: 10px;
         }
         
         /* ********************************************************* */
-        /* تنسيقات صفحة الطباعة (لم يتم المساس بها لتبقى بيضاء ومهنية) */
+        /* تنسيقات صفحة الطباعة (لم يتم المساس بها) */
         /* ********************************************************* */
         @media print {
             
@@ -327,7 +320,8 @@
             
             /* العمود الجانبي الملون (Sidebar - على اليمين) */
             .sidebar-column {
-                background-color: #5B4F46 !important; /* لون جانبي بني/داكن احترافي */
+                /* استخدام ألوان احترافية بيضاء / رمادية للطباعة */
+                background-color: #5B4F46 !important; 
                 color: #FFFFFF !important; 
                 padding: 20px 10px 10px 10px !important; 
                 order: 1; 
@@ -346,16 +340,15 @@
             .section-content,
             .language-entry-print,
             .reference-entry-print {
-                page-break-inside: avoid !important; /* للطباعة */
-                -webkit-column-break-inside: avoid !important; /* لمتصفحات كروم */
-                break-inside: avoid !important; /* للجميع */
+                page-break-inside: avoid !important; 
+                -webkit-column-break-inside: avoid !important; 
+                break-inside: avoid !important; 
             }
             
             /* ********************************************************* */
             /* 2. تحسين وضوح العناوين في العمود الرئيسي (اللون الأبيض) */
             /* ********************************************************* */
             
-            /* العناوين في العمود الرئيسي (أسود داكن مع خط رمادي) */
             .main-content-column h2 {
                 color: #17202A !important; 
                 border-bottom: 2px solid #6c757d !important; 
@@ -424,17 +417,17 @@
             }
             
             .lang-bar-container {
-                background: rgba(255, 255, 255, 0.3) !important; /* شريط خلفي فاتح */
-                height: 5px !important;
-                border-radius: 5px !important;
-                margin-top: 5px !important;
-                overflow: hidden !important;
+                 background-color: rgba(255, 255, 255, 0.3); 
+                 height: 5px;
+                 border-radius: 2px;
+                 margin-top: 3px;
             }
             
             .lang-bar-fill {
-                 background-color: #f8f9fa !important; /* لون شريط التقدم باللون الأبيض */
-                 height: 100% !important;
-                 display: block !important;
+                 background-color: #f8f9fa !important; 
+                 height: 5px;
+                 border-radius: 2px;
+                 display: block;
             }
              
              .main-content-column .section-content {
@@ -444,11 +437,6 @@
                 font-size: 12px !important;
                 line-height: 1.4 !important;
                 color: #333 !important; 
-            }
-            
-            .reference-entry-print p, .reference-entry-print strong {
-                 font-size: 12px !important;
-                 margin: 0 !important;
             }
         }
     </style>
