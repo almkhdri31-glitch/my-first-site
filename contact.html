@@ -3,184 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تواصل معنا | المنصة الرقمية المتكاملة</title>
-    <meta name="description" content="تواصل مع مركز الأمن السيبراني والإرشاد التقني المُحدَّث لطلب الاستشارات، الخدمات الأمنية أو الإبلاغ عن الثغرات.">
-    <link rel="icon" type="image/png" href="favicon.png"> 
-    <link href="https://almkhdri31-glitch.github.io/web/" rel="stylesheet">
+    <title>الاتصال بنا - عالم الجوالات</title>
+    <meta name="description" content="تواصل معنا للاستفسارات والدعم الفني وخدمة العملاء.">
+    <link rel="icon" type="image/png" href="favicon-new.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        /* المتغيرات الأساسية (الذهبي) */
-        :root {
-            --color-bg-main: #111111;    
-            --color-bg-secondary: #1c1c1c; 
-            --color-bg-card: #2c3e50;    
-            --color-text-light: #f1f1f1; 
-            --color-text-subtle: #bdc3c7;
-            --color-brand-primary: #FFC300;  /* الذهبي الساطع */
-            --color-brand-hover: #DAA520;   
-            --color-accent-secondary: #f39c12;
-        }
-        /* تنسيقات عامة */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Cairo', sans-serif; line-height: 1.6; color: var(--color-text-light); background-color: var(--color-bg-main); font-size: 16px; }
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        .container { width: 90%; max-width: 1200px; margin: auto; overflow: hidden; }
-        .text-center { text-align: center; }
-        .highlight-text { color: var(--color-brand-primary); }
-        /* تنسيق الهيدر (مشابه للصفحة الرئيسية) */
-        .main-header { background: var(--color-bg-secondary); color: var(--color-text-light); padding: 15px 0; border-bottom: 1px solid #333; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
-        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 900; color: var(--color-brand-primary); }
-        .logo span { font-size: 18px; font-weight: 700; color: var(--color-text-light); }
-        .back-link { color: var(--color-text-subtle); transition: color 0.3s; padding: 5px 10px; border: 1px solid var(--color-text-subtle); border-radius: 5px; display: flex; align-items: center; gap: 5px; } 
-        .back-link:hover { color: var(--color-brand-primary); border-color: var(--color-brand-primary); }
-        /* تنسيقات قسم التواصل */
-        .contact-section {
-            padding: 80px 0;
-            background-color: var(--color-bg-secondary);
-            min-height: 80vh; 
-            display: flex;
-            align-items: center;
-        }
-        .contact-form-card {
-            background: var(--color-bg-card);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            max-width: 700px; 
-            margin: 40px auto; 
-        }
-        .contact-form-card h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: var(--color-brand-primary);
-            border-bottom: 2px solid var(--color-brand-primary);
-            padding-bottom: 10px;
-        }
-        .contact-form-card p {
-            color: var(--color-text-subtle);
-            margin-bottom: 30px;
-            font-size: 15px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-            color: var(--color-text-light);
-        }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #444;
-            border-radius: 5px;
-            background-color: #222;
-            color: var(--color-text-light);
-            font-family: 'Cairo', sans-serif;
-            font-size: 15px;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: var(--color-brand-primary);
-            outline: none;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: var(--color-brand-primary);
-            color: var(--color-bg-main);
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--color-brand-hover);
-            transform: translateY(-2px);
-        }
-
-        /* الفوتر (Footer) - للحفاظ على التنسيق */
-        .main-footer { background-color: var(--color-bg-secondary); color: var(--color-text-light); padding: 20px 0; border-top: 1px solid #333; text-align: center;}
-        .main-footer a { color: var(--color-brand-primary); }
-        /* Media Query for Mobile */
-        @media (max-width: 768px) {
-            .contact-form-card { padding: 20px; }
-            .contact-form-card h2 { font-size: 24px; }
-            .submit-btn { padding: 12px; font-size: 16px; }
-            .logo { font-size: 20px; }
-            .logo span { font-size: 15px !important; }
-        }
-    </style>
+    
+    <link rel="stylesheet" href="styles.css"> 
+    
 </head>
 <body>
     <header class="main-header">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            
-            <a class="logo" href="index.html">الرئيسية <span style="font-size: 18px; font-weight: 700; color: var(--color-text-light);"></span></a>
-            <a href="index.html" class="back-link">
-                <i class="fas fa-arrow-right"></i> 
+        <div class="container">
+            <a href="index.html" class="logo-area">
+                <img src="logo.png" alt="Store Logo" class="main-logo-img">
+                <div class="titles-container">
+                    <span style="display: block; font-size: 15px; font-weight: 900; color: var(--color-brand-primary);">
+                        عالم الجوالات    
+                    </span> 
+                    <span style="display: block; font-size: 11px; font-weight: 700; color: var(--color-text-light); margin-top: -1px;"> 
+                        متجر الإلكترونيات والهواتف النقالة
+                    </span>
+                </div>
             </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-mobile-alt"></i>الأجهزة</a></li>
+                    <li><a href="accessories.html"><i class="fas fa-headphones"></i>الملحقات</a></li> 
+                    <li><a href="video-library.html" class="video-link"><i class="fas fa-video"></i>شروحات المنتجات</a></li>
+                    <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </header>
-    <section class="contact-section">
+
+    <section class="category-header">
         <div class="container">
-            <div class="contact-form-card">
-                <h2 class="text-center">تواصل بنا</h2>
-                <p class="text-center">
-                    سواء كان لديك استفسار أمني، طلب تدريب، أو رغبة في الإبلاغ عن ثغرة. فريقنا على أتم الاستعداد لخدمتك.
-                </p>
+            <h1><i class="fas fa-envelope" style="font-size: 38px; color: var(--color-brand-primary);"></i> اتصل بنا</h1>
+            <p>نحن هنا لخدمتك. تواصل معنا لأي استفسار أو دعم فني.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="contact-content">
+            
+            <div class="contact-info">
+                <h2>معلومات التواصل</h2>
+                <p>يسعدنا الرد على استفساراتكم عبر القنوات التالية:</p>
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>للدعم الفني: <a href="tel:+967777XXXXX" style="color: var(--color-text-light); text-decoration: none;">+967 777 XXX XXX</a></p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>التوصيل في: صنعاء - حي الأندلس (عبر مندوب)</p>
+                </div>
+                <div class="info-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <p>للاستفسارات السريعة: <a href="https://wa.me/967777XXXXX" target="_blank" style="color: var(--color-text-light); text-decoration: none;">مراسلتنا عبر واتساب</a></p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <p>ساعات العمل: من السبت إلى الخميس، 9:00 صباحاً - 5:00 مساءً</p>
+                </div>
+            </div>
+            
+            <div class="contact-form-container">
+                <h2>أرسل لنا رسالة (Web3Forms)</h2>
+                
                 <form action="https://api.web3forms.com/submit" method="POST">
                     <input type="hidden" name="access_key" value="b2ed5633-7b5f-46c3-b087-5bb11a7da5a0">
-                    <div class="form
+                    
+                    <div class="form-group">
                         <label for="name">الاسم الكريم:</label>
                         <input type="text" id="name" name="الاسم" required>
                     </div>
                     <div class="form-group">
                         <label for="email">البريد الإلكتروني:</label>
-                        <input type="hidden" name="subject" value="رسالة جديدة من نموذج تواصل منصة الأمن السيبراني">
+                        <input type="hidden" name="subject" value="رسالة جديدة من متجر عالم الجوالات">
                         <input type="email" id="email" name="البريد الإلكتروني" required>
                     </div>
                     <div class="form-group">
                         <label for="service">سبب التواصل:</label>
-                        <select id="service" name="الخدمة_المطلوبة" required>
+                        <select id="service" name="نوع_الطلب" required>
                             <option value="">-- اختر نوع الطلب --</option>
-                            <option value="استشارة أمنية عامة">استشارة أمنية عامة</option>
-                            <option value="طلب تقييم واختبار ">طلب تقييم واختبار </option>
-                            <option value="طلب تدريب مخصص">طلب تدريب مخصص</option>
-                            <option value="استفسار حول مقال أو دليل">استفسار حول مقال أو دليل</option>
+                            <option value="استفسار عن منتج">استفسار عن منتج</option>
+                            <option value="طلب دعم فني / ضمان">طلب دعم فني / ضمان</option>
+                            <option value="استفسار حول الطلب والشحن">استفسار حول الطلب والشحن</option>
                             <option value="أخرى">أخرى</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message">رسالتك أو تفاصيل طلب الاستشارة:</label>
+                        <label for="message">رسالتك:</label>
                         <textarea id="message" name="الرسالة" required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">إرسال طلب الاستشارة <i class="fas fa-paper-plane"></i></button>
+                    
+                    <button type="submit" class="submit-button">إرسال الرسالة <i class="fas fa-paper-plane"></i></button>
+                    
                 </form>
             </div>
+            
         </div>
-    </section>
-    <footer class="main-footer">
-        <div class="container">
-            <p>  <a href="mailto:f@hotmail.hu">
-                 </a></p>
+    </main>
+    
+    <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 30px auto 15px; opacity: 0.3;">
+    
+    <footer class="main-footer" id="contact-footer">
+        <div class="container text-center">
+             <div class="social-icons">
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/" target="_blank" title="X / Twitter Page"><i class="fab fa-twitter"></i></a>
+                 <a href="https://telegram.org/" target="_blank" title="Telegram Page"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube Channel"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="font-size: 14px; margin-bottom: 5px;">
+                <a href="privacy-policy.html" style="color: var(--color-text-subtle); text-decoration: none;">سياسة الخصوصية</a>
+                <span style="margin: 0 10px; color: var(--color-text-subtle);">|</span>
+                 <a href="contact.html" style="color: var(--color-text-subtle); text-decoration: none;">اتصل بنا</a>
+            </p>
+            <p class="mb-0" style="font-size: 14px; color: var(--color-text-subtle);">
+            جميع الحقوق محفوظة &copy;  <span id="current-year"></span>-M.M.S.ALMKHDRI
+            </p>
         </div>
     </footer>
+
+    <button onclick="topFunction()" id="backToTop" title="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script src="script.js"></script>
 </body>
 </html>
