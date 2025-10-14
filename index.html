@@ -9,55 +9,191 @@
     <link rel="icon" type="image/png" href="favicon-new.png"> 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
     <style>
-        /* تم الحفاظ على تنسيقات الـ CSS الأصلية الخاصة بالخلفية البيج والألوان الذهبية */
         /* المتغيرات (Variables) */
         :root {
+            /* التعديلات الرئيسية للخلفية البيج والإطارات الذهبية */
             --color-bg-main: #FAF0E6;    /* لون بيج فاتح (Linen) للخلفية الرئيسية */
             --color-bg-secondary: #FFF8E1; /* لون أفتح قليلاً للخلفية الثانوية */
             --color-bg-card: #F5F5DC;    /* لون بيج متوسط لبطاقات الخدمات */
+            
+            /* لون النصوص أصبح داكناً ليتناسب مع الخلفية الفاتحة */
             --color-text-light: #333333;  /* لون داكن للنصوص الرئيسية */
             --color-text-subtle: #555555; /* لون أغمق قليلاً للنصوص الثانوية */
+            
+            /* الألوان الذهبية للإطارات والتمييز */
             --color-brand-primary: #DAA520;     /* الذهبي الداكن (Goldenrod) */
             --color-brand-hover: #C5931D;       /* لون التمرير الذهبي الداكن */
+            
+            /* ألوان مميزة داكنة لتناسب الخلفية الفاتحة */
             --color-accent-secondary: #D2691E;  /* البني الداكن */
             --color-tool-highlight-green: #38761D;    /* الأخضر الداكن */
             --color-tool-highlight-blue: #0B5394;     /* الأزرق الداكن */
             --color-video-highlight: #CC0000;         /* الأحمر الداكن (للفيديو) */
+            --color-card-dark: #F5F5DC;         
+            --color-hover-visual: #8B4513;      
         }
-        /* جميع التنسيقات العامة (body, a, ul, container, header, etc.) تم الاحتفاظ بها */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Cairo', sans-serif; line-height: 1.6; color: var(--color-text-light); background-color: var(--color-bg-main); overflow-x: hidden; font-size: 16px; }
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        ul { list-style: none; }
-        .container { width: 90%; max-width: 1200px; margin: auto; overflow: hidden; }
-        .text-center { text-align: center; }
-        .section-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; color: var(--color-text-light); position: relative; padding-bottom: 10px; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--color-brand-primary); margin: 10px auto 0; border-radius: 2px; }
-        .section-subtitle { font-size: 18px; color: var(--color-text-subtle); margin-bottom: 40px; }
-        .main-header { background: var(--color-bg-main); color: var(--color-text-light); padding: 15px 0; border-bottom: 1px solid #dcdcdc; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position: sticky; top: 0; z-index: 1000; }
-        .main-header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; }
-        .logo-area { display: flex; align-items: center; text-decoration: none; color: inherit; font-size: 24px; flex-shrink: 1; min-width: 0; }
-        .main-logo-img { height: 40px; width: auto; margin-left: 10px; }
-        .titles-container { line-height: 1.2; text-align: right; }
-        .main-nav ul { display: flex; gap: 20px; }
-        .main-nav ul li a { padding: 5px 0; transition: all 0.3s; color: var(--color-text-light); display: flex; align-items: center; gap: 5px; font-weight: 400; }
-        .main-nav ul li a:hover, .main-nav ul li a.active { color: var(--color-brand-primary); border-bottom: 3px solid var(--color-brand-primary); padding-bottom: 5px; }
-        .main-nav ul li a i { color: var(--color-text-light); transition: color 0.3s; }
-        .main-nav ul li a:hover i, .main-nav ul li a.active i { color: var(--color-brand-primary) !important; }
-        .menu-toggle { color: var(--color-text-light); font-size: 24px; cursor: pointer; display: none; }
+        /* الإعدادات الأساسية وتنسيق الخطوط العامة */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-light); 
+            background-color: var(--color-bg-main); 
+            overflow-x: hidden; 
+            font-size: 16px; 
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .section-title {
+            font-size: 28px; 
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-text-light);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-brand-primary); 
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--color-text-subtle);
+            margin-bottom: 40px;
+        }
+        /* الهيدر وقائمة التنقل */
+        .main-header {
+            background: var(--color-bg-main); 
+            color: var(--color-text-light);
+            padding: 15px 0;
+            border-bottom: 1px solid #dcdcdc; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .main-header .container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        /* تنسيقات اللوجو (الشعار) */
+        .logo-area {
+            display: flex;
+            align-items: center; 
+            text-decoration: none;
+            color: inherit;
+            font-size: 24px; 
+            flex-shrink: 1; 
+            min-width: 0;
+        }
+
+        .main-logo-img {
+            height: 40px; 
+            width: auto; 
+            margin-left: 10px; 
+        }
         
-        /* قسم البطل (Hero Section) - تم تغيير الـ ID من home إلى store-hero */
+        .titles-container {
+            line-height: 1.2; 
+            text-align: right; 
+        }
+        
+        .main-nav ul {
+            display: flex;
+            gap: 20px;
+        }
+        /* تنسيق الروابط في القائمة العلوية */
+        .main-nav ul li a {
+            padding: 5px 0; 
+            transition: all 0.3s;
+            color: var(--color-text-light);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 400;
+        }
+        
+        /* تأثير التمرير (Hover Effect) البصري المميز */
+        .main-nav ul li a:hover,
+        .main-nav ul li a.active {
+            color: var(--color-brand-primary); 
+            border-bottom: 3px solid var(--color-brand-primary); 
+            padding-bottom: 5px; 
+        }
+        
+        /* توحيد ألوان الأيقونات في القائمة لتبدأ باللون الداكن ثم تتلون عند التمرير */
+        .main-nav ul li a i {
+            color: var(--color-text-light);
+            transition: color 0.3s;
+        }
+
+        .main-nav ul li a:hover i,
+        .main-nav ul li a.active i {
+            color: var(--color-brand-primary) !important; 
+        }
+        
+        /* تخصيص لون رابط مكتبة الفيديو لتمييزها قليلاً */
+        .main-nav ul li .video-link {
+            color: var(--color-video-highlight); 
+            font-weight: 700;
+        }
+
+        .main-nav ul li .video-link:hover {
+             border-bottom-color: var(--color-video-highlight);
+        }
+        .main-nav ul li .video-link:hover i {
+             color: var(--color-video-highlight) !important;
+        }
+        
+        .menu-toggle {
+            color: var(--color-text-light);
+            font-size: 24px;
+            cursor: pointer;
+            display: none; 
+        }
+
+        /* قسم البطل (Hero Section) للمتجر */
         .store-hero {
             padding: 100px 0;
-            min-height: 70vh; /* تقليل الارتفاع قليلاً */
+            min-height: 70vh; 
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--color-text-light);
-            background-color: var(--color-bg-secondary);
-            /* يُفضل استخدام صور خلفية احترافية ذات صلة بالهواتف */
+            background-color: var(--color-bg-secondary); 
             background-image: url('background-hero.jpg'); 
             background-position: center center;
             background-repeat: no-repeat;
@@ -73,15 +209,32 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.2); /* تعتيم فاتح */
+            background: rgba(255, 255, 255, 0.2); 
             z-index: -1;
         }
-        .hero-title { font-size: 34px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
-        .hero-subtitle { font-size: 22px; color: var(--color-text-light); margin-bottom: 30px; }
-        .hero-text { font-size: 17px; color: var(--color-text-light); margin-bottom: 40px; }
-        .highlight-text { color: var(--color-brand-primary); }
         
-        /* تنسيق بطاقات أقسام الجوالات الجديدة (Grid) */
+        .hero-title {
+            font-size: 34px; 
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero-subtitle {
+             font-size: 22px; 
+             color: var(--color-text-light);
+             margin-bottom: 30px;
+        }
+       
+        .hero-text {
+            font-size: 17px; 
+            color: var(--color-text-light); 
+            margin-bottom: 40px;
+        }
+        .highlight-text {
+            color: var(--color-brand-primary); 
+        }
+
+        /* شبكة فئات الجوالات مع الأيقونات (الـ Grid) */
         .mobile-categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -111,7 +264,7 @@
             border-color: var(--color-brand-primary);
         }
         .category-card i {
-            font-size: 45px; /* حجم أكبر لأيقونات الشعارات */
+            font-size: 45px; 
             margin-bottom: 15px;
             transition: color 0.3s;
         }
@@ -125,22 +278,175 @@
         }
         
         /* تنسيق الأيقونات (الشعارات الافتراضية) */
-        .card-apple i { color: #000000; } /* أسود */
-        .card-samsung i { color: #124B9F; } /* أزرق سامسونج */
-        .card-xiaomi i { color: #FF6700; } /* برتقالي شاومي */
-        .card-accessories i { color: var(--color-accent-secondary); } /* بني للإكسسوارات */
-        .card-video i { color: var(--color-video-highlight); } /* أحمر للفيديو */
+        .card-apple i { color: #000000; } 
+        .card-samsung i { color: #124B9F; } 
+        .card-xiaomi i { color: #FF6700; } 
+        .card-accessories i { color: var(--color-accent-secondary); } 
+        .card-video i { color: var(--color-video-highlight); } 
         
+        /* الفوتر (Footer) */
         .main-footer {
-            background-color: var(--color-bg-secondary);
+            background-color: var(--color-bg-secondary); 
             color: var(--color-text-light);
             padding: 20px 0; 
             border-top: 1px solid #dcdcdc; 
         }
-        /* تنسيقات الاستجابة (Media Queries) تم الاحتفاظ بها */
+        .main-footer .highlight-text {
+            color: var(--color-brand-primary); 
+        }
+        .social-icons {
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .social-icons a {
+            color: var(--color-text-subtle);
+            font-size: 24px;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--color-brand-primary);
+        }
+        /* *************** تنسيق زر العودة للأعلى *************** */
+        #backToTop {
+            display: none; 
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 99; 
+            border: none; 
+            outline: none; 
+            background-color: var(--color-brand-primary); 
+            color: var(--color-bg-main); 
+            cursor: pointer; 
+            padding: 10px 15px; 
+            border-radius: 50%;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #backToTop:hover {
+            background-color: var(--color-brand-hover);
+            transform: translateY(-2px);
+        }
+        /* *************************************************************** */
+
+        /* تنسيقات الاستجابة (Media Queries) - تم تعديلها لإصلاح مشكلة الهيدر */
+        @media (max-width: 992px) {
+            .main-header .container {
+                justify-content: space-between;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                position: absolute;
+                top: 70px; 
+                left: 0;
+                background: var(--color-bg-card); 
+                box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+                padding-bottom: 10px;
+                z-index: 999; 
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .main-nav ul li a {
+                border-bottom: 1px solid #dcdcdc;
+                padding: 15px 0; 
+                display: flex; 
+                justify-content: center;
+                align-items: center;
+            }
+            /* تفعيل التمييز عند التمرير في وضع الجوال */
+            .main-nav ul li a:hover,
+            .main-nav ul li a.active {
+                border-bottom: none;
+                background-color: var(--color-brand-primary); 
+                color: var(--color-bg-main); 
+            }
+            
+            .main-nav ul li a:hover i,
+            .main-nav ul li a.active i {
+                color: var(--color-bg-main) !important; 
+            }
+            
+            .logo-area {
+                font-size: 20px; 
+                max-width: 60%; /* تحديد أقصى عرض لمنطقة الشعار */
+            }
+        }
         @media (max-width: 768px) {
+            body {
+                font-size: 14px; 
+            }
+            
+            /* تحسينات الهيدر للجوال */
+            .main-header .container {
+                 width: 95%; 
+                 padding: 0 5px; 
+            }
+            .main-logo-img {
+                height: 30px; 
+                margin-left: 8px;
+            }
+            
+            .titles-container {
+                 flex-shrink: 1; /* لضمان عدم شغلها مساحة كبيرة */
+            }
+            
+            .titles-container span {
+                font-size: 13px !important; 
+            }
+
+            .hero-section {
+                min-height: auto; 
+                padding-top: 80px;
+                padding-bottom: 50px;
+            }
+            
+            .hero-title {
+                font-size: 24px; 
+                line-height: 1.3;
+            }
+            .hero-subtitle {
+                font-size: 17px; 
+            }
+            .hero-text {
+                font-size: 14px; 
+            }
+            .section-title {
+                font-size: 22px; 
+            }
+            
             .mobile-categories-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .main-footer .container p {
+                font-size: 13px !important;
+            }
+            #backToTop {
+                padding: 8px 12px; 
+                font-size: 16px;
+                bottom: 15px; 
+                right: 15px; 
             }
         }
     </style>
@@ -192,12 +498,14 @@
                 </a>
                 
                 <a href="category-samsung.html" class="category-card card-samsung">
-                    <i class="fas fa-tablet-alt"></i> <h3>أجهزة Samsung (Galaxy)</h3>
-                    <p>تشكيلة واسعة من هواتف فئة Galaxy S و Note و A</p>
+                    <i class="fas fa-tablet-alt"></i> 
+                    <h3>أجهزة Samsung (Galaxy)</h3>
+                    <p>تشكيلة واسعة من هواتف فئة Galaxy S و A</p>
                 </a>
                 
                 <a href="category-xiaomi.html" class="category-card card-xiaomi">
-                    <i class="fas fa-mobile-alt"></i> <h3>أجهزة Xiaomi & Huawei</h3>
+                    <i class="fas fa-mobile-alt"></i> 
+                    <h3>أجهزة Xiaomi & Vivo</h3>
                     <p>أجهزة بأسعار منافسة وإمكانيات قوية</p>
                 </a>
 
@@ -210,7 +518,7 @@
         </div>
     </section>
     
-    <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 0px auto 15px; opacity: 0.3;">
+    <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 30px auto 15px; opacity: 0.3;">
     
     <footer class="main-footer" id="contact-footer">
         <div class="container text-center">
