@@ -7,8 +7,8 @@
     --font-family-base: 'Cairo', sans-serif;
     
     /* الألوان الأساسية */
-    --color-bg-main: #f0f2f5;           /* خلفية الموقع الرئيسية (فاتح جداً) */
-    --color-bg-secondary: #ffffff;      /* خلفية الهيدر والفوتر والبطاقات (أبيض) */
+    --color-bg-main: #f0f2f5;           /* خلفية الموقع الرئيسية (رمادي فاتح) */
+    --color-bg-secondary: #FFFDF2;      /* خلفية الهيدر والفوتر والبطاقات (بيج ذهبي فاتح جداً - اللون الموحد) */
     --color-text-light: #333333;        /* لون النص الرئيسي الداكن */
     --color-text-subtle: #666666;       /* لون النص الثانوي (رمادي) */
     
@@ -16,9 +16,6 @@
     --color-brand-primary: #FFC300;     /* الذهبي الساطع */
     --color-brand-secondary: #DAA520;   /* الذهبي الغامق (للتأثيرات) */
     --color-accent-secondary: #f39c12;  /* برتقالي/ذهبي إضافي للملحقات */
-    
-    /* ألوان خاصة */
-    --color-video-highlight: #c00;      /* الأحمر الخاص بالفيديو */
     
     /* ظلال وأبعاد */
     --shadow-main: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -178,7 +175,7 @@ a {
     text-align: center;
     box-shadow: var(--shadow-main);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; 
-    border: 1px solid #ddd; /* **تم إضافة حد ثابت خفيف هنا** */
+    border: 1px solid #ddd; /* حد ثابت خفيف */
 }
 
 .category-card:hover {
@@ -258,13 +255,13 @@ a {
     overflow: hidden;
     box-shadow: var(--shadow-main);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    border: 1px solid #ddd; /* **تم إضافة حد ثابت خفيف هنا** */
+    border: 1px solid #ddd; /* حد ثابت خفيف */
 }
 
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
-    border-color: var(--color-brand-primary); /* الحد الذهبي يظهر عند التفاعل */
+    border-color: var(--color-brand-primary);
 }
 
 .product-card img {
@@ -359,7 +356,6 @@ a {
     cursor: pointer;
     padding: 15px;
     border-radius: 50%;
-    font-size: 18px;
     box-shadow: var(--shadow-main);
     transition: background-color 0.3s, transform 0.2s;
 }
@@ -450,7 +446,7 @@ a {
 
 .video-card {
     background-color: var(--color-bg-secondary);
-    border: 1px solid #ddd; /* تم وضع حد ثابت */
+    border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: var(--shadow-main);
@@ -460,13 +456,13 @@ a {
 .video-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
-    border-color: var(--color-brand-primary); /* الحد الذهبي يظهر عند التفاعل */
+    border-color: var(--color-brand-primary);
 }
 
 .video-thumbnail-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* نسبة 16:9 للفيديو */
+    padding-top: 56.25%; 
     overflow: hidden;
 }
 
