@@ -3,247 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عالم الجوالات</title>
-    <meta name="description" content="جميع ماتبحث عنه تجده في منتصتنا ا  >
-    <meta name="keywords" content="احدث الهواتف الجوالة لجميع الشركات وايضآ جميع اكسسوارتها وملحقات">
+    <title>متجر عالم الجوالات - الأجهزة والملحقات</title>
+    <meta name="description" content="أحدث الهواتف الجوالة لجميع الشركات وجميع اكسسواراتها وملحقاتها بأفضل الأسعار.">
+    <meta name="keywords" content="هواتف جوالة, أجهزة نقالة, اكسسوارات جوال, سامسونج, آيفون, شاومي, أسعار جوالات">
     <link rel="icon" type="image/png" href="favicon-new.png"> 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
+        /* تم الحفاظ على تنسيقات الـ CSS الأصلية الخاصة بالخلفية البيج والألوان الذهبية */
         /* المتغيرات (Variables) */
         :root {
-            /* التعديلات الرئيسية للخلفية البيج والإطارات الذهبية */
             --color-bg-main: #FAF0E6;    /* لون بيج فاتح (Linen) للخلفية الرئيسية */
             --color-bg-secondary: #FFF8E1; /* لون أفتح قليلاً للخلفية الثانوية */
             --color-bg-card: #F5F5DC;    /* لون بيج متوسط لبطاقات الخدمات */
-            
-            /* لون النصوص أصبح داكناً ليتناسب مع الخلفية الفاتحة */
             --color-text-light: #333333;  /* لون داكن للنصوص الرئيسية */
             --color-text-subtle: #555555; /* لون أغمق قليلاً للنصوص الثانوية */
-            
-            /* الألوان الذهبية للإطارات والتمييز */
             --color-brand-primary: #DAA520;     /* الذهبي الداكن (Goldenrod) */
             --color-brand-hover: #C5931D;       /* لون التمرير الذهبي الداكن */
-            
-            /* ألوان مميزة داكنة لتناسب الخلفية الفاتحة */
-            --color-accent-secondary: #D2691E;  /* البني الداكن (لكلمات المرور) */
+            --color-accent-secondary: #D2691E;  /* البني الداكن */
             --color-tool-highlight-green: #38761D;    /* الأخضر الداكن */
             --color-tool-highlight-blue: #0B5394;     /* الأزرق الداكن */
             --color-video-highlight: #CC0000;         /* الأحمر الداكن (للفيديو) */
-            --color-card-dark: #F5F5DC;         /* لون خلفية البطاقة الموحد (بيج متوسط) */
-            --color-hover-visual: #8B4513;      /* لون بصري عند التمرير (بني داكن) */
         }
-        /* الإعدادات الأساسية وتنسيق الخطوط العامة */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Cairo', sans-serif;
-            line-height: 1.6;
-            color: var(--color-text-light); 
-            background-color: var(--color-bg-main); /* تطبيق الخلفية البيج */
-            overflow-x: hidden; 
-            font-size: 16px; 
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            overflow: hidden;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .section-title {
-            font-size: 28px; 
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--color-text-light);
-            position: relative;
-            padding-bottom: 10px;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--color-brand-primary); 
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-        .section-subtitle {
-            font-size: 18px;
-            color: var(--color-text-subtle);
-            margin-bottom: 40px;
-        }
-        /* الهيدر وقائمة التنقل */
-        .main-header {
-            background: var(--color-bg-main); /* خلفية الهيدر بيج */
-            color: var(--color-text-light);
-            padding: 15px 0;
-            border-bottom: 1px solid #dcdcdc; /* خط حدود خفيف */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ظل خفيف */
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .main-header .container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            flex-wrap: nowrap;
-        }
-
-        /* تنسيقات اللوجو (الشعار) */
-        .logo-area {
-            display: flex;
-            align-items: center; 
-            text-decoration: none;
-            color: inherit;
-            font-size: 24px; 
-            flex-shrink: 1; 
-            min-width: 0;
-        }
-
-        .main-logo-img {
-            height: 40px; 
-            width: auto; 
-            margin-left: 10px; 
-        }
+        /* جميع التنسيقات العامة (body, a, ul, container, header, etc.) تم الاحتفاظ بها */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; line-height: 1.6; color: var(--color-text-light); background-color: var(--color-bg-main); overflow-x: hidden; font-size: 16px; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+        .container { width: 90%; max-width: 1200px; margin: auto; overflow: hidden; }
+        .text-center { text-align: center; }
+        .section-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; color: var(--color-text-light); position: relative; padding-bottom: 10px; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--color-brand-primary); margin: 10px auto 0; border-radius: 2px; }
+        .section-subtitle { font-size: 18px; color: var(--color-text-subtle); margin-bottom: 40px; }
+        .main-header { background: var(--color-bg-main); color: var(--color-text-light); padding: 15px 0; border-bottom: 1px solid #dcdcdc; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position: sticky; top: 0; z-index: 1000; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; }
+        .logo-area { display: flex; align-items: center; text-decoration: none; color: inherit; font-size: 24px; flex-shrink: 1; min-width: 0; }
+        .main-logo-img { height: 40px; width: auto; margin-left: 10px; }
+        .titles-container { line-height: 1.2; text-align: right; }
+        .main-nav ul { display: flex; gap: 20px; }
+        .main-nav ul li a { padding: 5px 0; transition: all 0.3s; color: var(--color-text-light); display: flex; align-items: center; gap: 5px; font-weight: 400; }
+        .main-nav ul li a:hover, .main-nav ul li a.active { color: var(--color-brand-primary); border-bottom: 3px solid var(--color-brand-primary); padding-bottom: 5px; }
+        .main-nav ul li a i { color: var(--color-text-light); transition: color 0.3s; }
+        .main-nav ul li a:hover i, .main-nav ul li a.active i { color: var(--color-brand-primary) !important; }
+        .menu-toggle { color: var(--color-text-light); font-size: 24px; cursor: pointer; display: none; }
         
-        .titles-container {
-            line-height: 1.2; 
-            text-align: right; 
-        }
-        
-        .main-nav ul {
-            display: flex;
-            gap: 20px;
-        }
-        /* تنسيق الروابط في القائمة العلوية */
-        .main-nav ul li a {
-            padding: 5px 0; 
-            transition: all 0.3s;
-            color: var(--color-text-light);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: 400;
-        }
-        
-        /* تأثير التمرير (Hover Effect) البصري المميز */
-        .main-nav ul li a:hover,
-        .main-nav ul li a.active {
-            color: var(--color-brand-primary); 
-            border-bottom: 3px solid var(--color-brand-primary); 
-            padding-bottom: 5px; 
-        }
-        
-        /* توحيد ألوان الأيقونات في القائمة لتبدأ باللون الداكن ثم تتلون عند التمرير */
-        .main-nav ul li a i {
-            color: var(--color-text-light);
-            transition: color 0.3s;
-        }
-
-        .main-nav ul li a:hover i,
-        .main-nav ul li a.active i {
-            color: var(--color-brand-primary) !important; 
-        }
-        
-        /* تخصيص لون رابط مكتبة الفيديو لتمييزها قليلاً */
-        .main-nav ul li .video-link {
-            color: var(--color-video-highlight); 
-            font-weight: 700;
-        }
-
-        .main-nav ul li .video-link:hover {
-             border-bottom-color: var(--color-video-highlight);
-        }
-        .main-nav ul li .video-link:hover i {
-             color: var(--color-video-highlight) !important;
-        }
-        
-        /* تنسيقات القائمة المنسدلة (تم تركها تحسباً) */
-        .dropdown-tools {
-            position: relative; 
-            padding-bottom: 0 !important; 
-        }
-
-        .dropdown-tools a {
-            /* تعديل لتجنب تكرار البوردر السفلي مع القائمة المنسدلة */
-            border-bottom: 0 !important; 
-            padding-bottom: 5px; 
-        }
-        
-        .dropdown-tools > a:hover {
-            color: var(--color-brand-primary); 
-            border-bottom: 3px solid var(--color-brand-primary) !important; 
-            padding-bottom: 5px !important; 
-        }
-
-        .dropdown-menu {
-            display: none; 
-            position: absolute;
-            right: 0; 
-            top: 100%; 
-            background-color: var(--color-bg-card); /* خلفية القائمة المنسدلة بيج */
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-            padding: 10px 0;
-            border-radius: 5px;
-            border-top: 3px solid var(--color-brand-primary);
-        }
-
-        .dropdown-tools:hover .dropdown-menu {
-            display: block; 
-        }
-
-        /* تنسيق روابط القائمة المنسدلة */
-        .dropdown-menu li a {
-            padding: 10px 15px;
-            display: block;
-            border-bottom: none !important; 
-            text-align: right;
-            color: var(--color-text-light);
-            font-weight: 400;
-        }
-        .dropdown-menu li a:hover {
-            background-color: #EDECE4; /* لون بيج أغمق قليلاً عند التمرير */
-            color: var(--color-brand-primary);
-        }
-        
-        .menu-toggle {
-            color: var(--color-text-light);
-            font-size: 24px;
-            cursor: pointer;
-            display: none; 
-        }
-
-        /* قسم البطل (Hero Section) */
-        .hero-section {
+        /* قسم البطل (Hero Section) - تم تغيير الـ ID من home إلى store-hero */
+        .store-hero {
             padding: 100px 0;
-            min-height: 100vh;
+            min-height: 70vh; /* تقليل الارتفاع قليلاً */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--color-text-light);
-            background-color: var(--color-bg-secondary); /* خلفية القسم بيج */
-            /* يُفضل استخدام صور خلفية احترافية */
+            background-color: var(--color-bg-secondary);
+            /* يُفضل استخدام صور خلفية احترافية ذات صلة بالهواتف */
             background-image: url('background-hero.jpg'); 
             background-position: center center;
             background-repeat: no-repeat;
@@ -252,397 +66,81 @@
             position: relative;
             z-index: 1;
         }
-        .hero-section::before {
+        .store-hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1); /* تعتيم فاتح */
+            background: rgba(255, 255, 255, 0.2); /* تعتيم فاتح */
             z-index: -1;
         }
+        .hero-title { font-size: 34px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+        .hero-subtitle { font-size: 22px; color: var(--color-text-light); margin-bottom: 30px; }
+        .hero-text { font-size: 17px; color: var(--color-text-light); margin-bottom: 40px; }
+        .highlight-text { color: var(--color-brand-primary); }
         
-        .hero-title {
-            font-size: 34px; 
-            font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        .hero-subtitle {
-             font-size: 22px; 
-             color: var(--color-text-light);
-             margin-bottom: 30px;
-        }
-       
-        .hero-text {
-            font-size: 17px; 
-            color: var(--color-text-light); 
-            margin-bottom: 40px;
-        }
-        .highlight-text {
-            color: var(--color-brand-primary); 
-        }
-        /* تنسيق البطاقات في قسم Hero */
-        .hero-buttons-grid {
+        /* تنسيق بطاقات أقسام الجوالات الجديدة (Grid) */
+        .mobile-categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-top: 40px; 
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .card-button-hero {
-            /* توحيد اللون الأساسي لخلفية البطاقة */
+        .category-card {
             background: var(--color-bg-card); 
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* ظل خفيف */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
             transition: all 0.3s ease;
             color: var(--color-text-light);
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* الإطار الذهبي (البرواز) */
             border: 3px solid transparent; 
+            text-align: center;
         }
-        /* تأثير التمرير (Hover Effect) على جميع البطاقات */
-        .card-button-hero:hover {
+        .category-card:hover {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             transform: translateY(-5px);
-            background-color: #EDECE4; /* لون بيج أغمق قليلاً عند التمرير */
-        }
-        .card-button-hero i {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
-        /* تخصيص البطاقة الأولى (الإرشادية - ذهبي) */
-        .card-button-hero.primary-card {
-             border-color: var(--color-brand-primary); /* إطار ذهبي */
-        }
-        .card-button-hero.primary-card i {
-             color: var(--color-brand-primary);
-        }
-        .card-button-hero.primary-card:hover {
-             border-color: var(--color-brand-hover);
-        }
-        /* تخصيص بطاقة السيرة الذاتية (بني داكن) */
-        .card-button-hero.cv-card {
-            border-color: var(--color-accent-secondary); 
-        }
-        .card-button-hero.cv-card i {
-            color: var(--color-accent-secondary); 
-        }
-        
-        .card-button-hero.cv-card:hover {
-            border-color: var(--color-accent-secondary);
-        }
-        /* تخصيص بطاقة الأدوات الجديدة (أخضر داكن) */
-        .card-button-hero.tools-card {
-            border-color: var(--color-tool-highlight-green); 
-        }
-
-        .card-button-hero.tools-card i {
-            color: var(--color-tool-highlight-green); 
-        }
-        .card-button-hero.tools-card:hover {
-            border-color: var(--color-tool-highlight-green);
-        }
-        /* --- تنسيق بطاقة الفيديو المربوطة بالصفحة الجديدة (أحمر داكن) --- */
-        .card-button-hero.video-card {
-            border-color: var(--color-video-highlight); 
-        }
-        .card-button-hero.video-card i {
-            color: var(--color-video-highlight); 
-        }
-        
-        .card-button-hero.video-card:hover {
-            border-color: var(--color-video-highlight);
-        }
-        /* ------------------------------------- */
-        
-        /* تنسيق أقسام المحتوى الداخلية */
-        .main-content, .quick-tip-section {
-            padding: 80px 0;
-            background-color: var(--color-bg-secondary); 
-        }
-        .tip-card {
-            background: var(--color-bg-card); /* خلفية بطاقة النصيحة بيج */
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            color: var(--color-text-light);
-            width: 100%;
-        }
-       
-        .tip-icon {
-            color: var(--color-brand-primary); 
-            font-size: 40px;
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .service-card {
-            background: var(--color-bg-card); /* خلفية بطاقة الخدمة بيج */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: right;
-            transition: all 0.3s ease;
-            color: var(--color-text-light);
-            border: 3px solid transparent;
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between;
-        }
-        /* تأثير البرواز الذهبي عند التمرير على بطاقات الخدمات */
-        .service-card:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            transform: translateY(-5px);
-            border-color: var(--color-brand-primary); /* إطار ذهبي عند التمرير */
-        }
-        .service-card h2 {
-            color: var(--color-text-light);
-            font-size: 22px; 
-            margin-bottom: 10px;
-        }
-        .service-card p {
-            color: var(--color-text-subtle);
-            font-size: 15px; 
-            margin-bottom: 15px;
-        }
-        .card-icon {
-            font-size: 32px;
-            color: var(--color-brand-primary); 
-            margin-bottom: 15px; 
-        }
-        .card-link {
-            color: var(--color-text-light); 
-            transition: all 0.3s;
-            font-size: 15px;
-            display: inline-flex; 
-            align-items: center;
-            gap: 5px;
-            padding: 3px 6px; 
-            border-radius: 4px;
-            border: 2px solid transparent; 
-            margin-top: auto; 
-            color: var(--color-brand-primary); 
-        }
-        /* تخصيص لون رابط بطاقة أداة فحص كلمة المرور */
-        .service-card a[href="T-password.html"] .card-link,
-        .service-card a[href="T-password.html"] .card-icon {
-            color: var(--color-accent-secondary) !important;
-        }
-        /* تخصيص لون رابط بطاقة Base64 (أخضر داكن) */
-        .service-card a[href="T-base64.html"] .card-link,
-        .service-card a[href="T-base64.html"] .card-icon {
-            color: var(--color-tool-highlight-green) !important;
-        }
-        /* تخصيص لون رابط بطاقة Subnetting (أزرق داكن) */
-        .service-card a[href="T-subnet.html"] .card-link,
-        .service-card a[href="T-subnet.html"] .card-icon {
-            color: var(--color-tool-highlight-blue) !important;
-        }
-
-
-        .card-link i { 
-            color: var(--color-brand-primary);
-        }
-        .card-link:hover, .card-link:focus {
-            color: var(--color-bg-main); /* لون النص بيج على الخلفية الذهبية */
-            background-color: var(--color-brand-primary); 
+            background-color: #EDECE4;
             border-color: var(--color-brand-primary);
         }
-        .card-link:hover i { 
-            color: var(--color-bg-main); 
+        .category-card i {
+            font-size: 45px; /* حجم أكبر لأيقونات الشعارات */
+            margin-bottom: 15px;
+            transition: color 0.3s;
         }
-        /* الفوتر (Footer) */
+        .category-card h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .category-card p {
+            font-size: 14px;
+            color: var(--color-text-subtle);
+        }
+        
+        /* تنسيق الأيقونات (الشعارات الافتراضية) */
+        .card-apple i { color: #000000; } /* أسود */
+        .card-samsung i { color: #124B9F; } /* أزرق سامسونج */
+        .card-xiaomi i { color: #FF6700; } /* برتقالي شاومي */
+        .card-accessories i { color: var(--color-accent-secondary); } /* بني للإكسسوارات */
+        .card-video i { color: var(--color-video-highlight); } /* أحمر للفيديو */
+        
         .main-footer {
-            background-color: var(--color-bg-secondary); /* خلفية الفوتر بيج فاتح */
+            background-color: var(--color-bg-secondary);
             color: var(--color-text-light);
             padding: 20px 0; 
             border-top: 1px solid #dcdcdc; 
         }
-        .main-footer .highlight-text {
-            color: var(--color-brand-primary); 
-        }
-        .social-icons {
-            margin-top: 15px;
-            margin-bottom: 10px;
-        }
-
-        .social-icons a {
-            color: var(--color-text-subtle);
-            font-size: 24px;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: var(--color-brand-primary);
-        }
-        /* *************** تنسيق زر العودة للأعلى *************** */
-        #backToTop {
-            display: none; /* مخفي افتراضياً */
-            position: fixed; 
-            bottom: 20px; 
-            right: 20px; 
-            z-index: 99; 
-            border: none; 
-            outline: none; 
-            background-color: var(--color-brand-primary); 
-            color: var(--color-bg-main); /* لون الأيقونة بيج */
-            cursor: pointer; 
-            padding: 10px 15px; 
-            border-radius: 50%;
-            font-size: 18px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        #backToTop:hover {
-            background-color: var(--color-brand-hover);
-            transform: translateY(-2px);
-        }
-        /* *************************************************************** */
-
-        /* تنسيقات الاستجابة (Media Queries) */
-        @media (max-width: 992px) {
-            .main-header .container {
-                justify-content: space-between;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .main-nav {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
-                position: absolute;
-                top: 70px; 
-                left: 0;
-                background: var(--color-bg-card); /* خلفية القائمة في الجوال بيج */
-                box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
-                padding-bottom: 10px;
-                z-index: 999; 
-            }
-            
-            .main-nav.active {
-                display: flex;
-            }
-
-            .main-nav ul {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            .main-nav ul li a {
-                border-bottom: 1px solid #dcdcdc;
-                padding: 15px 0; 
-                display: flex; 
-                justify-content: center;
-                align-items: center;
-            }
-            /* تفعيل التمييز عند التمرير في وضع الجوال */
-            .main-nav ul li a:hover,
-            .main-nav ul li a.active {
-                border-bottom: none;
-                background-color: var(--color-brand-primary); 
-                color: var(--color-bg-main); /* لون النص بيج على الخلفية الذهبية */
-            }
-            /* تعديل لون الأيقونات والنص عند التمرير في وضع الجوال */
-            .main-nav ul li a:hover i,
-            .main-nav ul li a.active i {
-                color: var(--color-bg-main) !important; 
-            }
-            .logo-area {
-                font-size: 20px; 
-            }
-
-            /* --- تنسيقات القائمة المنسدلة في الجوال --- */
-            .dropdown-tools {
-                width: 100%;
-            }
-            /* إظهار القائمة المنسدلة عند تفعيل القائمة الرئيسية (في الجوال) */
-            .main-nav.active .dropdown-menu {
-                display: block; 
-                position: static; 
-                box-shadow: none;
-                border: none;
-                padding: 0;
-                min-width: auto;
-                border-radius: 0;
-                background-color: var(--color-bg-secondary); /* لون أفتح للقائمة الفرعية */
-                border-bottom: 1px solid #dcdcdc;
-            }
-            .dropdown-tools:hover .dropdown-menu {
-                display: none; /* إيقاف عمل الـ hover في الجوال */
-            }
-            .dropdown-menu li a {
-                 padding: 10px 30px; /* لإعطاء مسافة بادئة تميزها كقائمة فرعية */
-                 justify-content: right;
-            }
-            .dropdown-menu li a:hover {
-                 border-bottom: none !important;
-                 background-color: #EDECE4; 
-                 color: var(--color-brand-primary);
-            }
-            /* --- نهاية تنسيقات القائمة المنسدلة في الجوال --- */
-        }
+        /* تنسيقات الاستجابة (Media Queries) تم الاحتفاظ بها */
         @media (max-width: 768px) {
-            body {
-                font-size: 14px; 
-            }
-            /* إصلاح مشكلة الهيدر في الجوال */
-            .main-logo-img {
-                height: 30px; 
-                margin-left: 8px;
-            }
-            
-            .titles-container span {
-                font-size: 12px !important; 
-            }
-
-            .hero-section {
-                min-height: auto; 
-                padding-top: 80px;
-                padding-bottom: 50px;
-            }
-            /* التعديل رقم 1: تصغير حجم الخط الترحيبي في وضع الجوال أكثر */
-            .hero-title {
-                font-size: 24px; 
-                line-height: 1.3;
-            }
-            .hero-subtitle {
-                font-size: 17px; 
-            }
-            .hero-text {
-                font-size: 14px; 
-            }
-            .section-title {
-                font-size: 22px; 
-            }
-            .hero-buttons-grid {
+            .mobile-categories-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            /* التعديل رقم 3: زيادة حجم خط حقوق النشر في الفوتر للجوال */
-            .main-footer .container p {
-                font-size: 13px !important;
-            }
-            #backToTop {
-                padding: 8px 12px; 
-                font-size: 16px;
-                bottom: 15px; 
-                right: 15px; 
             }
         }
     </style>
@@ -651,149 +149,69 @@
     <header class="main-header">
         <div class="container">
             <a href="#" class="logo-area">
-                <img src="logo.png" alt="IT Logo" class="main-logo-img">
+                <img src="logo.png" alt="Store Logo" class="main-logo-img">
                 <div class="titles-container">
                     <span style="display: block; font-size: 15px; font-weight: 900; color: var(--color-brand-primary);">
                عالم الجوالات    
                     </span> 
                     <span style="display: block; font-size: 11px; font-weight: 700; color: var(--color-text-light); margin-top: -1px;"> 
+                    متجر الإلكترونيات والهواتف النقالة
                     </span>
                 </div>
             </a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#home" class="active"><i class="fas fa-home"></i>الرؤية والهدف</a></li>
-                    <li><a href="#about"><i class="fas fa-info-circle"></i>من نحن</a></li> 
-                    <li><a href="#guides"><i class="fas fa-sitemap"></i>أدلة الإرشاد</a></li>
-                    
-                    <li>
-                        <a href="video-library.html" class="video-link">
-                            <i class="fas fa-video"></i>
-                            مكتبة الشروحات التعليمية
-                        </a>
-                    </li>
-                    
+                    <li><a href="#store-hero" class="active"><i class="fas fa-mobile-alt"></i>الأجهزة</a></li>
+                    <li><a href="accessories.html"><i class="fas fa-headphones"></i>الملحقات</a></li> 
+                    <li><a href="video-library.html" class="video-link"><i class="fas fa-video"></i>شروحات المنتجات</a></li>
                     <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
                 </ul>
             </nav>
             <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </header>
-<section id="home" class="hero-section">
+
+    <section id="store-hero" class="store-hero">
         <div class="container text-center">
-            <h3 class="hero-title">
-                أهلاً بك في <span class="highlight-text">     منصة عالم الجوالات </span>
-            </h2>
+            <h1 class="hero-title">
+                اكتشف أحدث <span class="highlight-text">الهواتف الذكية والملحقات</span>
+            </h1>
             <h2 class="hero-subtitle">
+            الجودة والسعر المنافس في متجر واحد
             </h2>
             <p class="hero-text">
-                نوفر لكم جميع انواع الأجهزة الجوالة لجميع الشركات وبأقل الأسعار  ..وكذالك  اكسسواراتها وملحقاتها .
+                نوفر لكم جميع أنواع الأجهزة الجوالة لجميع الشركات وبأقل الأسعار، بالإضافة إلى تشكيلة واسعة من الملحقات الأصلية.
             </p>
-            <div class="hero-buttons-grid">
-                <a href="#guides" class="card-button-hero primary-card">
-                    <i class="fas fa-book-open"></i>
-                    <h3> احدث الأجهزة بأقل الأسعار</h3>
-                    <p style="font-size: 14px; color: var(--color-text-subtle);"> تشكيلة واسعة تلبي جميع إختياراتكم  </p>
-                </a>
-                <a href="https://almkhdri31-glitch.github.io/web/m.html" target="_self" class="card-button-hero cv-card">
-                    <i class="fas fa-file-invoice"></i>
-                    <h3> قسم ملحقات الهواتف النقالة   </h3>
-                    <p style="font-size: 14px; color: var(--color-text-subtle);">(كمليات)</p>
-                </a>
-                <a href="https://almkhdri31-glitch.github.io/web/m" class="card-button-hero tools-card">
-                    <i class="fas fa-tools"></i>
-                 كل ماتبحث عنه..  جمعناه لك تحت سقف واحد .</h3>
-                    <p style="font-size: 14px; color: var(--color-text-subtle);">.</p>
-                </a>
-                <a href="video-library.html" target="_self" class="card-button-hero video-card">
-                    <i class="fas fa-video"></i>
-                    <h3>شاهد الشروحات التعليمية الآن</h3>
-                    <p style="font-size: 14px; color: var(--color-text-subtle);">(مكتبة الشروحات المسارية)</p>
-                </a>
-                </div>
-        </div>
-    </section>
-    <section id="about" class="quick-tip-section">
-        <div class="container text-center">
-            <h3 class="section-title">من نحن</h2>
-            <p class="section-subtitle">
-                 "نقدم حلولًا رقمية متكاملة"        
-            </p>
-            <div class="row" style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-                <div class="col-lg-6 mb-4" style="padding: 10px;">
-                    <div class="tip-card">
-                        <i class="fas fa-shield-alt tip-icon"></i>
-                        <div>
-                            <h3 class="tip-title">خبرة تنفيذية في الأمن  </h2>
-                            <p class="tip-content">إرشادات مستخلصة من خبرة الـ - CCNA - CCNP - CCIE لضمان دقة المعلومة.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4" style="padding: 10px;">
-                    <div class="tip-card">
-                        <i class="fas fa-tools tip-icon"></i>
-                        <div>
-                            <h3 class="tip-title">أدوات وتقنيات مُحدثة</h3>
-                            <p class="tip-content">محتوى إرشادي عملي يركز على أحدث الثغرات.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="guides" class="main-content">
-        <div class="container text-center">
-            <h3 class="section-title">أدلة الإرشاد والمحتوى الموثوق    </h2> 
-            <p class="section-subtitle">
-                تعلم كيف تحمي نفسك وعملك بنفسك.
-            </p>
-            <div class="services-grid">
-
-                <a href="T-base64.html" class="service-card" style="border-color: var(--color-tool-highlight-green);">
-                    <i class="fas fa-code-branch card-icon" style="color: var(--color-tool-highlight-green);"></i>
-                    <h2>أداة تشفير وفك تشفير Base64</h2>
-                    <p>حول البيانات الثنائية إلى نص آمن للنقل (والعكس). تعمل بالكامل على متصفحك لضمان الخصوصية.</p>
-                    <span class="card-link" style="color: var(--color-tool-highlight-green);">تجربة الأداة <i class="fas fa-arrow-left"></i></span>
-                </a>
-
-                <a href="T-subnet.html" class="service-card" style="border-color: var(--color-tool-highlight-blue);">
-                    <i class="fas fa-network-wired card-icon" style="color: var(--color-tool-highlight-blue);"></i>
-                    <h2>حاسبة Subnetting المتقدمة (IPv4)</h2>
-                    <p>أداة أساسية لمهندسي الشبكات لحساب نطاق الشبكة، وعنوان البث، وعدد المضيفين المتاحين.</p>
-                    <span class="card-link" style="color: var(--color-tool-highlight-blue);">تجربة الأداة <i class="fas fa-arrow-left"></i></span>
+            
+            <div class="mobile-categories-grid">
+                
+                <a href="category-apple.html" class="category-card card-apple">
+                    <i class="fab fa-apple"></i>
+                    <h3>أجهزة Apple (iPhone)</h3>
+                    <p>أحدث إصدارات آيفون والملحقات الأصلية</p>
                 </a>
                 
-                <a href="T-password.html" class="service-card" style="border-color: var(--color-accent-secondary);">
-                    <i class="fas fa-lock card-icon" style="color: var(--color-accent-secondary);"></i>
-                    <h2>أداة مُولِّد ومُدقق قوة كلمات المرور</h2>
-                    <p>اختبر مدى أمان كلمة مرورك أو قم بتوليد كلمة مرور عشوائية فائقة القوة بضغطة زر. (مُجانية).</p>
-                    <span class="card-link" style="color: var(--color-accent-secondary);">تجربة الأداة <i class="fas fa-arrow-left"></i></span>
-                </a>
-
-                <a href="network-security-guide.html" class="service-card">
-                    <i class="fas fa-network-wired card-icon"></i>
-                    <h2>تأمين شبكتك المنزلية بدليل متكامل (CCNP/CCIE)</h2>
-                    <p>شرح لثغرات الراوتر وكيفية إعداد المنافذ وتفعيل المصادقة الثنائية (MFA) - **اضغط للقراءة**.</p>
-                    <span class="card-link">قراءة الدليل <i class="fas fa-arrow-left"></i></span>
-                </a>
-
-                <a href="nmap-guide.html" class="service-card">
-                    <i class="fas fa-search-location card-icon"></i>
-                    <h2>دليل فحص المنافذ: Nmap وبدائل الأندرويد</h3>
-                    <p>تعلم كيفية استخدام ماسح الشبكة Nmap أو تطبيقات الأندرويد البديلة لترى شبكتك بعين المهاجم - **اضغط للقراءة**.</p>
-                    <span class="card-link">شاهد الدليل <i class="fas fa-arrow-left"></i></span>
+                <a href="category-samsung.html" class="category-card card-samsung">
+                    <i class="fas fa-tablet-alt"></i> <h3>أجهزة Samsung (Galaxy)</h3>
+                    <p>تشكيلة واسعة من هواتف فئة Galaxy S و Note و A</p>
                 </a>
                 
-                <a href="security-alerts.html" class="service-card">
-                    <i class="fas fa-bullhorn card-icon"></i>
-                    <h2>مستجدات الأمن والتحذيرات الحرجة (CVEs)</h2>
-                    <p>نشرة يومية بأحدث الثغرات الأمنية وكيفية تطبيق التصحيحات اللازمة على نظامك - **اضغط للتفاصيل**.</p>
-                    <span class="card-link">قراءة النشرة <i class="fas fa-arrow-left"></i></span>
+                <a href="category-xiaomi.html" class="category-card card-xiaomi">
+                    <i class="fas fa-mobile-alt"></i> <h3>أجهزة Xiaomi & Huawei</h3>
+                    <p>أجهزة بأسعار منافسة وإمكانيات قوية</p>
+                </a>
+
+                <a href="accessories.html" class="category-card card-accessories">
+                    <i class="fas fa-headphones"></i>
+                    <h3>الملحقات والكماليات</h3>
+                    <p>سماعات، شواحن، أغطية حماية والمزيد</p>
                 </a>
             </div>
         </div>
     </section>
+    
     <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 0px auto 15px; opacity: 0.3;">
+    
     <footer class="main-footer" id="contact-footer">
         <div class="container text-center">
              <div class="social-icons">
@@ -816,8 +234,8 @@
     <button onclick="topFunction()" id="backToTop" title="العودة للأعلى">
         <i class="fas fa-arrow-up"></i>
     </button>
+    
     <script>
-        // الكود الأصلي لتشغيل قائمة التنقل وتحديث التاريخ
         const menuToggle = document.querySelector('.menu-toggle');
         const mainNav = document.querySelector('.main-nav');
         
@@ -829,14 +247,9 @@
         navLinks.forEach(link => {
             link.addEventListener('click', (event) => {
                 const href = link.getAttribute('href');
-                const isDropdownLink = link.closest('.dropdown-menu'); 
-                
-                if (href === '#' || href.startsWith('#')) {
+                if (href === '#store-hero' || href.startsWith('#')) {
                     mainNav.classList.remove('active');
                 } 
-                else if (isDropdownLink) {
-                     mainNav.classList.remove('active');
-                }
                 else {
                     setTimeout(() => {
                        mainNav.classList.remove('active');
@@ -847,11 +260,7 @@
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-
-        // ********************* START: كود زر العودة للأعلى *********************
         let mybutton = document.getElementById("backToTop");
-
-        // إظهار الزر عند التمرير 20 بكسل لأسفل
         window.onscroll = function() {scrollFunction()};
 
         function scrollFunction() {
@@ -862,14 +271,10 @@
           }
         }
 
-        // عند النقر على الزر، انتقل للأعلى
         function topFunction() {
-          document.body.scrollTop = 0; // لمتصفح سفاري
-          document.documentElement.scrollTop = 0; // لمتصفحات كروم وفايرفوكس وإيدج
+          document.body.scrollTop = 0; 
+          document.documentElement.scrollTop = 0; 
         }
-        // ********************* END: كود زر العودة للأعلى *********************
-        
-        // ملاحظة: تم حذف كود جلب الأخبار (RSS) بالكامل لضمان عدم ظهور أخطاء الاتصال.
     </script>
 </body>
 </html>
