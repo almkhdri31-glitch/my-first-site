@@ -15,7 +15,7 @@
     /* ألوان العلامة التجارية (الذهبي/الأصفر) */
     --color-brand-primary: #FFC300;     /* الذهبي الساطع */
     --color-brand-secondary: #DAA520;   /* الذهبي الغامق (للتأثيرات) */
-    --color-accent-secondary: #f39c12;  /* برتقالي/ذهبي إضافي */
+    --color-accent-secondary: #f39c12;  /* برتقالي/ذهبي إضافي للملحقات */
     
     /* ألوان خاصة */
     --color-video-highlight: #c00;      /* الأحمر الخاص بالفيديو */
@@ -110,7 +110,7 @@ a {
     font-weight: 700;
     font-size: 16px;
     color: var(--color-text-light);
-    border-bottom: 3px solid transparent; /* للمسة متحركة */
+    border-bottom: 3px solid transparent; 
 }
 
 .main-nav ul li a:hover,
@@ -177,8 +177,8 @@ a {
     border-radius: 12px;
     text-align: center;
     box-shadow: var(--shadow-main);
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 2px solid transparent;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; 
+    border: 1px solid #ddd; /* **تم إضافة حد ثابت خفيف هنا** */
 }
 
 .category-card:hover {
@@ -257,19 +257,20 @@ a {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow-main);
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid #eee;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    border: 1px solid #ddd; /* **تم إضافة حد ثابت خفيف هنا** */
 }
 
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    border-color: var(--color-brand-primary); /* الحد الذهبي يظهر عند التفاعل */
 }
 
 .product-card img {
     width: 100%;
     height: 250px;
-    object-fit: contain; /* لتجنب قص الصورة والحفاظ على نسبتها */
+    object-fit: contain; 
     padding: 20px;
     border-bottom: 1px solid #f0f0f0;
 }
@@ -290,13 +291,13 @@ a {
     font-size: 14px;
     color: var(--color-text-subtle);
     margin-bottom: 10px;
-    min-height: 40px; /* لتوحيد ارتفاع البطاقات */
+    min-height: 40px; 
 }
 
 .product-info .price {
     font-size: 22px;
     font-weight: 900;
-    color: #c00; /* لون أحمر للسعر */
+    color: #c00; 
     margin-bottom: 15px;
 }
 
@@ -380,7 +381,7 @@ a {
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 70px; /* تحت الهيدر */
+        top: 70px; 
         right: 0;
         background-color: var(--color-bg-secondary);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -449,16 +450,17 @@ a {
 
 .video-card {
     background-color: var(--color-bg-secondary);
-    border: 1px solid #eee;
+    border: 1px solid #ddd; /* تم وضع حد ثابت */
     border-radius: 8px;
     overflow: hidden;
     box-shadow: var(--shadow-main);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s;
 }
 
 .video-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    border-color: var(--color-brand-primary); /* الحد الذهبي يظهر عند التفاعل */
 }
 
 .video-thumbnail-container {
@@ -671,4 +673,143 @@ a {
 
 .policy-content ul li {
     margin-bottom: 10px;
+}
+
+/* ========================================================== */
+/* === تنسيقات صفحة تفاصيل المنتج (product-details.html) === */
+/* ========================================================== */
+.product-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 40px 0;
+}
+
+/* العمود الأيسر (الصور والوصف) */
+.product-gallery {
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--color-bg-secondary);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-main);
+    height: fit-content;
+}
+
+.main-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.description-box {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    border-right: 4px solid var(--color-brand-primary);
+    margin-top: 20px;
+}
+
+.description-box h2 {
+     color: var(--color-brand-primary);
+     font-size: 22px;
+     margin-bottom: 15px;
+}
+
+/* العمود الأيمن (الاسم والسعر والخيارات) */
+.product-info-panel {
+    flex: 1.5;
+    min-width: 450px;
+    background-color: var(--color-bg-secondary);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-main);
+}
+
+.product-info-panel h1 {
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--color-text-light);
+    margin-bottom: 10px;
+}
+
+.product-info-panel .brand {
+     font-size: 20px;
+     color: var(--color-text-subtle);
+     margin-bottom: 20px;
+     border-bottom: 1px solid #eee;
+     padding-bottom: 10px;
+}
+
+.product-price {
+    font-size: 40px;
+    font-weight: 900;
+    color: #c00;
+    margin: 20px 0;
+    display: block;
+}
+
+/* خيارات المنتج */
+.options-group {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.options-group h3 {
+    font-size: 18px;
+    color: var(--color-brand-primary);
+    margin-bottom: 10px;
+}
+
+.option-choice {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: var(--color-text-light);
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s, border 0.2s;
+    border: 2px solid transparent;
+}
+
+.option-choice:hover,
+.option-choice.selected {
+    background-color: #fff8e8;
+    border-color: var(--color-brand-primary);
+    font-weight: 700;
+}
+
+/* زر الشراء */
+.add-to-cart-btn {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background-color: var(--color-brand-primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 30px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: var(--color-brand-secondary);
+    transform: translateY(-2px);
+}
+
+/* التجاوب لصفحة تفاصيل المنتج */
+@media (max-width: 992px) {
+    .product-details-container {
+        flex-direction: column;
+    }
+    .product-info-panel, .product-gallery {
+        min-width: 100%;
+    }
 }
