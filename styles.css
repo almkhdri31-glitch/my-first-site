@@ -135,7 +135,7 @@ a {
 /* ========================================================== */
 
 .store-hero {
-    padding: 5px 0;
+    padding: 50px 0;
     
     /* الكود المحدّث لزيادة وضوح الخلفية */
     background: linear-gradient(180deg, rgba(255, 253, 242, 0.5) 0%, rgba(255, 253, 242, 0.90) 70%), url('background-image.jpg');
