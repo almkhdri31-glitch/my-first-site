@@ -43,11 +43,7 @@ body {
     color: var(--color-text-light);
     font-size: 16px;
     
-    /* التعديل الجديد: إضافة خلفية صورة */
-    background-image: url('background-image.jpg'); /* اسم الصورة يجب أن يكون هنا */
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+    /* التعديل الهام: تم إزالة الصورة كخلفية لكي يتم إدراجها كبانر في الواجهة */
     background-color: var(--color-bg-main); /* لون احتياطي (الأبيض اللؤلؤي) */
 }
 
@@ -161,6 +157,22 @@ a {
     max-width: 800px;
     margin: 0 auto 40px;
     color: var(--color-text-light);
+}
+
+/* التنسيق الجديد للبانر الذي سيتم إدراجه في HTML */
+.main-hero-banner {
+    width: 100%;
+    margin: 30px auto; /* مسافة أعلى وأسفل البانر */
+    border-radius: 12px;
+    overflow: hidden; /* لحماية الصورة من تجاوز الحدود */
+    box-shadow: var(--shadow-main);
+}
+
+.main-hero-banner img {
+    width: 100%;
+    height: auto; /* تضمن أن الصورة تتمدد وتغطي المساحة بالكامل */
+    display: block;
+    object-fit: cover; /* تضمن أن الصورة لا تتشوه */
 }
 
 /* ========================================================== */
