@@ -7,7 +7,7 @@
     --font-family-base: 'Cairo', sans-serif;
     
     /* الألوان الأساسية */
-    --color-bg-main: #FAF9F7;           /* تم التغيير: الأبيض اللؤلؤي */
+    --color-bg-main: #FAF9F7;           /* الأبيض اللؤلؤي (للاستخدام الاحتياطي) */
     --color-bg-secondary: #FFFDF2;      /* خلفية الهيدر والفوتر والبطاقات (بيج ذهبي فاتح جداً - اللون الموحد) */
     --color-text-light: #333333;        /* لون النص الرئيسي الداكن */
     --color-text-subtle: #666666;       /* لون النص الثانوي (رمادي) */
@@ -41,8 +41,14 @@ body {
     font-family: var(--font-family-base);
     line-height: 1.6;
     color: var(--color-text-light);
-    background-color: var(--color-bg-main);
     font-size: 16px;
+    
+    /* التعديل الجديد: إضافة خلفية صورة */
+    background-image: url('images/background-image.jpg'); /* اسم الصورة يجب أن يكون هنا */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: var(--color-bg-main); /* لون احتياطي (الأبيض اللؤلؤي) */
 }
 
 a {
@@ -73,7 +79,7 @@ a {
 .main-header {
     background: var(--color-bg-secondary);
     color: var(--color-text-light);
-    padding: 12px 0; /* تم التعديل من 10px إلى 12px لتوفير مساحة أفضل */
+    padding: 12px 0; /* تم التعديل إلى 12px */
     border-bottom: 3px solid var(--color-brand-primary);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -752,12 +758,6 @@ a {
     margin-bottom: 25px;
     padding-bottom: 15px;
     border-bottom: 1px dashed #ddd;
-}
-
-.options-group h3 {
-    font-size: 18px;
-    color: var(--color-brand-primary);
-    margin-bottom: 10px;
 }
 
 .option-choice {
