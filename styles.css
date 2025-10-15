@@ -182,12 +182,15 @@ a {
     text-align: center;
     box-shadow: var(--shadow-main);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; 
-    border: 1px solid #ddd; /* حد ثابت خفيف */
+    
+    /* === التعديل هنا: تثبيت الحد الذهبي على جميع البطاقات === */
+    border: 1px solid var(--color-brand-primary); /* حد ذهبي ثابت بدلاً من #ddd */
 }
 
 .category-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    /* الإبقاء على لون الحد الذهبي، أو يمكن حذف السطر لعدم وجود تغيير */
     border-color: var(--color-brand-primary);
 }
 
@@ -262,12 +265,15 @@ a {
     overflow: hidden;
     box-shadow: var(--shadow-main);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    border: 1px solid #ddd; /* حد ثابت خفيف */
+    
+    /* === التعديل هنا أيضاً: تثبيت الحد الذهبي على بطاقات المنتجات === */
+    border: 1px solid var(--color-brand-primary); /* حد ذهبي ثابت بدلاً من #ddd */
 }
 
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    /* الإبقاء على لون الحد الذهبي */
     border-color: var(--color-brand-primary);
 }
 
@@ -453,7 +459,8 @@ a {
 
 .video-card {
     background-color: var(--color-bg-secondary);
-    border: 1px solid #ddd;
+    /* === التعديل هنا أيضاً: تثبيت الحد الذهبي على بطاقات الفيديو === */
+    border: 1px solid var(--color-brand-primary);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: var(--shadow-main);
@@ -463,6 +470,7 @@ a {
 .video-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    /* الإبقاء على لون الحد الذهبي */
     border-color: var(--color-brand-primary);
 }
 
@@ -534,6 +542,9 @@ a {
     border-radius: 12px;
     box-shadow: var(--shadow-main);
     min-width: 300px;
+    
+    /* === التعديل هنا أيضاً: تثبيت الحد الذهبي على حاويات الاتصال === */
+    border: 1px solid var(--color-brand-primary);
 }
 
 .contact-info {
@@ -650,6 +661,9 @@ a {
     border-radius: 12px;
     box-shadow: var(--shadow-main);
     margin: 40px auto;
+    
+    /* === التعديل هنا أيضاً: تثبيت الحد الذهبي على حاوية السياسة === */
+    border: 1px solid var(--color-brand-primary);
 }
 
 .policy-content h2 {
@@ -697,6 +711,9 @@ a {
     border-radius: 12px;
     box-shadow: var(--shadow-main);
     height: fit-content;
+    
+    /* === التعديل هنا أيضاً: تثبيت الحد الذهبي على معرض الصور === */
+    border: 1px solid var(--color-brand-primary);
 }
 
 .main-image {
@@ -729,6 +746,9 @@ a {
     padding: 30px;
     border-radius: 12px;
     box-shadow: var(--shadow-main);
+    
+    /* === التعديل هنا أيضاً: تثبيت الحد الذهبي على لوحة المعلومات === */
+    border: 1px solid var(--color-brand-primary);
 }
 
 .product-info-panel h1 {
