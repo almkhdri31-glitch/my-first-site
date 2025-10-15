@@ -44,7 +44,7 @@ body {
     font-size: 16px;
     
     /* التعديل الجديد: إضافة خلفية صورة */
-    background-image: url('images/background-image.jpg'); /* اسم الصورة يجب أن يكون هنا */
+    background-image: url('background-image.jpg'); /* اسم الصورة يجب أن يكون هنا */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
