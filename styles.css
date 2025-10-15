@@ -137,10 +137,10 @@ a {
 .store-hero {
     padding: 50px 0;
     
-    /* هذا الكود يطبق الخلفية المضلعة (background-image.jpg) مع طبقة بيضاء خفيفة كما في الصورة القديمة */
-    background: linear-gradient(180deg, rgba(255, 253, 242, 0.7) 0%, rgba(255, 253, 242, 0.95) 70%), url('background-image.jpg');
+    /* الكود المحدّث لزيادة وضوح الخلفية */
+    background: linear-gradient(180deg, rgba(255, 253, 242, 0.5) 0%, rgba(255, 253, 242, 0.90) 70%), url('background-image.jpg');
     background-size: cover; 
-    background-position: center top; /* تظهر في المنطقة العلوية بوضوح */
+    background-position: center top; 
 
     border-bottom: 1px solid #ddd;
 }
