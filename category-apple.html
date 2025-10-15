@@ -9,310 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
-    <style>
-        /* ========================================================== */
-        /* === 1. المتغيرات والتنسيقات العامة (نسخ من index.html) === */
-        /* ========================================================== */
-
-        :root {
-            --color-bg-main: #FAF0E6;    /* لون بيج فاتح */
-            --color-bg-secondary: #FFF8E1; /* لون أفتح */
-            --color-bg-card: #F5F5DC;    /* لون بيج متوسط */
-            --color-text-light: #333333;  
-            --color-text-subtle: #555555; 
-            --color-brand-primary: #DAA520;     /* الذهبي الداكن */
-            --color-brand-hover: #C5931D;       
-            --color-accent-secondary: #D2691E;  /* البني الداكن للسعر */
-            --color-video-highlight: #CC0000;         
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Cairo', sans-serif;
-            line-height: 1.6;
-            color: var(--color-text-light); 
-            background-color: var(--color-bg-main); 
-            overflow-x: hidden; 
-            font-size: 16px; 
-            direction: rtl; /* ضمان الاتجاه لليمين */
-            text-align: right;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s;
-        }
-        ul {
-            list-style: none;
-        }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            overflow: hidden;
-        }
-        .text-center {
-            text-align: center;
-        }
-        
-        /* الهيدر وقائمة التنقل */
-        .main-header {
-            background: var(--color-bg-main); 
-            color: var(--color-text-light);
-            padding: 15px 0;
-            border-bottom: 1px solid #dcdcdc; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .main-header .container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            flex-wrap: nowrap;
-        }
-
-        /* تنسيقات اللوجو (الشعار) - هنا تم تصحيح مشكلة التكبير */
-        .logo-area {
-            display: flex;
-            align-items: center; 
-            text-decoration: none;
-            color: inherit;
-            font-size: 24px; 
-            flex-shrink: 1; 
-            min-width: 0;
-            max-width: 100%; /* تصحيح المشكلة هنا */
-        }
-        .main-logo-img {
-            height: 40px; 
-            width: auto; 
-            margin-left: 10px; 
-            max-height: 40px; /* تصحيح المشكلة هنا */
-            max-width: 100%;
-        }
-        
-        .titles-container {
-            line-height: 1.2; 
-            text-align: right; 
-        }
-        
-        .main-nav ul {
-            display: flex;
-            gap: 20px;
-        }
-        .main-nav ul li a {
-            padding: 5px 0; 
-            transition: all 0.3s;
-            color: var(--color-text-light);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: 400;
-        }
-        .main-nav ul li a:hover,
-        .main-nav ul li a.active {
-            color: var(--color-brand-primary); 
-            border-bottom: 3px solid var(--color-brand-primary); 
-            padding-bottom: 5px; 
-        }
-        .main-nav ul li a i {
-            color: var(--color-text-light);
-            transition: color 0.3s;
-        }
-        .main-nav ul li a:hover i,
-        .main-nav ul li a.active i {
-            color: var(--color-brand-primary) !important; 
-        }
-        .menu-toggle {
-            color: var(--color-text-light);
-            font-size: 24px;
-            cursor: pointer;
-            display: none; 
-        }
-
-        /* الفوتر وزر العودة للأعلى */
-        .main-footer {
-            background-color: var(--color-bg-secondary); 
-            color: var(--color-text-light);
-            padding: 20px 0; 
-            border-top: 1px solid #dcdcdc; 
-        }
-        #backToTop {
-            display: none; 
-            position: fixed; 
-            bottom: 20px; 
-            right: 20px; 
-            z-index: 99; 
-            border: none; 
-            outline: none; 
-            background-color: var(--color-brand-primary); 
-            color: var(--color-bg-main); 
-            cursor: pointer; 
-            padding: 10px 15px; 
-            border-radius: 50%;
-            font-size: 18px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        #backToTop:hover {
-            background-color: var(--color-brand-hover);
-            transform: translateY(-2px);
-        }
-        
-        /* ========================================================== */
-        /* === 2. تنسيقات صفحة القسم (category-apple.html) === */
-        /* ========================================================== */
-
-        .category-header {
-            background-color: #ffffff; /* تغيير إلى الأبيض لمظهر أنظف */
-            padding: 40px 0;
-            text-align: center;
-            border-bottom: 3px solid #000; /* خط أسود لآبل */
-            margin-bottom: 30px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .category-header h1 {
-            font-size: 38px;
-            color: #000;
-            margin-bottom: 10px;
-            font-weight: 900;
-        }
-
-        .category-header p {
-            font-size: 18px;
-            color: #555;
-        }
-
-        /* تنسيق أقسام المنتجات الفرعية */
-        .product-section {
-            margin-bottom: 50px;
-            padding: 25px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .product-section h2 {
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--color-brand-primary);
-            border-bottom: 3px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-
-        /* شبكة عرض المنتجات */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 30px;
-        }
-
-        /* بطاقة المنتج الواحد */
-        .product-card {
-            background-color: #F8F8F8; /* خلفية بيضاء فاتحة للبطاقة */
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-card:hover {
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-            transform: translateY(-3px);
-            border-color: #000; /* إطار أسود عند التمرير */
-        }
-
-        .product-card img {
-            max-width: 100%;
-            height: 200px; 
-            object-fit: contain; 
-            border-radius: 8px;
-            margin-bottom: 15px;
-            background-color: #fff;
-            padding: 5px;
-        }
-
-        .product-info h3 {
-            font-size: 19px;
-            margin: 5px 0;
-            color: var(--color-text-light);
-        }
-
-        .product-info p.description {
-            font-size: 14px;
-            color: var(--color-text-subtle);
-            margin-bottom: 10px;
-            min-height: 40px; 
-        }
-
-        .product-info p.price {
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--color-accent-secondary); 
-            margin-bottom: 15px;
-        }
-
-        .details-button {
-            display: block;
-            background-color: var(--color-brand-primary);
-            color: var(--color-bg-main);
-            padding: 12px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 700;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        .details-button:hover {
-            background-color: var(--color-brand-hover);
-        }
-        .details-button.disabled {
-            background-color: #aaa;
-            cursor: default;
-        }
-
-        /* ========================================================== */
-        /* === 3. تنسيقات الاستجابة (Media Queries) === */
-        /* ========================================================== */
-
-        @media (max-width: 992px) {
-            .main-header .container {
-                justify-content: space-between;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .main-nav {
-                display: none;
-                /* ... باقي تنسيقات القائمة في وضع الجوال ... */
-            }
-            .main-nav.active {
-                display: flex;
-            }
-            /* ... باقي تنسيقات الجوال ... */
-        }
-        @media (max-width: 768px) {
-            .main-logo-img {
-                height: 30px; 
-                max-height: 30px; /* تصحيح مشكلة حجم الشعار على الجوال */
-                margin-left: 8px;
-            }
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> 
+    
 </head>
 <body>
     <header class="main-header">
@@ -331,7 +29,8 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html"><i class="fas fa-mobile-alt"></i>الأجهزة</a></li>
-                    <li><a href="accessories.html" class="active"><i class="fas fa-headphones"></i>الملحقات</a></li> <li><a href="video-library.html" class="video-link"><i class="fas fa-video"></i>شروحات المنتجات</a></li>
+                    <li><a href="accessories.html"><i class="fas fa-headphones"></i>الملحقات</a></li> 
+                    <li><a href="video-library.html" class="video-link"><i class="fas fa-video"></i>شروحات المنتجات</a></li>
                     <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
                 </ul>
             </nav>
@@ -352,23 +51,23 @@
             <h2>🥇 الأكثر مبيعاً حالياً</h2>
             <div class="products-grid">
                 
-                <a href="product-details.html?id=15pm" class="product-card">
-                    <img src="images/iphone-15-pro-max.jpg" alt="iPhone 15 Pro Max">
+                <a href="https://wa.me/9665xxxxxxxx?text=أرغب في طلب منتج iPhone 15 Pro Max (256GB) بسعر 5,199 ر.س." target="_blank" class="product-card">
+                    <img src="iphone-15-pro-max.png" alt="iPhone 15 Pro Max">
                     <div class="product-info">
                         <h3>iPhone 15 Pro Max (256GB)</h3>
                         <p class="description">كاميرا احترافية، شاشة ProMotion، وهيكل من التيتانيوم.</p>
                         <p class="price">5,199 ر.س</p>
-                        <span class="details-button">اطلب الآن</span>
+                        <span class="details-button"><i class="fab fa-whatsapp"></i> اطلب الآن عبر الواتساب</span>
                     </div>
                 </a>
                 
-                <a href="product-details.html?id=14" class="product-card">
+                <a href="https://wa.me/9665xxxxxxxx?text=أرغب في طلب منتج iPhone 14 (128GB) بسعر 3,299 ر.س." target="_blank" class="product-card">
                     <img src="images/iphone-14.jpg" alt="iPhone 14">
                     <div class="product-info">
                         <h3>iPhone 14 (128GB)</h3>
                         <p class="description">قوة وثبات بسعر منافس، أداء ممتاز لجميع الاستخدامات.</p>
                         <p class="price">3,299 ر.س</p>
-                        <span class="details-button">اطلب الآن</span>
+                        <span class="details-button"><i class="fab fa-whatsapp"></i> اطلب الآن عبر الواتساب</span>
                     </div>
                 </a>
             </div>
@@ -378,8 +77,8 @@
             <h2>✨ أحدث الإصدارات</h2>
             <div class="products-grid">
                 
-                <a href="product-details.html?id=16" class="product-card">
-                    <img src="images/iphone-16-placeholder.jpg" alt="iPhone 16">
+                <a href="#" class="product-card">
+                    <img src="https://my-first-site-gold-seven.vercel.app/iphone-15-pro-max.png" alt="iPhone 16">
                     <div class="product-info">
                         <h3>iPhone 16 - قريباً</h3>
                         <p class="description">ترقبوا الجيل القادم من هواتف آيفون.</p>
@@ -388,13 +87,13 @@
                     </div>
                 </a>
                 
-                <a href="product-details.html?id=aw9" class="product-card">
+                <a href="https://wa.me/9665xxxxxxxx?text=أرغب في طلب منتج Apple Watch Series 9 بسعر 1,799 ر.س." target="_blank" class="product-card">
                     <img src="images/apple-watch-9.jpg" alt="Apple Watch Series 9">
                     <div class="product-info">
                         <h3>Apple Watch Series 9</h3>
                         <p class="description">أقوى شريحة، إيماءة النقر المزدوج المبتكرة.</p>
                         <p class="price">1,799 ر.س</p>
-                        <span class="details-button">اطلب الآن</span>
+                        <span class="details-button"><i class="fab fa-whatsapp"></i> اطلب الآن عبر الواتساب</span>
                     </div>
                 </a>
             </div>
@@ -427,46 +126,6 @@
         <i class="fas fa-arrow-up"></i>
     </button>
     
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mainNav = document.querySelector('.main-nav');
-        
-        menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-
-        const navLinks = document.querySelectorAll('.main-nav ul li a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                const href = link.getAttribute('href');
-                if (href === '#store-hero' || href.startsWith('#')) {
-                    mainNav.classList.remove('active');
-                } 
-                else {
-                    setTimeout(() => {
-                       mainNav.classList.remove('active');
-                    }, 50); 
-                }
-            });
-        });
-
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        let mybutton = document.getElementById("backToTop");
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            mybutton.style.display = "block";
-          } else {
-            mybutton.style.display = "none";
-          }
-        }
-
-        function topFunction() {
-          document.body.scrollTop = 0; 
-          document.documentElement.scrollTop = 0; 
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
