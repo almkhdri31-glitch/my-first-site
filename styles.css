@@ -43,8 +43,8 @@ body {
     color: var(--color-text-light);
     font-size: 16px;
     
-    /* التعديل الهام: تم إزالة الصورة كخلفية لكي يتم إدراجها كبانر في الواجهة */
-    background-color: var(--color-bg-main); /* لون احتياطي (الأبيض اللؤلؤي) */
+    /* تم التأكد من إزالة أي صورة خلفية من الجسم الرئيسي */
+    background-color: var(--color-bg-main); 
 }
 
 a {
@@ -75,7 +75,7 @@ a {
 .main-header {
     background: var(--color-bg-secondary);
     color: var(--color-text-light);
-    padding: 12px 0; /* تم التعديل إلى 12px */
+    padding: 12px 0;
     border-bottom: 3px solid var(--color-brand-primary);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -131,12 +131,17 @@ a {
 }
 
 /* ========================================================== */
-/* === قسم الترويسة الرئيسي (Hero Section) === */
+/* === قسم الترويسة الرئيسي (Hero Section) - الخلفية المطلوبة هنا === */
 /* ========================================================== */
 
 .store-hero {
     padding: 50px 0;
-    background: linear-gradient(145deg, var(--color-bg-secondary), #f9f9f9);
+    
+    /* هذا الكود يطبق الخلفية المضلعة (background-image.jpg) مع طبقة بيضاء خفيفة كما في الصورة القديمة */
+    background: linear-gradient(180deg, rgba(255, 253, 242, 0.7) 0%, rgba(255, 253, 242, 0.95) 70%), url('background-image.jpg');
+    background-size: cover; 
+    background-position: center top; /* تظهر في المنطقة العلوية بوضوح */
+
     border-bottom: 1px solid #ddd;
 }
 
@@ -157,22 +162,6 @@ a {
     max-width: 800px;
     margin: 0 auto 40px;
     color: var(--color-text-light);
-}
-
-/* التنسيق الجديد للبانر الذي سيتم إدراجه في HTML */
-.main-hero-banner {
-    width: 100%;
-    margin: 30px auto; /* مسافة أعلى وأسفل البانر */
-    border-radius: 12px;
-    overflow: hidden; /* لحماية الصورة من تجاوز الحدود */
-    box-shadow: var(--shadow-main);
-}
-
-.main-hero-banner img {
-    width: 100%;
-    height: auto; /* تضمن أن الصورة تتمدد وتغطي المساحة بالكامل */
-    display: block;
-    object-fit: cover; /* تضمن أن الصورة لا تتشوه */
 }
 
 /* ========================================================== */
