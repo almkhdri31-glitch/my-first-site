@@ -1,6 +1,6 @@
 /* =========================================================
-   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية والمجمعة)
-   تم تصحيح مشكلة ظهور المجموع الصفري في صفحة السلة.
+   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية والمدمجة)
+   تم تصحيح الـ IDs لتتطابق مع cart.html.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
         // إعادة عرض محتويات السلة والملخص بعد كل تعديل
+        // هنا نستخدم 'cart-items' و 'cart-total' (المعرفات الصحيحة الآن)
         if (document.getElementById('cart-items')) {
             renderCartItems();
         }
@@ -60,15 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const productId = card.dataset.productId;
             
-            // قراءة السعر والتحقق من أنه رقم صالح
             const priceText = card.dataset.price;
             const price = priceText ? parseFloat(priceText) : 0;
             
-            // استخراج اسم المنتج
             const productNameElement = card.querySelector('h3');
             const name = productNameElement ? productNameElement.textContent.trim() : 'منتج غير معروف';
 
-            // استخراج الكمية
             const qtyInput = card.querySelector(`input[type="number"]`); 
             const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
             
@@ -99,10 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
         saveCart();
     };
 
-    // 7. وظيفة عرض محتويات السلة في صفحة cart.html (تم تصحيحها نهائياً)
+    // 7. وظيفة عرض محتويات السلة في صفحة cart.html (مع استخدام الـ IDs الصحيحة)
     const renderCartItems = () => {
-        const cartItemsContainer = document.getElementById('cart-items');
-        const cartTotalElement = document.getElementById('cart-total');
+        const cartItemsContainer = document.getElementById('cart-items'); // الـ ID الصحيح
+        const cartTotalElement = document.getElementById('cart-total');   // الـ ID الصحيح
         if (!cartItemsContainer || !cartTotalElement) return;
 
         cartItemsContainer.innerHTML = ''; 
@@ -121,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             
-            // مسار الصورة. إذا كانت صورك لاحقها .jpg أو .jpeg، قم بتعديل ".png"
+            // مسار الصورة (استخدم اللاحقة الصحيحة لملفات صورك: .png أو .jpg أو .jpeg)
             const imagePath = `img/products/${item.id}.png`; 
 
             const itemHTML = `

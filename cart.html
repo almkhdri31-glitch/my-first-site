@@ -44,13 +44,13 @@
     <main class="container" style="padding: 40px 15px;">
         <h1 style="text-align: center; margin-bottom: 30px; color: var(--color-brand-primary);">سلة مشترياتك</h1>
         
-        <div id="cart-items-container" style="min-height: 200px;">
+        <div id="cart-items" style="min-height: 200px;">
             </div>
 
-        <div id="cart-summary">
-            <p style="font-size: 20px; font-weight: bold;">المجموع الكلي: <span id="cart-total-amount">0.00$</span></p>
+        <div id="cart-summary" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
+            <p style="font-size: 20px; font-weight: bold; text-align: center;">المجموع الكلي: <span id="cart-total">$0.00</span></p>
             
-            <button id="checkout-btn">
+            <button id="checkout-btn" class="checkout-link">
                 <i class="fas fa-money-check-alt"></i> إتمام الشراء
             </button>
             <p id="empty-cart-message" style="color: red; margin-top: 15px; display: none;">سلة المشتريات فارغة. <a href="index.html">ابدأ بالتسوق!</a></p>
