@@ -1,59 +1,109 @@
-// ==========================================================
-// script.js - ملف الأكواد البرمجية الموحد لمتجر عالم الجوالات
-// ==========================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. الدالة الرئيسية لتهيئة السلة وتحديث العداد
+    function initializeCart() {
+        // قراءة السلة من التخزين المحلي. إذا لم توجد، ابدأ بمصفوفة فارغة.
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+        updateCartCount(cart);
+        
+        // إعداد المستمعين لجميع أزرار الإضافة إلى السلة
+        setupAddToCartListeners();
 
-// 1. وظائف قائمة التنقل (القائمة المنسدلة في وضع الجوال)
-const menuToggle = document.querySelector('.menu-toggle');
-const mainNav = document.querySelector('.main-nav');
+        // إعداد وظيفة "العودة للأعلى"
+        setupBackToTopButton();
+    }
 
-// وظيفة فتح/إغلاق القائمة عند النقر على أيقونة الهامبرغر
-menuToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('active');
-});
-
-// وظيفة إغلاق القائمة عند النقر على أي رابط داخلها (مهم في وضع الجوال)
-const navLinks = document.querySelectorAll('.main-nav ul li a');
-navLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-        const href = link.getAttribute('href');
-        // تفحص ما إذا كان الرابط يؤدي إلى قسم في نفس الصفحة (#) أو رابط خارجي
-        if (href === '#store-hero' || href.startsWith('#')) {
-            mainNav.classList.remove('active');
-        } 
-        else {
-            // إغلاق القائمة بعد تأخير بسيط للسماح للانتقال بالحدوث
-            setTimeout(() => {
-               mainNav.classList.remove('active');
-            }, 50); 
+    // 2. تحديث عدد المنتجات في أيقونة السلة
+    function updateCartCount(cart) {
+        const cartCountElement = document.querySelector('.cart-count');
+        if (cartCountElement) {
+            // حساب العدد الإجمالي للمنتجات (الكميات)
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountElement.textContent = totalItems;
         }
-    });
+    }
+
+    // 3. إعداد وظيفة الأزرار
+    function setupAddToCartListeners() {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                // الوصول إلى بطاقة المنتج الأم
+                const productCard = event.target.closest('.product-card');
+                
+                // التأكد من وجود البطاقة
+                if (!productCard) return; 
+
+                // استخراج البيانات من HTML
+                const productId = productCard.getAttribute('data-product-id');
+                const price = parseFloat(productCard.getAttribute('data-price'));
+                
+                // استخراج الكمية المدخلة
+                const quantityInput = productCard.querySelector(`input[id="qty-${productId}"]`);
+                const quantity = parseInt(quantityInput.value) || 1; 
+
+                // استخراج اسم المنتج (نعتمد على وسم h3)
+                const name = productCard.querySelector('h3').textContent.trim();
+                
+                // استخراج مسار الصورة (نعتمد على وسم img)
+                const imageSrc = productCard.querySelector('img').getAttribute('src');
+
+                // إضافة المنتج إلى السلة
+                addItemToCart({
+                    id: productId,
+                    name: name,
+                    price: price,
+                    quantity: quantity,
+                    image: imageSrc
+                });
+                
+                // تنبيه المستخدم (يمكن استبداله بتنبيه أجمل لاحقاً)
+                alert(`تم إضافة ${quantity} من ${name} إلى السلة!`);
+            });
+        });
+    }
+
+    // 4. منطق إضافة المنتج وتخزينه
+    function addItemToCart(product) {
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+        let itemExists = false;
+
+        // التحقق مما إذا كان المنتج موجوداً بالفعل في السلة
+        cart = cart.map(item => {
+            if (item.id === product.id) {
+                // إذا كان موجوداً، قم بزيادة الكمية
+                item.quantity += product.quantity;
+                itemExists = true;
+            }
+            return item;
+        });
+
+        // إذا لم يكن موجوداً، قم بإضافته كمنتج جديد
+        if (!itemExists) {
+            cart.push(product);
+        }
+
+        // حفظ السلة المحدثة في التخزين المحلي
+        localStorage.setItem('shoppingCart', JSON.stringify(cart));
+        
+        // تحديث العداد
+        updateCartCount(cart);
+    }
+    
+    // 5. وظيفة زر العودة للأعلى (كانت موجودة مسبقاً)
+    function setupBackToTopButton() {
+        const backToTopButton = document.getElementById("backToTop");
+        if (backToTopButton) {
+            window.onscroll = function() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopButton.style.display = "block";
+                } else {
+                    backToTopButton.style.display = "none";
+                }
+            };
+        }
+    }
+
+    // تشغيل وظيفة تهيئة السلة عند تحميل الصفحة
+    initializeCart();
 });
-
-
-// 2. تحديث السنة الحالية في الفوتر تلقائياً
-document.getElementById('current-year').textContent = new Date().getFullYear();
-
-
-// 3. وظائف زر العودة للأعلى (#backToTop)
-
-let mybutton = document.getElementById("backToTop");
-
-// عرض/إخفاء الزر عند التمرير
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-  // يظهر الزر بعد التمرير 20 بكسل
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-
-// وظيفة العودة إلى أعلى الصفحة عند النقر على الزر
-function topFunction() {
-  // للوصول إلى أعلى الصفحة في متصفحات كروم/سفاري/فايرفوكس
-  document.body.scrollTop = 0; 
-  // للوصول إلى أعلى الصفحة في متصفحات IE/Edge وبعض المتصفحات الأخرى
-  document.documentElement.scrollTop = 0; 
-}
