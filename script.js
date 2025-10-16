@@ -1,7 +1,6 @@
 /* =========================================================
    SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية والموحدة)
-   - يشمل تصحيح الـ IDs لصفحة السلة.
-   - يعيد توجيه العميل إلى contact.html بعد إتمام الطلب.
+   يشمل جميع التصحيحات والتعديلات الأخيرة.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
         
-        // هنا نستخدم 'cart-items' و 'cart-total' (المعرفات التي يجب أن تكون في cart.html)
+        // إعادة عرض محتويات السلة والملخص بعد كل تعديل
         if (document.getElementById('cart-items')) {
             renderCartItems();
         }
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`تمت إضافة ${quantity} من ${name} إلى سلة المشتريات بنجاح!`);
     };
 
-    // 4. معالج النقر على زر "أضف إلى السلة"
+    // 4. معالج النقر على زر "أضف إلى السلة" (في index.html)
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const card = e.target.closest('.product-card');
@@ -179,6 +178,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
+    // *** NEW: تفعيل زر "إتمام الشراء" في صفحة السلة للنقل إلى checkout.html ***
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length > 0) {
+                window.location.href = 'checkout.html';
+            } else {
+                alert('سلة المشتريات فارغة. لا يمكن إتمام الشراء.');
+            }
+        });
+    }
+
     /* =======================================
        وظائف صفحة إتمام الشراء (checkout.html)
        ======================================= */
@@ -215,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         totalElement.textContent = formatCurrency(calculateCartTotal());
     };
     
-    // 9. معالج إرسال نموذج إتمام الشراء
+    // 9. معالج إرسال نموذج إتمام الشراء (في checkout.html)
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (e) => {
@@ -274,7 +285,7 @@ ${orderDetails.map(item =>
             cart = [];
             saveCart(); 
             
-            // *** النقطة الختامية: إعادة توجيه لصفحة الاتصال بنا لتأكيد الطلب ***
+            // إعادة توجيه لصفحة الاتصال بنا لتأكيد الطلب
              setTimeout(() => window.location.href = 'contact.html', 2000); 
         });
         
