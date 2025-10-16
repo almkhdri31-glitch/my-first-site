@@ -34,6 +34,14 @@
                     <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
                 </ul>
             </nav>
+            
+            <div class="cart-widget">
+                <a href="cart.html" class="cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i> 
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            
             <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </header>
@@ -51,25 +59,41 @@
             <h2>🥇 الأكثر مبيعاً حالياً</h2>
             <div class="products-grid">
                 
-                <a href="contact.html" class="product-card">
+                <div class="product-card" data-product-id="apple15pm" data-price="1200">
                     <img src="iphone-15-pro-max.png" alt="iPhone 15 Pro Max">
                     <div class="product-info">
                         <h3>iPhone 15 Pro Max (256GB)</h3>
                         <p class="description">كاميرا احترافية، شاشة ProMotion، وهيكل من التيتانيوم.</p>
-                        <p class="price"></p>
-                        <span class="details-button">اطلب الآن</span>
+                        <div class="price-area">السعر: 1200.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-apple15pm">الكمية:</label>
+                            <input type="number" id="qty-apple15pm" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
                     </div>
-                </a>
+                </div>
                 
-                <a href="contact.html" class="product-card">
+                <div class="product-card" data-product-id="apple14pm" data-price="950">
                     <img src="iphone-14-pro-max.jpg" alt="iphone-14-pro-max">
                     <div class="product-info">
                         <h3>iphone-14-pro-max (128GB)</h3>
                         <p class="description">قوة وثبات بسعر منافس، أداء ممتاز لجميع الاستخدامات.</p>
-                        <p class="price"></p>
-                        <span class="details-button">اطلب الآن</span>
+                        <div class="price-area">السعر: 950.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-apple14pm">الكمية:</label>
+                            <input type="number" id="qty-apple14pm" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
 
@@ -87,15 +111,23 @@
                     </div>
                 </a>
                 
-                <a href="contact.html" class="product-card">
+                <div class="product-card" data-product-id="applewatch10" data-price="400">
                     <img src="apple-watch-series-10.png" alt="Apple Watch Series 10">
                     <div class="product-info">
                         <h3>Apple Watch Series 10</h3>
                         <p class="description">أقوى شريحة، إيماءة النقر المزدوج المبتكرة.</p>
-                        <p class="price"></p>
-                        <span class="details-button">اطلب الآن</span>
+                        <div class="price-area">السعر: 400.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-watch10">الكمية:</label>
+                            <input type="number" id="qty-watch10" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
         
