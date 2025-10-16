@@ -229,14 +229,49 @@ a {
 }
 
 /* ========================================================== */
-/* === بطاقات المنتجات في صفحة index.html === */
+/* === تنسيقات صفحات المنتجات الفرعية (Category Pages) === */
 /* ========================================================== */
+
+.category-header {
+    padding: 40px 0 20px;
+    background-color: var(--color-bg-secondary);
+    border-bottom: 3px solid var(--color-brand-primary);
+    text-align: center;
+}
+
+.category-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 900;
+}
+
+.category-header p {
+    font-size: 18px;
+    color: var(--color-text-subtle);
+}
+
+.product-section {
+    padding: 40px 0;
+}
+
+.product-section h2 {
+    font-size: 28px;
+    color: var(--color-brand-primary);
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    font-weight: 900;
+}
 
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
 }
+
+/* ========================================================== */
+/* === بطاقات المنتجات (لصفحة Index وللصفحات الفرعية) === */
+/* ========================================================== */
 
 .product-card {
     background-color: var(--color-bg-secondary);
@@ -245,8 +280,6 @@ a {
     box-shadow: var(--shadow-main);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     border: 1px solid var(--color-brand-primary);
-    
-    /* تنسيقات إضافية من السلة */
     text-align: center;
     padding: 15px;
 }
@@ -259,10 +292,15 @@ a {
 
 .product-card img {
     width: 100%;
-    height: 180px; /* تعديل الارتفاع لجعلها أصغر في بطاقة الشبكة */
+    height: 180px; /* ارتفاع موحد لجميع البطاقات */
     object-fit: contain; 
     padding: 10px;
     border-bottom: 1px solid #f0f0f0;
+}
+
+.product-info {
+    padding: 15px;
+    text-align: center; /* تجميع العناصر في المنتصف */
 }
 
 .product-card h3 {
@@ -271,10 +309,11 @@ a {
     font-weight: 900;
 }
 
-.product-card .price-area {
+.product-card .price-area,
+.product-info .price {
     font-size: 20px;
     font-weight: 900;
-    color: #c00; /* اللون الأحمر للسعر */
+    color: #c00; 
     margin: 10px 0;
 }
 
@@ -301,7 +340,7 @@ a {
 
 .product-card .add-to-cart-btn {
     /* تنسيق زر الإضافة إلى السلة */
-    display: block; /* لضمان أخذ كامل العرض */
+    display: block; 
     width: 100%;
     padding: 12px 20px;
     background-color: var(--color-brand-primary);
@@ -374,6 +413,23 @@ a {
 .cart-widget {
     margin-right: 15px;
     position: relative;
+}
+
+/* تنسيق أيقونات إضافية قد تحتاجها بجانب السلة (مثل المستخدم أو الإشعارات) */
+.user-notification-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-notification-icons a {
+    font-size: 24px;
+    color: var(--color-text-light);
+    padding: 10px;
+}
+
+.user-notification-icons a:hover {
+    color: var(--color-brand-primary);
 }
 
 .cart-icon-link {
@@ -491,36 +547,13 @@ a {
     text-decoration: underline;
 }
 
-/* التجاوب لصفحة السلة */
-@media (max-width: 600px) {
-    .cart-item {
-        flex-wrap: wrap;
-        text-align: center;
-        justify-content: center;
-    }
-    .cart-item > * {
-        width: 100%;
-        text-align: center !important;
-    }
-    .cart-item img {
-        width: 100px;
-        height: 100px;
-    }
-    .cart-item .item-qty-control, 
-    .cart-item .remove-item-btn {
-        width: auto;
-    }
-    .cart-item .remove-item-btn {
-        margin-top: 10px;
-    }
-}
-
 
 /* ========================================================== */
 /* === التجاوب (Media Queries for Mobile) === */
 /* ========================================================== */
 
 @media (max-width: 992px) {
+    /* تنسيق القائمة الجانبية (Hamburger Menu) */
     .main-nav {
         display: none;
         flex-direction: column;
@@ -533,7 +566,8 @@ a {
         z-index: 10;
         border-top: 1px solid #eee;
     }
-
+    
+    /* هذا الكلاس يتم إضافته وإزالته بواسطة JavaScript لتشغيل القائمة */
     .main-nav.active {
         display: flex;
     }
@@ -571,5 +605,29 @@ a {
 
     .hero-subtitle {
         font-size: 20px;
+    }
+}
+
+/* التجاوب لصفحة السلة */
+@media (max-width: 600px) {
+    .cart-item {
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+    }
+    .cart-item > * {
+        width: 100%;
+        text-align: center !important;
+    }
+    .cart-item img {
+        width: 100px;
+        height: 100px;
+    }
+    .cart-item .item-qty-control, 
+    .cart-item .remove-item-btn {
+        width: auto;
+    }
+    .cart-item .remove-item-btn {
+        margin-top: 10px;
     }
 }
