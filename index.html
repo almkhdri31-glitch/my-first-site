@@ -34,13 +34,14 @@
                     <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
                 </ul>
             </nav>
-
+            
             <div class="cart-widget">
                 <a href="cart.html" class="cart-icon-link">
                     <i class="fas fa-shopping-cart"></i> 
                     <span class="cart-count">0</span>
                 </a>
             </div>
+            
             <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </header>
@@ -90,40 +91,36 @@
         <div class="container">
             <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">أحدث المنتجات المتوفرة حالياً</h2>
             
-            <div class="products-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+            <div class="products-grid">
                 
-                <div class="product-card" data-product-id="15pm" data-price="1200" style="border: 1px solid #ddd; padding: 15px; width: 300px; text-align: center; border-radius: 8px;">
-                    <img src="img/iphone15pro.jpg" alt="iPhone 15 Pro Max" style="max-width: 100%; height: auto; border-radius: 5px;">
-                    <h3 style="margin: 10px 0;">iPhone 15 Pro Max</h3>
-                    <p class="category" style="color: #888; font-size: 14px;">أجهزة Apple</p>
-                    <div class="price-area" style="font-size: 18px; font-weight: bold; color: var(--color-brand-primary);">
-                        السعر: 1200.00$
-                    </div>
+                <div class="product-card" data-product-id="15pm" data-price="1200">
+                    <img src="img/iphone15pro.jpg" alt="iPhone 15 Pro Max">
+                    <h3>iPhone 15 Pro Max</h3>
+                    <p class="category">أجهزة Apple</p>
+                    <div class="price-area">السعر: 1200.00$</div>
                     
-                    <div class="quantity-control" style="margin: 10px 0;">
+                    <div class="quantity-control">
                         <label for="qty-15pm">الكمية:</label>
-                        <input type="number" id="qty-15pm" value="1" min="1" max="10" style="width: 50px; text-align: center;">
+                        <input type="number" id="qty-15pm" value="1" min="1" max="10">
                     </div>
                     
-                    <button class="add-to-cart-btn" style="background-color: var(--color-brand-primary); color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px;">
+                    <button class="add-to-cart-btn">
                         <i class="fas fa-cart-plus"></i> أضف إلى السلة
                     </button>
                 </div>
                 
-                <div class="product-card" data-product-id="ap2" data-price="250" style="border: 1px solid #ddd; padding: 15px; width: 300px; text-align: center; border-radius: 8px;">
-                    <img src="img/airpods-pro2.jpg" alt="AirPods Pro 2" style="max-width: 100%; height: auto; border-radius: 5px;">
-                    <h3 style="margin: 10px 0;">سماعات AirPods Pro 2</h3>
-                    <p class="category" style="color: #888; font-size: 14px;">ملحقات أصلية</p>
-                    <div class="price-area" style="font-size: 18px; font-weight: bold; color: var(--color-brand-primary);">
-                        السعر: 250.00$
-                    </div>
+                <div class="product-card" data-product-id="ap2" data-price="250">
+                    <img src="img/airpods-pro2.jpg" alt="AirPods Pro 2">
+                    <h3>سماعات AirPods Pro 2</h3>
+                    <p class="category">ملحقات أصلية</p>
+                    <div class="price-area">السعر: 250.00$</div>
                     
-                    <div class="quantity-control" style="margin: 10px 0;">
+                    <div class="quantity-control">
                         <label for="qty-ap2">الكمية:</label>
-                        <input type="number" id="qty-ap2" value="1" min="1" max="10" style="width: 50px; text-align: center;">
+                        <input type="number" id="qty-ap2" value="1" min="1" max="10">
                     </div>
                     
-                    <button class="add-to-cart-btn" style="background-color: var(--color-brand-primary); color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px;">
+                    <button class="add-to-cart-btn">
                         <i class="fas fa-cart-plus"></i> أضف إلى السلة
                     </button>
                 </div>
@@ -131,6 +128,7 @@
                 </div>
         </div>
     </section>
+
     <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 30px auto 15px; opacity: 0.3;">
     
     <footer class="main-footer" id="contact-footer">
