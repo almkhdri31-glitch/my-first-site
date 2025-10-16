@@ -34,6 +34,14 @@
                     <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
                 </ul>
             </nav>
+            
+            <div class="cart-widget">
+                <a href="cart.html" class="cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i> 
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            
             <div class="menu-toggle"><i class="fas fa-bars"></i></div>
         </div>
     </header>
@@ -51,25 +59,41 @@
             <h2>🎧 سماعات الأذن والرأس</h2>
             <div class="products-grid">
                 
-                <a href="contact.html" class="product-card">
+                <div class="product-card" data-product-id="acc-airpods" data-price="250">
                     <img src="AirPods-4.jpg" alt="AirPods Pro 2">
                     <div class="product-info">
                         <h3>Apple AirPods Pro 4</h3>
                         <p class="description">ميزة إلغاء الضوضاء النشط، صوت مكاني مخصص.</p>
-                        <p class="price"></p>
-                        <span class="details-button">اطلب الآن</span>
+                        <div class="price-area">السعر: 250.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-airpods">الكمية:</label>
+                            <input type="number" id="qty-airpods" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
                     </div>
-                </a>
+                </div>
                 
-                <a href="contact.html" class="product-card">
+                <div class="product-card" data-product-id="acc-buds" data-price="180">
                     <img src="galaxy-buds-3-pro.png" alt="Galaxy Buds 4 Pro">
                     <div class="product-info">
                         <h3>Samsung Galaxy Buds 3 Pro</h3>
                         <p class="description">صوت Hi-Fi 24 بت، مريحة وخفيفة الوزن.</p>
-                        <p class="price"></p>
-                        <span class="details-button">اطلب الآن</span>
+                        <div class="price-area">السعر: 180.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-buds">الكمية:</label>
+                            <input type="number" id="qty-buds" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
 
@@ -77,25 +101,41 @@
             <h2>🔌 الشواحن وأجهزة التتبع</h2>
             <div class="products-grid">
                 
-                <a href="contact.html" class="product-card">
+                <div class="product-card" data-product-id="acc-charger" data-price="50">
                     <img src="wireless-fast-charger-2025.jpg" alt="Wireless Fast Charger">
                     <div class="product-info">
-                          <h3>شاحن لاسلكي  ( سريع )</h3>     
-                        <p class="description">شاحن يدعم الشحن السريع  متوافق مع جميع سلسلة iPhone.</p>
-                        <p class="price"></p>
-                        <span class="details-button">اطلب الآن</span>
+                          <h3>شاحن لاسلكي (سريع)</h3>     
+                        <p class="description">شاحن يدعم الشحن السريع متوافق مع جميع سلسلة iPhone.</p>
+                        <div class="price-area">السعر: 50.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-charger">الكمية:</label>
+                            <input type="number" id="qty-charger" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
                     </div>
-                </a>
+                </div>
                 
-                <a href="contact.html" class="product-card">
+                <div class="product-card" data-product-id="acc-airtag" data-price="35">
                     <img src="apple-air-tag.jpeg" alt="Apple AirTag">
                     <div class="product-info">
                         <h3>Apple AirTag (جهاز تتبع)</h3>
                         <p class="description">تتبع مفاتيحك وحقائبك بسهولة باستخدام شبكة Find My.</p>
-                        <p class="price"></p>
-                        <span class="details-button">اطلب الآن</span>
+                        <div class="price-area">السعر: 35.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-airtag">الكمية:</label>
+                            <input type="number" id="qty-airtag" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
         
