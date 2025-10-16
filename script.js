@@ -1,12 +1,12 @@
-/* =======================================
-   SCRIPT.JS - وظائف متجر عالم الجوالات (النسخة النهائية والمصححة)
-   ======================================= */
+/* =========================================================
+   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية)
+   يشمل: إدارة السلة (CRUD)، حساب الإجمالي، إتمام الشراء، وظائف UI/UX.
+   ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. تعريف وظيفة تنسيق العملة
     const formatCurrency = (amount) => {
-        // التأكد من أن القيمة رقم قبل التنسيق
         const number = parseFloat(amount);
         return `$${isNaN(number) ? '0.00' : number.toFixed(2)}`;
     };
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`تمت إضافة ${quantity} من ${name} إلى سلة المشتريات بنجاح!`);
     };
 
-    // 4. معالج النقر على زر "أضف إلى السلة" (تصحيح قراءة السعر)
+    // 4. معالج النقر على زر "أضف إلى السلة"
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const card = e.target.closest('.product-card');
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveCart();
     };
 
-    // 7. وظيفة عرض محتويات السلة في صفحة cart.html (تم التصحيح هنا)
+    // 7. وظيفة عرض محتويات السلة في صفحة cart.html
     const renderCartItems = () => {
         const cartItemsContainer = document.getElementById('cart-items');
         const cartTotalElement = document.getElementById('cart-total');
@@ -121,11 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             
-            // استخدام اسم الصورة المرتبط بالـ ID، مع استخدام عنصر الصورة الموجود في بطاقة المنتج الأصلية كـ Fallback 
-            const imagePath = `img/products/${item.id}.png`; 
+            // تم تغيير الامتداد إلى jpeg كأكثر احتمالية للاستخدام، يمكنك تغييره إلى png أو jpg حسب صورك
+            const imagePath = `img/products/${item.id}.jpeg`; 
 
             const itemHTML = `
                 <div class="cart-item" data-product-id="${item.id}">
+                    <button class="delete-item-btn" data-product-id="${item.id}" title="حذف المنتج">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                     <div class="item-details">
                         <img src="${imagePath}" alt="${item.name}" onerror="this.onerror=null;this.src='placeholder.png';" style="max-width: 60px;">
                         <h3>${item.name}</h3>
@@ -145,10 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="total-label">المجموع: </span> 
                         <span class="total-amount">${formatCurrency(itemTotal)}</span>
                     </div>
-                    
-                    <button class="delete-item-btn" data-product-id="${item.id}" title="حذف المنتج">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
                 </div>
             `;
             cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
@@ -173,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.querySelectorAll('.delete-item-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // نضمن أننا نأخذ الـ ID من الزر نفسه أو أقرب عنصر يحمله
                 const productId = e.target.closest('.delete-item-btn').dataset.productId;
                 if(confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
                    removeFromCart(productId);
@@ -248,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const finalTotal = formatCurrency(calculateCartTotal());
 
-            // 12. بناء رسالة الطلب النهائية
+            // 12. بناء رسالة الطلب النهائية (تظهر في Console ويمكن ربطها بالـ WhatsApp)
             let message = `
 ========================================
     🎉 طلب جديد من متجر عالم الجوالات 🎉
@@ -337,7 +335,6 @@ ${orderDetails.map(item =>
     updateCartCount();
     
     // 19. تفعيل وظيفة عرض السلة إذا كنا في cart.html
-    // يجب أن تكون هذه الوظيفة في نهاية DOMContentLoaded
     if (document.getElementById('cart-items')) {
         renderCartItems();
     }
