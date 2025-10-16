@@ -218,21 +218,20 @@ a {
 .card-xiaomi i { color: var(--color-xiaomi); }
 .card-accessories i { color: var(--color-accent-secondary); }
 
-/* === تنسيق البطاقة الجديدة (نشرة الجوالات/card-news) - الألوان النهائية === */
+/* === تنسيق البطاقة الجديدة (نشرة الجوالات/card-news) - الألوان النهائية متوافقة مع البيج === */
 .category-card.card-news {
-    /* لون أزرق سماوي نقي جداً كخلفية */
-    background-color: #e3f2fd; 
-    /* لون أزرق قوي للحد (متناسق مع الأزرق القوي لـ Samsung) */
-    border-color: #2196f3; 
+    /* تم إزالة الخلفية والحد الأزرقين للسماح باللون البيج الافتراضي */
+    background-color: var(--color-bg-secondary); /* البيج الفاتح */
+    border-color: var(--color-brand-primary); /* الحد الذهبي */
 }
 
 .category-card.card-news i {
-    /* لون أيقونة أزرق نقي وقوي */
+    /* الاحتفاظ باللون الأزرق للأيقونة لتمييزها كقسم إخباري */
     color: #2196f3; 
 }
 
 .category-card.card-news h3 {
-    /* لون عنوان أزرق نقي وقوي */
+    /* الاحتفاظ باللون الأزرق للعنون لتمييزها كقسم إخباري */
     color: #2196f3; 
 }
 
