@@ -1,5 +1,6 @@
 /* =========================================================
    SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية والمجمعة)
+   تم تصحيح مشكلة ظهور المجموع الصفري في صفحة السلة.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveCart();
     };
 
-    // 7. وظيفة عرض محتويات السلة في صفحة cart.html (تم التصحيح لضمان العرض)
+    // 7. وظيفة عرض محتويات السلة في صفحة cart.html (تم تصحيحها نهائياً)
     const renderCartItems = () => {
         const cartItemsContainer = document.getElementById('cart-items');
         const cartTotalElement = document.getElementById('cart-total');
@@ -120,16 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             
-            // **هنا هو أهم تصحيح للمشكلة:**
-            // استخدم لاحقة الصورة التي تستخدمها في ملفاتك. سنضع `.jpg` كخيار شائع.
-            // إذا كانت صورك `.png`، عدّلها إلى `${item.id}.png`
-            const imagePath = `img/products/${item.id}.jpg`; 
+            // مسار الصورة. إذا كانت صورك لاحقها .jpg أو .jpeg، قم بتعديل ".png"
+            const imagePath = `img/products/${item.id}.png`; 
 
             const itemHTML = `
                 <div class="cart-item" data-product-id="${item.id}">
-                    <button class="delete-item-btn" data-product-id="${item.id}" title="حذف المنتج">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
                     <div class="item-details">
                         <img src="${imagePath}" alt="${item.name}" onerror="this.onerror=null;this.src='placeholder.png';" style="max-width: 60px;">
                         <h3>${item.name}</h3>
@@ -149,6 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="total-label">المجموع: </span> 
                         <span class="total-amount">${formatCurrency(itemTotal)}</span>
                     </div>
+                    
+                    <button class="delete-item-btn" data-product-id="${item.id}" title="حذف المنتج">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </div>
             `;
             cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
