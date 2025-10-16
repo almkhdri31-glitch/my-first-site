@@ -218,6 +218,20 @@ a {
 .card-xiaomi i { color: var(--color-xiaomi); }
 .card-accessories i { color: var(--color-accent-secondary); }
 
+/* === تنسيق البطاقة الجديدة (نشرة الجوالات/card-news) === */
+.category-card.card-news {
+    /* اختيار لون أزرق فاتح جداً كخلفية لتمييزه كقسم "إخباري" */
+    background-color: #f0f8ff; 
+    border-color: #4682b4; /* لون أزرق متوسط للحد */
+}
+
+.category-card.card-news i {
+    color: #4682b4; /* لون أيقونة أزرق */
+}
+
+.category-card.card-news h3 {
+    color: #4682b4; /* لون عنوان أزرق */
+}
 /* ========================================================== */
 /* === صفحات الأقسام (Category Pages) === */
 /* ========================================================== */
