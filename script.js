@@ -1,13 +1,14 @@
 /* =======================================
    SCRIPT.JS - وظائف متجر عالم الجوالات (النسخة النهائية والمصححة)
-   يشمل: السلة، إتمام الشراء، التجاوب، زر العودة للأعلى
    ======================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. تعريف وظيفة تنسيق العملة
     const formatCurrency = (amount) => {
-        return `$${parseFloat(amount).toFixed(2)}`;
+        // التأكد من أن القيمة رقم قبل التنسيق
+        const number = parseFloat(amount);
+        return `$${isNaN(number) ? '0.00' : number.toFixed(2)}`;
     };
 
     // 2. إدارة السلة (التحميل والحفظ والحساب)
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveCart = () => {
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
+        // إعادة عرض محتويات السلة والملخص بعد كل تعديل
         if (document.getElementById('cart-items')) {
             renderCartItems();
         }
@@ -50,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`تمت إضافة ${quantity} من ${name} إلى سلة المشتريات بنجاح!`);
     };
 
-    // 4. معالج النقر على زر "أضف إلى السلة" (تم تصحيح مشكلة قراءة السعر هنا)
+    // 4. معالج النقر على زر "أضف إلى السلة" (تصحيح قراءة السعر)
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const card = e.target.closest('.product-card');
@@ -62,12 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const priceText = card.dataset.price;
             const price = priceText ? parseFloat(priceText) : 0;
             
-            // استخراج اسم المنتج من عنوان h3
+            // استخراج اسم المنتج
             const productNameElement = card.querySelector('h3');
             const name = productNameElement ? productNameElement.textContent.trim() : 'منتج غير معروف';
 
-            // استخراج الكمية من حقل الإدخال المقابل
-            // نستخدم قراءة ID الكمية المربوطة بـ ID المنتج
+            // استخراج الكمية
             const qtyInput = card.querySelector(`input[type="number"]`); 
             const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
             
@@ -75,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 addToCart(productId, name, price, quantity);
             } else {
                 alert('عذراً، لا يمكن إضافة هذا المنتج حالياً. يرجى التأكد من توفر السعر والكمية.');
-                console.error(`Failed to add to cart. Product ID: ${productId}, Price: ${price}, Quantity: ${quantity}`);
             }
         });
     });
@@ -97,10 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const removeFromCart = (productId) => {
         cart = cart.filter(item => item.id !== productId);
         saveCart();
-        alert('تم حذف المنتج من السلة.');
     };
 
-    // 7. وظيفة عرض محتويات السلة في صفحة cart.html
+    // 7. وظيفة عرض محتويات السلة في صفحة cart.html (تم التصحيح هنا)
     const renderCartItems = () => {
         const cartItemsContainer = document.getElementById('cart-items');
         const cartTotalElement = document.getElementById('cart-total');
@@ -122,22 +121,34 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             
-            // لضمان عرض صور المنتج: نبحث عن الصورة في مجلد img/products/ باسم productId.png
+            // استخدام اسم الصورة المرتبط بالـ ID، مع استخدام عنصر الصورة الموجود في بطاقة المنتج الأصلية كـ Fallback 
+            const imagePath = `img/products/${item.id}.png`; 
+
             const itemHTML = `
                 <div class="cart-item" data-product-id="${item.id}">
-                    <span class="delete-item-btn" data-product-id="${item.id}"><i class="fas fa-trash-alt"></i></span>
                     <div class="item-details">
-                        <img src="img/products/${item.id}.png" alt="${item.name}" onerror="this.onerror=null;this.src='placeholder.png';">
+                        <img src="${imagePath}" alt="${item.name}" onerror="this.onerror=null;this.src='placeholder.png';" style="max-width: 60px;">
                         <h3>${item.name}</h3>
-                        <p class="price-per-unit">السعر: ${formatCurrency(item.price)}</p>
                     </div>
+                    
+                    <div class="item-price">
+                         <span class="price-label">السعر: </span> 
+                         <span class="price-value">${formatCurrency(item.price)}</span>
+                    </div>
+
                     <div class="quantity-control">
                         <label for="qty-${item.id}">الكمية:</label>
                         <input type="number" id="qty-${item.id}" class="item-quantity-input" value="${item.quantity}" min="1" data-product-id="${item.id}">
                     </div>
+
                     <div class="item-total">
-                        المجموع: <span class="total-amount">${formatCurrency(itemTotal)}</span>
+                        <span class="total-label">المجموع: </span> 
+                        <span class="total-amount">${formatCurrency(itemTotal)}</span>
                     </div>
+                    
+                    <button class="delete-item-btn" data-product-id="${item.id}" title="حذف المنتج">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </div>
             `;
             cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
@@ -162,8 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.querySelectorAll('.delete-item-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
+                // نضمن أننا نأخذ الـ ID من الزر نفسه أو أقرب عنصر يحمله
                 const productId = e.target.closest('.delete-item-btn').dataset.productId;
-                removeFromCart(productId);
+                if(confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
+                   removeFromCart(productId);
+                }
             });
         });
     };
@@ -234,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const finalTotal = formatCurrency(calculateCartTotal());
 
-            // 12. بناء رسالة الطلب النهائية (يمكن إرسالها عبر WhatsApp أو Email)
+            // 12. بناء رسالة الطلب النهائية
             let message = `
 ========================================
     🎉 طلب جديد من متجر عالم الجوالات 🎉
@@ -255,12 +269,7 @@ ${orderDetails.map(item =>
 ========================================
 `;
 
-            console.log(message); // لعرضها في Console (F12)
-            
-            // 13. تنفيذ الإرسال (مثال: فتح رسالة WhatsApp مجهزة مسبقاً)
-            // هذا الجزء يحتاج رقم هاتف حقيقي للتاجر
-            // const whatsappUrl = `https://wa.me/967771234567?text=${encodeURIComponent(message)}`;
-            // window.open(whatsappUrl, '_blank');
+            console.log(message); 
             
             alert('تم تأكيد طلبك بنجاح! سيتم التواصل معك قريباً لتأكيد تفاصيل الشحن. (انظر Console F12 لتفاصيل الرسالة)');
 
@@ -307,7 +316,6 @@ ${orderDetails.map(item =>
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
             mainNav.classList.toggle('active');
-            // تبديل أيقونة الهامبرغر إلى أيقونة X
             const icon = menuToggle.querySelector('i');
             if(mainNav.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -329,6 +337,7 @@ ${orderDetails.map(item =>
     updateCartCount();
     
     // 19. تفعيل وظيفة عرض السلة إذا كنا في cart.html
+    // يجب أن تكون هذه الوظيفة في نهاية DOMContentLoaded
     if (document.getElementById('cart-items')) {
         renderCartItems();
     }
