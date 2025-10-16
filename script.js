@@ -1,6 +1,7 @@
 /* =========================================================
-   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية والمدمجة)
-   تم تصحيح الـ IDs لتتطابق مع cart.html.
+   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية والموحدة)
+   - يشمل تصحيح الـ IDs لصفحة السلة.
+   - يعيد توجيه العميل إلى contact.html بعد إتمام الطلب.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveCart = () => {
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
-        // إعادة عرض محتويات السلة والملخص بعد كل تعديل
-        // هنا نستخدم 'cart-items' و 'cart-total' (المعرفات الصحيحة الآن)
+        
+        // هنا نستخدم 'cart-items' و 'cart-total' (المعرفات التي يجب أن تكون في cart.html)
         if (document.getElementById('cart-items')) {
             renderCartItems();
         }
@@ -97,10 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
         saveCart();
     };
 
-    // 7. وظيفة عرض محتويات السلة في صفحة cart.html (مع استخدام الـ IDs الصحيحة)
+    // 7. وظيفة عرض محتويات السلة في صفحة cart.html
     const renderCartItems = () => {
-        const cartItemsContainer = document.getElementById('cart-items'); // الـ ID الصحيح
-        const cartTotalElement = document.getElementById('cart-total');   // الـ ID الصحيح
+        const cartItemsContainer = document.getElementById('cart-items'); 
+        const cartTotalElement = document.getElementById('cart-total');   
         if (!cartItemsContainer || !cartTotalElement) return;
 
         cartItemsContainer.innerHTML = ''; 
@@ -119,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             
-            // مسار الصورة (استخدم اللاحقة الصحيحة لملفات صورك: .png أو .jpg أو .jpeg)
             const imagePath = `img/products/${item.id}.png`; 
 
             const itemHTML = `
@@ -274,8 +274,8 @@ ${orderDetails.map(item =>
             cart = [];
             saveCart(); 
             
-            // إعادة توجيه لصفحة الشكر أو الرئيسية
-             setTimeout(() => window.location.href = 'index.html', 2000); 
+            // *** النقطة الختامية: إعادة توجيه لصفحة الاتصال بنا لتأكيد الطلب ***
+             setTimeout(() => window.location.href = 'contact.html', 2000); 
         });
         
         // تحديث الملخص عند تحميل الصفحة
