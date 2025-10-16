@@ -1,9 +1,10 @@
 /* =======================================
-   SCRIPT.JS - وظائف متجر عالم الجوالات
+   SCRIPT.JS - وظائف متجر عالم الجوالات (النسخة النهائية والمصححة)
    يشمل: السلة، إتمام الشراء، التجاوب، زر العودة للأعلى
    ======================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
+    
     // 1. تعريف وظيفة تنسيق العملة
     const formatCurrency = (amount) => {
         return `$${parseFloat(amount).toFixed(2)}`;
@@ -49,27 +50,32 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`تمت إضافة ${quantity} من ${name} إلى سلة المشتريات بنجاح!`);
     };
 
-    // 4. معالج النقر على زر "أضف إلى السلة"
+    // 4. معالج النقر على زر "أضف إلى السلة" (تم تصحيح مشكلة قراءة السعر هنا)
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const card = e.target.closest('.product-card');
             if (!card) return;
 
             const productId = card.dataset.productId;
-            const price = parseFloat(card.dataset.price);
+            
+            // قراءة السعر والتحقق من أنه رقم صالح
+            const priceText = card.dataset.price;
+            const price = priceText ? parseFloat(priceText) : 0;
             
             // استخراج اسم المنتج من عنوان h3
             const productNameElement = card.querySelector('h3');
             const name = productNameElement ? productNameElement.textContent.trim() : 'منتج غير معروف';
 
             // استخراج الكمية من حقل الإدخال المقابل
-            const qtyInput = card.querySelector(`#qty-${productId}`);
+            // نستخدم قراءة ID الكمية المربوطة بـ ID المنتج
+            const qtyInput = card.querySelector(`input[type="number"]`); 
             const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
             
             if (productId && price > 0 && quantity > 0) {
                 addToCart(productId, name, price, quantity);
             } else {
-                alert('عذراً، لا يمكن إضافة هذا المنتج حالياً.');
+                alert('عذراً، لا يمكن إضافة هذا المنتج حالياً. يرجى التأكد من توفر السعر والكمية.');
+                console.error(`Failed to add to cart. Product ID: ${productId}, Price: ${price}, Quantity: ${quantity}`);
             }
         });
     });
@@ -80,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (item) {
             item.quantity = parseInt(newQuantity);
             if (item.quantity <= 0) {
-                // إذا أصبحت الكمية صفر، قم بحذفه
                 removeFromCart(productId);
             } else {
                 saveCart();
@@ -101,19 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const cartTotalElement = document.getElementById('cart-total');
         if (!cartItemsContainer || !cartTotalElement) return;
 
-        cartItemsContainer.innerHTML = ''; // تفريغ المحتوى الحالي
+        cartItemsContainer.innerHTML = ''; 
 
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = '<p class="text-center" style="font-size: 18px; color: #888;">سلة مشترياتك فارغة حالياً.</p>';
             cartTotalElement.textContent = formatCurrency(0);
-            document.querySelector('.checkout-link').style.display = 'none';
+            const checkoutLink = document.querySelector('.checkout-link');
+            if(checkoutLink) checkoutLink.style.display = 'none';
             return;
         }
         
-        document.querySelector('.checkout-link').style.display = 'block';
+        const checkoutLink = document.querySelector('.checkout-link');
+        if(checkoutLink) checkoutLink.style.display = 'block';
 
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
+            
+            // لضمان عرض صور المنتج: نبحث عن الصورة في مجلد img/products/ باسم productId.png
             const itemHTML = `
                 <div class="cart-item" data-product-id="${item.id}">
                     <span class="delete-item-btn" data-product-id="${item.id}"><i class="fas fa-trash-alt"></i></span>
@@ -145,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (newQuantity >= 1) {
                      updateCartItemQuantity(productId, newQuantity);
                 } else {
-                    // إذا حاول إدخال 0، نعيده إلى 1 أو نحذفه
                     e.target.value = 1;
                     updateCartItemQuantity(productId, 1);
                 }
@@ -168,22 +176,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateCheckoutSummary = () => {
         const summaryElement = document.getElementById('checkout-summary');
         const totalElement = document.getElementById('checkout-total');
+        const checkoutForm = document.getElementById('checkout-form');
         
         if (!summaryElement || !totalElement) return;
         
         if (cart.length === 0) {
-            summaryElement.innerHTML = '<p style="color: red; font-weight: 700;">سلة المشتريات فارغة! يرجى العودة للصفحة الرئيسية.</p>';
+            summaryElement.innerHTML = '<p style="color: red; font-weight: 700;">سلة المشتريات فارغة! يرجى العودة لصفحة <a href="cart.html">السلة</a>.</p>';
             totalElement.textContent = formatCurrency(0);
-            // قد ترغب هنا في إعادة توجيه المستخدم لصفحة السلة/الرئيسية
+            if(checkoutForm) checkoutForm.querySelector('.confirm-order-btn').disabled = true;
             return;
         }
+        
+        if(checkoutForm) checkoutForm.querySelector('.confirm-order-btn').disabled = false;
 
-        let summaryHTML = '<ul>';
+        let summaryHTML = '<ul style="list-style: none; padding-right: 0;">';
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             summaryHTML += `
-                <li style="margin-bottom: 5px; list-style: circle; margin-right: 20px;">
-                    ${item.name} (${item.quantity} × ${formatCurrency(item.price)}) = <span style="font-weight: 700;">${formatCurrency(itemTotal)}</span>
+                <li style="margin-bottom: 5px; list-style: disc; margin-right: 20px; font-size: 15px;">
+                    ${item.name} (${item.quantity} × ${formatCurrency(item.price)}) = <span style="font-weight: 700; color: var(--color-brand-secondary);">${formatCurrency(itemTotal)}</span>
                 </li>
             `;
         });
@@ -197,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // منع الإرسال الافتراضي
+            e.preventDefault(); 
 
             if (cart.length === 0) {
                 alert('سلة المشتريات فارغة، لا يمكن إتمام الطلب.');
@@ -244,19 +255,21 @@ ${orderDetails.map(item =>
 ========================================
 `;
 
-            console.log(message); // لعرضها في Console
+            console.log(message); // لعرضها في Console (F12)
             
-            // 13. وظيفة الإرسال الفعلي (مثال: إرسال عبر WhatsApp)
-            // بما أننا لا نعمل على سيرفر حقيقي، سنستخدم هذه الطريقة للعرض.
+            // 13. تنفيذ الإرسال (مثال: فتح رسالة WhatsApp مجهزة مسبقاً)
+            // هذا الجزء يحتاج رقم هاتف حقيقي للتاجر
+            // const whatsappUrl = `https://wa.me/967771234567?text=${encodeURIComponent(message)}`;
+            // window.open(whatsappUrl, '_blank');
             
-            alert('تم تأكيد طلبك بنجاح! سيتم التواصل معك قريباً لتأكيد تفاصيل الشحن.\n\nيمكنك رؤية تفاصيل رسالة الطلب في Console (F12).');
+            alert('تم تأكيد طلبك بنجاح! سيتم التواصل معك قريباً لتأكيد تفاصيل الشحن. (انظر Console F12 لتفاصيل الرسالة)');
 
             // 14. مسح السلة بعد إتمام الطلب
             cart = [];
             saveCart(); 
             
-            // يمكنك إعادة توجيه المستخدم لصفحة شكر بعد الإرسال
-            // setTimeout(() => window.location.href = 'thank-you.html', 1500); 
+            // إعادة توجيه لصفحة الشكر أو الرئيسية
+             setTimeout(() => window.location.href = 'index.html', 2000); 
         });
         
         // تحديث الملخص عند تحميل الصفحة
@@ -279,11 +292,11 @@ ${orderDetails.map(item =>
             }
         };
         window.onscroll = scrollFunction;
-        scrollFunction(); // تأكد من الحالة عند التحميل
+        scrollFunction(); 
 
         window.topFunction = () => {
-            document.body.scrollTop = 0; // Safari
-            document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera
+            document.body.scrollTop = 0; 
+            document.documentElement.scrollTop = 0; 
         };
     }
 
@@ -294,8 +307,15 @@ ${orderDetails.map(item =>
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
             mainNav.classList.toggle('active');
-            menuToggle.querySelector('i').classList.toggle('fa-bars');
-            menuToggle.querySelector('i').classList.toggle('fa-times');
+            // تبديل أيقونة الهامبرغر إلى أيقونة X
+            const icon = menuToggle.querySelector('i');
+            if(mainNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
     }
 
