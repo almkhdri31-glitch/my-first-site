@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مستجدات الأمن والتحذيرات الحرجة</title>
+    <meta name="description" content="نشرة يومية بأحدث الثغرات الأمنية (CVEs) وكيفية تطبيق التصحيحات اللازمة على نظامك.">
+    
+    <link rel="icon" type="image/png" href="favicon.png"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /*
+        ========================================================================= */
+        /* 🎨 المتغيرات (Variables) - نفس متغيرات الصفحة الرئيسية تماماً */
+        /* ========================================================================= */
+        :root {
+            --color-bg-main: #0A0A0A;    
+            --color-bg-secondary: #1A1A1A; 
+            --color-bg-card: #1D2B35;    
+            --color-text-light: #f1f1f1;  
+            --color-text-subtle: #bdc3c7; 
+            --color-brand-primary: #FFC300;  
+            --color-brand-hover: #DAA520;   
+            --color-accent-secondary: #f39c12;
+            --color-tool-highlight: #2ecc71; 
+            --color-alert-critical: #e74c3c; /* لون جديد للتنبيهات الحرجة */
+            --color-alert-medium: #f39c12;  /* لون جديد للتنبيهات المتوسطة */
+        }
+
+
+        /* ========================================================================= */
+        /* الإعدادات الأساسية وتنسيق الخطوط العامة */
+        /* ========================================================================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-light); 
+            background-color: var(--color-bg-main);
+            overflow-x: hidden; 
+            font-size: 16px; 
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 28px; 
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-text-light);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-brand-primary); 
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--color-text-subtle);
+            margin-bottom: 40px;
+        }
+        
+        /* ========================================================================= */
+        /* الهيدر وقائمة التنقل */
+        /* ========================================================================= */
+         .main-header {
+            background: var(--color-bg-main); 
+            color: var(--color-text-light);
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px; 
+            font-weight: 900;
+            color: var(--color-brand-primary);
+            text-align: left !important;
+        }
+
+        .main-nav ul li a {
+            padding: 5px 0; 
+            transition: all 0.3s;
+            color: var(--color-text-light); 
+        }
+
+        .main-nav ul li a:hover,
+        .main-nav ul li a.active {
+            color: var(--color-brand-primary); 
+            background-color: transparent; 
+            border-radius: 0;
+            border-bottom: 3px solid var(--color-brand-primary); 
+            padding-bottom: 5px; 
+        }
+
+        .menu-toggle {
+            color: var(--color-text-light);
+            font-size: 24px;
+            cursor: pointer;
+            display: none; 
+        }
+        /* نهاية تنسيق الهيدر */
+
+        /* ========================================================================= */
+        /* تنسيق قسم المحتوى الداخلي (Content Section) */
+        /* ========================================================================= */
+        .content-section {
+            padding: 80px 0;
+            background-color: var(--color-bg-secondary);
+            min-height: 80vh; 
+        }
+
+        .content-header {
+            padding: 40px 0;
+            background-color: var(--color-bg-main);
+            text-align: center;
+            border-bottom: 3px solid var(--color-brand-primary);
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        /* تغيير البطاقة من رابط إلى حاوية محتوى (div) لإزالة زر "للمزيد" */
+        .alert-card-container { 
+            background: var(--color-bg-card); 
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            border-right: 5px solid var(--color-alert-medium); /* لون التنبيه الافتراضي */
+        }
+        
+        .alert-card-container.critical-alert {
+            border-right-color: var(--color-alert-critical);
+        }
+        
+        /* لا يوجد تأثير تحوم/Hover لإظهار أن المحتوى كامل هنا */
+        /* .alert-card-container:hover {
+            transform: translateY(-5px); 
+        } */
+
+        .alert-card-container h3 {
+            font-size: 20px;
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+        }
+
+        /* تنسيق المحتوى التفصيلي الجديد */
+        .alert-card-container .alert-details {
+            font-size: 15px;
+            color: var(--color-text-subtle);
+            margin-bottom: 15px;
+        }
+        
+        .alert-card-container .patch-info {
+            font-size: 14px;
+            color: var(--color-brand-primary);
+            font-weight: bold;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #333;
+        }
+        
+        .alert-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag-critical {
+            background-color: var(--color-alert-critical);
+            color: var(--color-text-light);
+        }
+        
+        .tag-medium {
+            background-color: var(--color-alert-medium);
+            color: var(--color-bg-main);
+        }
+
+        /* ========================================================================= */
+        /* الفوتر (Footer) */
+        /* ========================================================================= */
+        .main-footer {
+            background-color: var(--color-bg-secondary); 
+            color: var(--color-text-light);
+            padding: 20px 0; 
+            border-top: 1px solid #333; 
+        }
+        
+        .social-links a {
+            color: var(--color-brand-primary); 
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--color-text-light); 
+        }
+        
+        .main-footer .highlight-text {
+            color: var(--color-brand-primary); 
+        }
+        /* نهاية تنسيق الفوتر */
+
+        /* ========================================================================= */
+        /* تنسيقات الاستجابة (Media Queries) */
+        /* ========================================================================= */
+        @media (max-width: 992px) {
+            .main-header .container {
+                justify-content: space-between;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: var(--color-bg-secondary);
+                box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+                padding-bottom: 10px;
+                z-index: 999; 
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .main-nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            .main-nav ul li a {
+                border-bottom: 1px solid #333;
+                padding: 15px 0; 
+                display: block; 
+            }
+            .main-nav ul li a:hover,
+            .main-nav ul li a.active {
+                border-bottom: none;
+                background-color: var(--color-brand-primary); 
+                color: var(--color-bg-main); 
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px; 
+            }
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            
+            <a class="logo" href="index.html" style="font-size: 24px; text-align: left;">
+                <span style="display: block; font-size: 24px; font-weight: 900; color: var(--color-brand-primary);">
+                    أمن المعلومات
+                </span> 
+                <span style="display: block; font-size: 18px; font-weight: 700; color: var(--color-text-light); margin-top: -5px;"> 
+                    INFORMATION SECURITY
+                </span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#home">الرؤية والهدف</a></li>
+                    <li><a href="index.html#about">من نحن</a></li> 
+                    <li><a href="index.html#guides" class="active">أدلة الإرشاد</a></li>
+                    
+                    <li><a href="password-tool.html" style="color: var(--color-brand-primary); font-weight: bold;">أداة فحص كلمة المرور</a></li>
+                    
+                    <li><a href="https://my-first-site-gold-seven.vercel.app/network-scanner.html" target="_blank" style="color: var(--color-accent-secondary); font-weight: bold;">الأدوات المجانية (مدقق الشبكة)</a></li>
+                    
+                    <li><a href="contact.html">الاتصال بنا</a></li> 
+                </ul>
+            </nav>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+    
+    <div class="content-header">
+        <div class="container">
+            <h1 class="section-title">نشرة التحذيرات الأمنية والـ CVEs</h1>
+            <p class="section-subtitle">
+                متابعة يومية لأهم الثغرات الأمنية (Common Vulnerabilities and Exposures) التي قد تؤثر على أنظمتك.
+            </p>
+        </div>
+    </div>
+
+    <section id="alerts" class="content-section">
+        <div class="container">
+            
+            <div class="article-grid">
+                
+                <div class="alert-card-container critical-alert">
+                    <span class="alert-tag tag-critical"><i class="fas fa-exclamation-triangle"></i> حرج جداً</span>
+                    <h3>ثغرة تنفيذ كود عن بعد في خوادم Exchange (CVE-2025-XXXXX)</h3>
+                    <p class="alert-details">
+                        هذه الثغرة تسمح للمهاجمين بتنفيذ تعليمات برمجية دون مصادقة أو الحاجة لامتيازات عالية، مما يشكل خطراً وشيكاً على أنظمة البريد المؤسسية.
+                    </p>
+                    <p class="patch-info">
+                        **الحل:** يجب تطبيق تحديث الأمان الأخير (KB504XXXX) فوراً. للحصول على تفاصيل التصحيح والمصدر، يرجى زيارة موقع Microsoft الرسمي.
+                    </p>
+                    <p style="font-size: 13px; color: var(--color-text-subtle); margin-top: 15px;">تاريخ النشر: 8 أكتوبر 2025</p>
+                </div>
+                
+                <div class="alert-card-container">
+                    <span class="alert-tag tag-medium"><i class="fas fa-info-circle"></i> متوسط</span>
+                    <h3>تحديث ضروري لمتصفح Chrome وإصلاح 5 ثغرات (CVE-2025-YYYYY)</h3>
+                    <p class="alert-details">
+                        يتعلق التحديث بمشكلات في الذاكرة (Use-After-Free) قد تؤدي إلى تعطيل المتصفح أو إمكانية تنفيذ هجمات هندسة اجتماعية.
+                    </p>
+                    <p class="patch-info">
+                         **الحل:** تحديث المتصفح تلقائياً إلى الإصدار 118.0.5993.88. يُنصح بإعادة تشغيل المتصفح بعد التحديث.
+                    </p>
+                    <p style="font-size: 13px; color: var(--color-text-subtle); margin-top: 15px;">تاريخ النشر: 7 أكتوبر 2025</p>
+                </div>
+                
+                <div class="alert-card-container">
+                    <span class="alert-tag tag-medium"><i class="fas fa-info-circle"></i> متوسط</span>
+                    <h3>ثغرة في جدار الحماية Fortinet قد تكشف عن بيانات المستخدمين</h3>
+                    <p class="alert-details">
+                        كشفت الشركة عن خلل في بعض إصدارات FortiGate Firewall يمكن أن يسمح بـ Enumeration لأسماء المستخدمين.
+                    </p>
+                    <p class="patch-info">
+                        **الحل:** يجب ترقيع الجهاز للإصدار الأخير. يرجى مراجعة إعدادات تسجيل الدخول وتغيير كلمات المرور.
+                    </p>
+                    <p style="font-size: 13px; color: var(--color-text-subtle); margin-top: 15px;">تاريخ النشر: 5 أكتوبر 2025</p>
+                </div>
+                
+            </div>
+            
+            <div class="text-center" style="margin-top: 50px;">
+                 <a href="index.html#guides" class="card-link" style="font-size: 18px; border: 2px solid var(--color-brand-primary); padding: 10px 20px; border-radius: 8px;">
+                    العودة لصفحة الأدلة والإرشاد <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="main-footer" id="contact-footer">
+        <div class="container text-center">
+            <div class="social-links mb-3">
+                <a href="#" target="_blank" class="mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" target="_blank" class="mx-2"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                <a href="#" target="_blank" class="mx-2"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            
+            <p class="mb-1">
+            للتواصل
+                <a href="mailto:F@hotmail.hu" class="highlight-text" style="font-weight: bold;">F@hotmail.hu</a>
+            </p>
+            
+            <p class="mb-0">
+                <a href="index.html#home" class="highlight-text" style="font-weight: bold; margin-left: 10px;">العودة للصفحة الرئيسية</a>
+                | جميع الحقوق محفوظة &copy; 2024 | تصميم وتطوير  | <span class="highlight-text">الخبير التقني محمد المخدري</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('.main-nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // إغلاق القائمة بعد النقر على الرابط في وضع الجوال
+                mainNav.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
