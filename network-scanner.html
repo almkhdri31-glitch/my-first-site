@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة فحص البورتات والأمان</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #1a1a1a; /* خلفية داكنة */
+            color: #ffffff;
+            direction: rtl;
+        }
+        .container-tool {
+            max-width: 900px;
+            margin-top: 5rem;
+            padding: 30px;
+            border-radius: 15px;
+            background: #2c2c2c; /* خلفية أغمق للكونتينر */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .tool-header h1 {
+            color: #FFD700; /* اللون الذهبي */
+            font-weight: 700;
+        }
+        .tool-header p {
+            color: #cccccc;
+        }
+        .form-control-custom {
+            background-color: #3a3a3a;
+            border: 1px solid #FFD700;
+            color: #ffffff;
+        }
+        .form-control-custom:focus {
+            background-color: #3a3a3a;
+            border-color: #FFD700;
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+            color: #ffffff;
+        }
+        .btn-warning-custom {
+            background-color: #FFD700;
+            border-color: #FFD700;
+            color: #1a1a1a;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn-warning-custom:hover {
+            background-color: #e6c300;
+            border-color: #e6c300;
+            color: #1a1a1a;
+        }
+        #result-area {
+            min-height: 200px;
+            background-color: #1a1a1a;
+            color: #39FF14; /* لون أخضر للنتائج (مريح للعين هذه المرة) */
+            border: 1px dashed #FFD700;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="btn btn-outline-warning back-link">
+        <i class="fas fa-arrow-right me-2"></i> العودة للمنصة
+    </a>
+
+    <div class="container container-tool shadow-lg">
+        <div class="tool-header text-center mb-5">
+            <h1><i class="fas fa-project-diagram me-2"></i> أداة فحص البورتات والأمان</h1>
+            <p class="lead">حل بسيط وسريع لاكتشاف البورتات المفتوحة والخدمات المشغلة على الأجهزة.</p>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <label for="targetIP" class="form-label text-warning"><i class="fas fa-globe me-1"></i> اسم النطاق أو عنوان IP:</label>
+                <input type="text" class="form-control form-control-custom" id="targetIP" placeholder="مثال: example.com أو 192.168.1.1">
+            </div>
+        </div>
+        
+        <div class="row mb-4">
+             <div class="col-12">
+                <label for="portsList" class="form-label text-warning"><i class="fas fa-list-ol me-1"></i> قائمة البورتات المراد فحصها (افصل بينها بفاصلة):</label>
+                <input type="text" class="form-control form-control-custom" id="portsList" value="21, 22, 80, 443, 3389" placeholder="مثال: 80, 443, 21, 22">
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 mb-4">
+            <button class="btn btn-lg btn-warning-custom" id="startScanButton">
+                <i class="fas fa-search me-2"></i> بدء الفحص الأمني
+            </button>
+        </div>
+        
+        <div class="mb-3">
+            <h5 class="text-warning"><i class="fas fa-terminal me-1"></i> نتائج الفحص:</h5>
+            <pre id="result-area">--- النتائج ستظهر هنا ---</pre>
+        </div>
+
+        <div class="alert alert-danger text-center mt-4">
+            <i class="fas fa-exclamation-triangle me-2"></i> إخلاء مسؤولية: هذه واجهة **للتوضيح فقط**. العمليات الحقيقية لفحص الأمن تتم عبر أدوات متخصصة وسكريبتات بايثون متقدمة يتم تشغيلها من قبل الخبير.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('startScanButton').addEventListener('click', function() {
+            const ip = document.getElementById('targetIP').value;
+            const ports = document.getElementById('portsList').value;
+            const resultArea = document.getElementById('result-area');
+            
+            if (!ip) {
+                resultArea.textContent = "الرجاء إدخال اسم نطاق أو عنوان IP للبدء.";
+                resultArea.style.color = '#FFD700'; // لون تحذيري
+                return;
+            }
+
+            resultArea.textContent = `جاري فحص ${ip} على البورتات: ${ports}...\n\n`;
+            resultArea.style.color = '#39FF14'; // لون أخضر للعملية
+            
+            // محاكاة عملية الفحص ونتائج عشوائية
+            const portArray = ports.split(',').map(p => p.trim());
+            let output = `[+] بدأ الفحص الأمني على ${ip}\n`;
+            
+            portArray.forEach(port => {
+                const isOpened = Math.random() < 0.6; // احتمال 60% لفتح البورت
+                if (isOpened) {
+                    let service = 'غير معروف';
+                    if (port === '80') service = 'HTTP - Web Server';
+                    else if (port === '443') service = 'HTTPS - Encrypted Web';
+                    else if (port === '22') service = 'SSH - Remote Access';
+                    else if (port === '21') service = 'FTP - File Transfer';
+                    else if (port === '3389') service = 'RDP - Remote Desktop';
+                    
+                    output += `[+] البورت ${port} مفتوح: ${service}\n`;
+                } else {
+                    output += `[-] البورت ${port} مغلق أو مُفلتر.\n`;
+                }
+            });
+
+            output += `\n[+] انتهى الفحص. **البورتات المفتوحة تُشكل نقاط ضعف محتملة.**\n`;
+            output += `[+] للحصول على تقييم أمني شامل، يرجى التواصل مع الخبير **محمد المخدري**.\n`;
+
+
+            setTimeout(() => {
+                resultArea.textContent = output;
+            }, 2000); // تأخير لثوانٍ لمحاكاة عملية الفحص
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

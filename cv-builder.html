@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منشئ السيرة الذاتية الفوري | محمد</title>
+    <link rel="stylesheet" href="../style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo">
+                <a href="../index.html">محمد | CyberDev</a>
+            </div>
+            <button class="menu-toggle" aria-label="فتح القائمة">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="../index.html">الرئيسية</a></li>
+                    <li><a href="../index.html#cyber-security">الأمن السيبراني</a></li>
+                    <li><a href="../index.html#development">البرمجة والتطوير</a></li>
+                    <li><a href="cv-builder.html" class="cta-nav-link active">منشئ السيرة الذاتية</a></li>
+                    <li><a href="../index.html#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container" style="padding: 40px 0;">
+
+        <h1 class="page-title" style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">
+            ✨ منشئ السيرة الذاتية (CV Builder)
+        </h1>
+        
+        <form id="cv-form" class="data-entry-form">
+            
+            <section class="form-section cv-photo-upload">
+                <div class="photo-area">
+                    <img id="profile-pic-preview" src="#" alt="صورة شخصية" style="display:none;">
+                    <span id="photo-placeholder">صورة شخصية (اختياري)</span>
+                </div>
+                <label for="profile-pic" class="upload-link">
+                    اختياري: لتحميل صورة شخصية اضغط هنا
+                </label>
+                <input type="file" id="profile-pic" accept="image/*" style="display: none;">
+            </section>
+            
+            <section class="form-section card-style">
+                <h2><i class="fas fa-id-card"></i> المعلومات الشخصية</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="full-name">الاسم الكامل:</label>
+                        <input type="text" id="full-name" required placeholder="أدخل اسمك الكامل" class="input-field">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">المدينة والدولة:</label>
+                        <input type="text" id="city" placeholder="مثال: الرياض، السعودية" class="input-field">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني:</label>
+                        <input type="email" id="email" required placeholder="example@domain.com" class="input-field">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف:</label>
+                        <input type="tel" id="phone" placeholder="+966 5x xxx xx xx" class="input-field">
+                    </div>
+                </div>
+                
+            </section>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                 <button type="submit" class="btn btn-primary btn-lg" id="generate-cv-btn">
+                    عرض وتنسيق السيرة الذاتية 
+                </button>
+            </div>
+
+        </form>
+
+    </main>
+    
+    <footer class="main-footer">
+        </footer>
+
+    <script src="../js/cv-script.js"></script>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.getElementById('main-nav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
