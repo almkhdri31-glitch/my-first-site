@@ -1,0 +1,19 @@
+User-agent: *
+# السماح لجميع روبوتات الزحف (Google, Bing, إلخ) بالتعامل مع الموقع
+
+Disallow: /admin/
+# منع فهرسة صفحات الإدارة أو لوحات التحكم
+
+Disallow: /temp/
+# منع فهرسة أي مجلدات تحتوي على ملفات مؤقتة أو بيانات مستخدمين (مثل ملفات CV المحفوظة)
+
+Disallow: /cgi-bin/
+# منع الوصول لملفات البرمجة الخلفية القياسية (للحماية)
+
+# السماح بشكل واضح للمحتوى الرئيسي والتعليمي للتأكد من فهرسته:
+Allow: /appcategory-apple.html
+Allow: /app/category-samsung.html
+Allow: /app/category-xiaomi-vivo.html
+Allow: /app/accessories.html
+Sitemap: https://my-first-site-gold-seven.vercel.app/sitemap.xml
+# التأكد من أن هذا الرابط يقود إلى الملف الذي رفعته أعلاه

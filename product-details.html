@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج | (اسم المنتج هنا) - عالم الجوالات</title>
+    <meta name="description" content="مواصفات كاملة وسعر خيارات الشراء لهاتف (اسم المنتج).">
+    <link rel="icon" type="image/png" href="favicon-new.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css"> 
+
+    <style>
+        /* ========================================================== */
+        /* === تنسيقات صفحة تفاصيل المنتج (product-details.html) === */
+        /* ========================================================== */
+        .product-details-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        /* العمود الأيسر (الصور والوصف) */
+        .product-gallery {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--color-bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-main);
+            height: fit-content;
+        }
+
+        .main-image {
+            width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .description-box {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 4px solid var(--color-brand-primary);
+            margin-top: 20px;
+        }
+        
+        .description-box h2 {
+             color: var(--color-brand-primary);
+             font-size: 22px;
+             margin-bottom: 15px;
+        }
+
+        /* العمود الأيمن (الاسم والسعر والخيارات) */
+        .product-info-panel {
+            flex: 1.5;
+            min-width: 450px;
+            background-color: var(--color-bg-secondary);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-main);
+        }
+
+        .product-info-panel h1 {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+        }
+        
+        .product-info-panel .brand {
+             font-size: 20px;
+             color: var(--color-text-subtle);
+             margin-bottom: 20px;
+             border-bottom: 1px solid #eee;
+             padding-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 40px;
+            font-weight: 900;
+            color: #c00;
+            margin: 20px 0;
+            display: block;
+        }
+        
+        /* خيارات المنتج */
+        .options-group {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .options-group h3 {
+            font-size: 18px;
+            color: var(--color-brand-primary);
+            margin-bottom: 10px;
+        }
+
+        .option-choice {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: var(--color-text-light);
+            padding: 8px 15px;
+            border-radius: 6px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s, border 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .option-choice:hover,
+        .option-choice.selected {
+            background-color: #fff8e8;
+            border-color: var(--color-brand-primary);
+            font-weight: 700;
+        }
+
+        /* زر الشراء */
+        .add-to-cart-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background-color: var(--color-brand-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 30px;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--color-brand-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* التجاوب */
+        @media (max-width: 992px) {
+            .product-details-container {
+                flex-direction: column;
+            }
+            .product-info-panel, .product-gallery {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo-area">
+                <img src="logo.png" alt="Store Logo" class="main-logo-img">
+                <div class="titles-container">
+                    <span style="display: block; font-size: 15px; font-weight: 900; color: var(--color-brand-primary);">
+                        عالم الجوالات    
+                    </span> 
+                    <span style="display: block; font-size: 11px; font-weight: 700; color: var(--color-text-light); margin-top: -1px;"> 
+                        متجر الإلكترونيات والهواتف النقالة
+                    </span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-mobile-alt"></i>الأجهزة</a></li>
+                    <li><a href="accessories.html"><i class="fas fa-headphones"></i>الملحقات</a></li> 
+                    <li><a href="video-library.html" class="video-link"><i class="fas fa-video"></i>شروحات المنتجات</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="product-details-container">
+            
+            <div class="product-gallery">
+                <img src="images/iphone-15-pro-main.jpg" alt="iPhone 15 Pro Max - الصورة الرئيسية" class="main-image">
+                
+                <div class="description-box">
+                    <h2>وصف ومميزات المنتج</h2>
+                    <p>
+                        هذا هو هاتف iPhone 15 Pro Max، المصمم بهيكل من التيتانيوم القوي وخفيف الوزن. يتميز بمعالج A17 Pro الرائد وكاميرا احترافية بنظام ثلاثي يتيح لك التقاط صور وفيديوهات بجودة استوديوهات التصوير.
+                    </p>
+                    <p>
+                        **الميزات الرئيسية:**
+                        <ul>
+                            <li>معالج Apple A17 Pro فائق السرعة.</li>
+                            <li>شاشة Super Retina XDR مع تقنية ProMotion.</li>
+                            <li>نظام كاميرا احترافي (العدسة الرئيسية 48MP، عدسة Telephoto 5x).</li>
+                            <li>منفذ USB-C حديث ومناسب.</li>
+                        </ul>
+                    </p>
+                </div>
+                
+            </div>
+            
+            <div class="product-info-panel">
+                <span class="brand">Apple / iPhone</span>
+                <h1>iPhone 15 Pro Max (256GB)</h1>
+                
+                <span class="product-price">4,999 ر.س</span>
+                
+                <div class="options-group">
+                    <h3>اختر سعة التخزين:</h3>
+                    <div class="option-choice selected" data-storage="256">256 GB</div>
+                    <div class="option-choice" data-storage="512">512 GB (+500 ر.س)</div>
+                    <div class="option-choice" data-storage="1TB">1 TB (+1000 ر.س)</div>
+                </div>
+
+                <div class="options-group">
+                    <h3>اختر اللون:</h3>
+                    <div class="option-choice selected" data-color="black">تيتانيوم أسود</div>
+                    <div class="option-choice" data-color="white">تيتانيوم أبيض</div>
+                    <div class="option-choice" data-color="blue">تيتانيوم أزرق</div>
+                </div>
+                
+                <div class="options-group">
+                    <h3>الضمان والتوصيل:</h3>
+                    <p style="color: green; font-weight: 700;">
+                        <i class="fas fa-check-circle"></i> ضمان الوكيل لمدة سنتين
+                    </p>
+                    <p style="color: var(--color-text-light);">
+                        <i class="fas fa-truck"></i> توصيل سريع خلال 24 ساعة
+                    </p>
+                </div>
+
+                <button class="add-to-cart-btn">
+                    <i class="fas fa-shopping-cart"></i> أضف إلى السلة
+                </button>
+                
+            </div>
+            
+        </div>
+    </main>
+    
+    <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 30px auto 15px; opacity: 0.3;">
+    
+    <footer class="main-footer" id="contact-footer">
+        <div class="container text-center">
+             <div class="social-icons">
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/" target="_blank" title="X / Twitter Page"><i class="fab fa-twitter"></i></a>
+                 <a href="https://telegram.org/" target="_blank" title="Telegram Page"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube Channel"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="font-size: 14px; margin-bottom: 5px;">
+                <a href="privacy-policy.html" style="color: var(--color-text-subtle); text-decoration: none;">سياسة الخصوصية</a>
+                <span style="margin: 0 10px; color: var(--color-text-subtle);">|</span>
+                 <a href="contact.html" style="color: var(--color-text-subtle); text-decoration: none;">اتصل بنا</a>
+            </p>
+            <p class="mb-0" style="font-size: 14px; color: var(--color-text-subtle);">
+            جميع الحقوق محفوظة &copy;  <span id="current-year"></span>-M.M.S.ALMKHDRI
+            </p>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="backToTop" title="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script src="script.js"></script>
+</body>
+</html>

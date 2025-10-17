@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شروحات المنتجات - مكتبة الفيديو - عالم الجوالات</title>
+    <meta name="description" content="مكتبة فيديوهات شاملة لشروحات ومراجعات أحدث الهواتف والملحقات المتوفرة في المتجر.">
+    <link rel="icon" type="image/png" href="favicon-new.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css"> 
+
+    <style>
+        /* إضافة تنسيق خاص لهذه الصفحة فقط (يمكن نقله لـ styles.css لاحقاً إذا أردت) */
+        .video-section {
+            padding: 30px 0;
+            background-color: #fcfcfc;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .video-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* تنسيق الفيديو/الصورة المصغرة */
+        .video-thumbnail-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* نسبة 16:9 للفيديو */
+            overflow: hidden;
+        }
+        
+        .video-thumbnail-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: white;
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s;
+        }
+        
+        .video-card:hover .play-icon {
+            transform: translate(-50%, -50%) scale(1.1);
+            color: var(--color-video-highlight); /* لون أحمر مميز */
+        }
+        
+        .video-info {
+            padding: 15px;
+            text-align: right;
+        }
+        
+        .video-info h3 {
+            font-size: 18px;
+            color: var(--color-text-light);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        .video-info p {
+            font-size: 14px;
+            color: var(--color-text-subtle);
+        }
+        
+        /* زر مشاهدة الفيديو */
+        .watch-button {
+            display: block;
+            background-color: var(--color-video-highlight); 
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 0 0 8px 8px; 
+            font-weight: 700;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+        
+        .watch-button:hover {
+            background-color: #A00000;
+        }
+        
+        /* يمكنك إضافة تنسيقات لأزرار التصفح إذا كانت الفيديوهات كثيرة */
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo-area">
+                <img src="logo.png" alt="Store Logo" class="main-logo-img">
+                <div class="titles-container">
+                    <span style="display: block; font-size: 15px; font-weight: 900; color: var(--color-brand-primary);">
+                        عالم الجوالات    
+                    </span> 
+                    <span style="display: block; font-size: 11px; font-weight: 700; color: var(--color-text-light); margin-top: -1px;"> 
+                        متجر الإلكترونيات والهواتف النقالة
+                    </span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-mobile-alt"></i>الأجهزة</a></li>
+                    <li><a href="accessories.html"><i class="fas fa-headphones"></i>الملحقات</a></li> 
+                    <li><a href="video-library.html" class="video-link active"><i class="fas fa-video"></i>شروحات المنتجات</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <section class="category-header">
+        <div class="container">
+            <h1>مكتبة <i class="fas fa-video" style="font-size: 38px; color: var(--color-video-highlight);"></i> شروحات المنتجات</h1>
+            <p>شاهد أحدث مراجعات الهواتف، مقارنات شاملة، وطرق استخدام الملحقات الجديدة.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        
+        <section class="video-section">
+            <h2 style="color: var(--color-brand-primary); border-bottom: 3px solid #eee; padding-bottom: 10px; margin-bottom: 20px;">
+                🎥 أحدث المراجعات
+            </h2>
+            <div class="video-grid">
+                
+                <a href="https://youtube.com/shorts/MrScr-ZSMMo?si=L9Au0u43vniiyLIN" target="_blank" class="video-card">
+                    <div class="video-thumbnail-container">
+                        <img src="video-iphone15.jpg" alt="مراجعة iPhone 15 Pro Max">
+                        <i class="video-iphone15.jpg"></i>
+                    </div>
+                    <div class="video-info">
+                        <h3>مراجعة شاملة: iPhone 15 Pro Max</h3>
+                        <p>نظرة متعمقة على كاميرا التيتانيوم والأداء الاحترافي.</p>
+                    </div>
+                </a>
+                
+                <a href="https://youtu.be/fVSpg5WMDUw?si=5D2R20B7hmjL7hkS" target="_blank" class="video-card">
+                    <div class="video-charger.jpg">
+                        <img src="samsung-s24-ultra.jpg" alt="مقارنة Samsung Galaxy S24 Ultra">
+                        <i class="samsung-s24-ultra.jpg"></i>
+                    </div>
+                    <div class="video-info">
+                        <h3>مقارنة: Galaxy S24 Ultra ضد المنافسين</h3>
+                        <p>اختبار الذكاء الاصطناعي والكاميرا في ظروف الإضاءة المختلفة.</p>
+                    </div>
+                </a>
+
+                <a href="https://youtube.com/shorts/_pD_9zpg7gE?si=r4j5KJ4Yz7DvIvO6" target="_blank" class="video-card">
+                    <div class="video-charger.jpg">
+                        <img src="video-charger.jpg" alt="أفضل شاحن ">
+                        <i class="video-charger.jpg"></i>
+                    </div>
+                    <div class="video-info">
+                        <h3>أفضل شاحن لعام 2025</h3>
+                        <p>نصائح لاختيار الشاحن السريع والآمن لجوالك.</p>
+                    </div>
+                </a>
+                
+            </div>
+        </section>
+
+    </main>
+    
+    <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 30px auto 15px; opacity: 0.3;">
+    
+    <footer class="main-footer" id="contact-footer">
+        <div class="container text-center">
+             <div class="social-icons">
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/" target="_blank" title="X / Twitter Page"><i class="fab fa-twitter"></i></a>
+                 <a href="https://telegram.org/" target="_blank" title="Telegram Page"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube Channel"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="font-size: 14px; margin-bottom: 5px;">
+                <a href="privacy-policy.html" style="color: var(--color-text-subtle); text-decoration: none;">سياسة الخصوصية</a>
+                <span style="margin: 0 10px; color: var(--color-text-subtle);">|</span>
+                 <a href="contact.html" style="color: var(--color-text-subtle); text-decoration: none;">اتصل بنا</a>
+            </p>
+            <p class="mb-0" style="font-size: 14px; color: var(--color-text-subtle);">
+            جميع الحقوق محفوظة &copy;  <span id="current-year"></span>-M.M.S.ALMKHDRI
+            </p>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="backToTop" title="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script src="script.js"></script>
+</body>
+</html>

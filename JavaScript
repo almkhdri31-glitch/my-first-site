@@ -1,0 +1,102 @@
+// **وظائف JavaScript**
+
+const textInput = document.getElementById('textInput');
+const fileInput = document.getElementById('fileInput');
+const createVideoBtn = document.getElementById('createVideoBtn');
+const fileCountSpan = document.getElementById('fileCount');
+const statusDiv = document.getElementById('status');
+const downloadLinkDiv = document.getElementById('downloadLink');
+const videoOutputDiv = document.getElementById('videoOutput');
+const currentSlideSpan = document.getElementById('currentSlide');
+
+const SLIDE_DURATION = 5000; // 5 ثوانٍ لكل شريحة (بالملي ثانية)
+
+// وظيفة تحديث عداد الصور
+function updateFileCount() {
+    const files = fileInput.files;
+    if (files.length > 0) {
+        fileCountSpan.textContent = `تم اختيار ${files.length} صورة. الحد الأدنى 3 صور.`;
+        fileCountSpan.style.color = files.length < 3 ? 'red' : '#888';
+    } else {
+        fileCountSpan.textContent = 'سيتم استخدام الصور بالترتيب الذي رفعتها به. كل صورة ستُعرض لمدة 5 ثواني تقريباً.';
+        fileCountSpan.style.color = '#888';
+    }
+}
+
+// وظيفة محاكاة إنشاء الفيديو وتشغيل العرض المتزامن
+function createVideoSimulation() {
+    const text = textInput.value.trim();
+    const files = fileInput.files;
+
+    // التحقق من الشروط
+    if (text.length < 10 || files.length < 3) {
+        alert('الرجاء إدخال نص (لا يقل عن 10 أحرف) ورفع 3 صور على الأقل.');
+        return;
+    }
+    
+    // إعداد واجهة المستخدم
+    createVideoBtn.disabled = true;
+    statusDiv.style.display = 'block';
+    downloadLinkDiv.style.display = 'none';
+    videoOutputDiv.style.display = 'flex';
+    currentSlideSpan.textContent = 'جاري التحضير...';
+
+    // 1. توليد الصوت الآلي (Web Speech API)
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ar-SA'; // محاولة اختيار صوت عربي
+        window.speechSynthesis.speak(utterance);
+        
+        // 2. مزامنة الصور مع الصوت
+        let slideIndex = 0;
+
+        function showNextSlide() {
+            if (slideIndex < files.length) {
+                const file = files[slideIndex];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // عرض الصورة
+                    currentSlideSpan.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; border-radius: 5px;">`;
+                    // تحديث مؤشر الشريحة
+                    statusDiv.textContent = `جاري العمل... (شريحة ${slideIndex + 1} من ${files.length})`;
+
+                    slideIndex++;
+                    // الانتقال إلى الشريحة التالية بعد 5 ثواني
+                    setTimeout(showNextSlide, SLIDE_DURATION); 
+                };
+                reader.readAsDataURL(file);
+
+            } else {
+                // 3. انتهاء العرض
+                videoOutputDiv.style.display = 'none';
+                statusDiv.style.display = 'none';
+                downloadLinkDiv.style.display = 'block';
+                createVideoBtn.disabled = false;
+                currentSlideSpan.textContent = '';
+                
+                // التأكد من توقف القراءة الآلية إذا لم تتوقف بعد
+                window.speechSynthesis.cancel();
+            }
+        }
+        
+        // عند بدء القراءة الآلية، ابدأ عرض الشرائح بعد تأخير بسيط
+        utterance.onstart = () => {
+            setTimeout(showNextSlide, 1000); // 1 ثانية تأخير قبل عرض أول شريحة
+        };
+        
+        // عند انتهاء القراءة الآلية، توقف عن عرض الشرائح وانتظر انتهاء المؤقتات الحالية
+        utterance.onend = () => {
+            // يمكننا هنا وضع منطق لإيقاف عرض الشرائح بشكل فوري لو احتجنا
+        };
+
+
+    } else {
+        alert('متصفحك لا يدعم التحويل الآلي إلى كلام. لا يمكن إنشاء الفيديو.');
+    }
+}
+
+// تهيئة زر الإنشاء عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    // التأكد من عمل الوظيفة عند الرفع
+});

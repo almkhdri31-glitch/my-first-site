@@ -1,0 +1,140 @@
+/* section-styles.css */
+
+/* استيراد الخطوط والتنسيقات الأساسية من ملف styles.css الرئيسي إذا كان منفصلاً */
+/* بما أنك استخدمت وسم <style> في index.html، سنفترض أنك ستضيف هذه التنسيقات في ملف styles.css الرئيسي الخاص بك أو تدمجها في <style> */
+
+
+/* تنسيقات خاصة بصفحات الأقسام (category-apple.html, category-samsung.html, إلخ) */
+
+/* عنوان الصفحة الرئيسية للقسم */
+.category-header {
+    background-color: var(--color-bg-secondary);
+    padding: 40px 0;
+    text-align: center;
+    border-bottom: 2px solid var(--color-brand-primary);
+    margin-bottom: 30px;
+}
+
+.category-header h1 {
+    font-size: 32px;
+    color: var(--color-text-light);
+    margin-bottom: 10px;
+}
+
+.category-header p {
+    font-size: 18px;
+    color: var(--color-text-subtle);
+}
+
+/* تنسيق أقسام المنتجات الفرعية (الأكثر مبيعاً، أحدث الإصدارات) */
+.product-section {
+    margin-bottom: 50px;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.product-section h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-brand-primary);
+    border-bottom: 3px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* شبكة عرض المنتجات */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* تصميم متجاوب */
+    gap: 30px;
+}
+
+/* بطاقة المنتج الواحد */
+.product-card {
+    background-color: var(--color-bg-card);
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    border-color: var(--color-brand-primary);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 200px; /* ارتفاع ثابت للصور */
+    object-fit: contain; /* للحفاظ على نسب الأبعاد */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    padding: 5px;
+}
+
+.product-info h3 {
+    font-size: 19px;
+    margin: 5px 0;
+    color: var(--color-text-light);
+}
+
+.product-info p.description {
+    font-size: 14px;
+    color: var(--color-text-subtle);
+    margin-bottom: 10px;
+    min-height: 40px; /* لتثبيت ارتفاع الوصف */
+}
+
+.product-info p.price {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--color-accent-secondary);
+    margin-bottom: 15px;
+}
+
+.details-button {
+    display: block;
+    background-color: var(--color-brand-primary);
+    color: var(--color-bg-main);
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.details-button:hover {
+    background-color: var(--color-brand-hover);
+}
+
+/* تنسيق حالة عدم التوفر أو قريباً */
+.details-button.disabled {
+    background-color: #aaa;
+    cursor: default;
+}
+.details-button.disabled:hover {
+    background-color: #aaa;
+}
+
+/* الاستجابة (Responsive) */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr; /* عمود واحد على الجوالات */
+    }
+    .category-header h1 {
+        font-size: 28px;
+    }
+    .product-section {
+        padding: 15px;
+    }
+}
