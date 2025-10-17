@@ -1,6 +1,6 @@
 /* =========================================================
-   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية الموحدة)
-   تم حذف جميع معالجات الإرسال البرمجية لتجاوز خطأ الخادم 500.
+   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية والموحدة)
+   يشمل جميع التصحيحات والتعديلات الأخيرة.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,9 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('cart-items')) {
             renderCartItems();
         }
-        if (document.querySelector('.checkout-container')) { // استخدم محدد مختلف
+        if (document.getElementById('checkout-form')) {
             updateCheckoutSummary();
-            prepareCheckoutForm(); // تحديث حقل الإرسال المخفي
         }
     };
 
@@ -179,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
-    // *** تفعيل زر "إتمام الشراء" في صفحة السلة للنقل إلى checkout.html ***
+    // *** NEW: تفعيل زر "إتمام الشراء" في صفحة السلة للنقل إلى checkout.html ***
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
@@ -199,11 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateCheckoutSummary = () => {
         const summaryElement = document.getElementById('checkout-summary');
         const totalElement = document.getElementById('checkout-total');
-        const checkoutContainer = document.querySelector('.checkout-container');
+        const checkoutForm = document.getElementById('checkout-form');
         
-        if (!summaryElement || !totalElement || !checkoutContainer) return;
-        
-        const checkoutForm = checkoutContainer.querySelector('form');
+        if (!summaryElement || !totalElement) return;
         
         if (cart.length === 0) {
             summaryElement.innerHTML = '<p style="color: red; font-weight: 700;">سلة المشتريات فارغة! يرجى العودة لصفحة <a href="cart.html">السلة</a>.</p>';
@@ -229,58 +226,79 @@ document.addEventListener('DOMContentLoaded', () => {
         totalElement.textContent = formatCurrency(calculateCartTotal());
     };
     
-    // 9. وظيفة تجميع تفاصيل الطلب وتعبئتها في الحقل المخفي مباشرةً
-    // 🔴 تم حذف معالج الإرسال البرمجي بالكامل لتجنب خطأ الخادم 500
-    const prepareCheckoutForm = () => {
-        const checkoutForm = document.querySelector('.checkout-container form');
-        if (!checkoutForm || cart.length === 0) {
-            return;
-        }
+    // 9. معالج إرسال نموذج إتمام الشراء (في checkout.html)
+    const checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault(); 
 
-        // تجميع تفاصيل الطلب
-        const orderDetails = cart.map(item => 
-            `\n - ${item.name} | الكمية: ${item.quantity} | السعر: ${formatCurrency(item.price)} | الإجمالي: ${formatCurrency(item.price * item.quantity)}`
-        ).join('');
+            if (cart.length === 0) {
+                alert('سلة المشتريات فارغة، لا يمكن إتمام الطلب.');
+                return;
+            }
+            
+            // 10. جمع بيانات العميل
+            const customerData = {
+                name: document.getElementById('full-name').value,
+                phone: document.getElementById('phone-number').value,
+                email: document.getElementById('email').value,
+                city: document.getElementById('city').value,
+                address: document.getElementById('address').value,
+            };
+
+            // 11. تجميع تفاصيل الطلب
+            const orderDetails = cart.map(item => ({
+                product: item.name,
+                quantity: item.quantity,
+                price: formatCurrency(item.price),
+                total: formatCurrency(item.price * item.quantity)
+            }));
+            
+            const finalTotal = formatCurrency(calculateCartTotal());
+
+            // 12. بناء رسالة الطلب النهائية
+            let message = `
+========================================
+    🎉 طلب جديد من متجر عالم الجوالات 🎉
+========================================
+✅ بيانات العميل:
+الاسم: ${customerData.name}
+الهاتف: ${customerData.phone}
+البريد: ${customerData.email || 'لا يوجد'}
+المدينة: ${customerData.city}
+العنوان: ${customerData.address}
+
+🛒 تفاصيل الطلبات:
+${orderDetails.map(item => 
+    ` - ${item.product} | الكمية: ${item.quantity} | الإجمالي: ${item.total}`
+).join('\n')}
+
+💰 المجموع الكلي للطلبية: ${finalTotal}
+========================================
+`;
+
+            console.log(message); 
+            
+            alert('تم تأكيد طلبك بنجاح! سيتم التواصل معك قريباً لتأكيد تفاصيل الشحن.');
+
+            // 14. مسح السلة بعد إتمام الطلب
+            cart = [];
+            saveCart(); 
+            
+            // إعادة توجيه لصفحة الاتصال بنا لتأكيد الطلب
+             setTimeout(() => window.location.href = 'contact.html', 2000); 
+        });
         
-        const finalTotal = formatCurrency(calculateCartTotal());
-        
-        const fullMessage = `
-            ========================================
-            🛒 تفاصيل الطلبية (المجموع: ${finalTotal}): 
-            ${orderDetails}
-            ========================================
-        `;
+        // تحديث الملخص عند تحميل الصفحة
+        updateCheckoutSummary();
+    }
 
-        // 10. وضع الرسالة الكاملة في الحقل المخفي ليتم إرسالها مع النموذج (عبر HTML Form Action)
-        const hiddenInput = document.getElementById('order-details-for-html-form');
-        if (hiddenInput) {
-             hiddenInput.value = fullMessage;
-        }
-
-        // إضافة معالج لزر الإرسال لمسح السلة (يتم تشغيله قبل الإرسال التلقائي لـ HTML)
-        const confirmButton = checkoutForm.querySelector('.confirm-order-btn');
-        if (confirmButton) {
-             confirmButton.addEventListener('click', (e) => {
-                if (cart.length > 0) {
-                    // مسح السلة بعد نجاح الإرسال التلقائي من HTML
-                    cart = [];
-                    saveCart(); 
-                } else {
-                    e.preventDefault(); // منع الإرسال إذا كانت السلة فارغة
-                }
-            });
-        }
-        
-    };
-
-    // 🔴 لا يوجد معالج لصفحة الاتصال هنا، الإرسال يعتمد على HTML فقط
-    
 
     /* =======================================
        وظائف عامة (UI/UX)
        ======================================= */
        
-    // 11. وظيفة زر العودة للأعلى
+    // 15. وظيفة زر العودة للأعلى
     const backToTopButton = document.getElementById("backToTop");
     if (backToTopButton) {
         const scrollFunction = () => {
@@ -299,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // 12. وظيفة فتح/إغلاق القائمة في وضع الجوال
+    // 16. وظيفة فتح/إغلاق القائمة في وضع الجوال
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.querySelector('.main-nav');
     
@@ -317,23 +335,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 13. تعيين السنة الحالية في الفوتر
+    // 17. تعيين السنة الحالية في الفوتر
     const currentYearSpan = document.getElementById('current-year');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
     
-    // 14. تحديث حالة السلة عند تحميل أي صفحة
+    // 18. تحديث حالة السلة عند تحميل أي صفحة
     updateCartCount();
     
-    // 15. تفعيل وظيفة عرض السلة إذا كنا في cart.html
+    // 19. تفعيل وظيفة عرض السلة إذا كنا في cart.html
     if (document.getElementById('cart-items')) {
         renderCartItems();
-    }
-    
-    // 16. تفعيل وظيفة تجهيز نموذج الشراء إذا كنا في checkout.html
-    if (document.querySelector('.checkout-container')) {
-        updateCheckoutSummary();
-        prepareCheckoutForm();
     }
 });
