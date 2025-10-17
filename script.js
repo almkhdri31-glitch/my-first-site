@@ -1,6 +1,6 @@
 /* =========================================================
-   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (الإصدار النهائي الموحد)
-   يشمل تصحيح الإرسال المباشر لـ Checkout و إضافة معالج Contact.
+   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية الموحدة)
+   تم حذف جميع معالجات الإرسال البرمجية لتجاوز خطأ الخادم 500.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,8 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('cart-items')) {
             renderCartItems();
         }
-        if (document.getElementById('checkout-form')) {
+        if (document.querySelector('.checkout-container')) { // استخدم محدد مختلف
             updateCheckoutSummary();
+            prepareCheckoutForm(); // تحديث حقل الإرسال المخفي
         }
     };
 
@@ -198,9 +199,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateCheckoutSummary = () => {
         const summaryElement = document.getElementById('checkout-summary');
         const totalElement = document.getElementById('checkout-total');
-        const checkoutForm = document.getElementById('checkout-form');
+        const checkoutContainer = document.querySelector('.checkout-container');
         
-        if (!summaryElement || !totalElement) return;
+        if (!summaryElement || !totalElement || !checkoutContainer) return;
+        
+        const checkoutForm = checkoutContainer.querySelector('form');
         
         if (cart.length === 0) {
             summaryElement.innerHTML = '<p style="color: red; font-weight: 700;">سلة المشتريات فارغة! يرجى العودة لصفحة <a href="cart.html">السلة</a>.</p>';
@@ -226,135 +229,58 @@ document.addEventListener('DOMContentLoaded', () => {
         totalElement.textContent = formatCurrency(calculateCartTotal());
     };
     
-    // 9. معالج إرسال نموذج إتمام الشراء (في checkout.html) - تم تصحيحه لضمان الإرسال الموحد والتأكيد
-    const checkoutForm = document.getElementById('checkout-form');
-    if (checkoutForm) {
-        checkoutForm.addEventListener('submit', async (e) => { 
-            e.preventDefault(); 
-            
-            const confirmButton = checkoutForm.querySelector('.confirm-order-btn');
-            // ⚠️ تنبيه للزائر: تعطيل الزر وعرض رسالة "جاري الإرسال"
-            confirmButton.disabled = true;
-            confirmButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جار إرسال الطلب، من فضلك انتظر...';
+    // 9. وظيفة تجميع تفاصيل الطلب وتعبئتها في الحقل المخفي مباشرةً
+    // 🔴 تم حذف معالج الإرسال البرمجي بالكامل لتجنب خطأ الخادم 500
+    const prepareCheckoutForm = () => {
+        const checkoutForm = document.querySelector('.checkout-container form');
+        if (!checkoutForm || cart.length === 0) {
+            return;
+        }
 
-            if (cart.length === 0) {
-                alert('سلة المشتريات فارغة، لا يمكن إتمام الطلب.');
-                confirmButton.disabled = false;
-                confirmButton.innerHTML = '<i class="fas fa-money-check-alt"></i> تأكيد الطلب وإرساله';
-                return;
-            }
+        // تجميع تفاصيل الطلب
+        const orderDetails = cart.map(item => 
+            `\n - ${item.name} | الكمية: ${item.quantity} | السعر: ${formatCurrency(item.price)} | الإجمالي: ${formatCurrency(item.price * item.quantity)}`
+        ).join('');
+        
+        const finalTotal = formatCurrency(calculateCartTotal());
+        
+        const fullMessage = `
+            ========================================
+            🛒 تفاصيل الطلبية (المجموع: ${finalTotal}): 
+            ${orderDetails}
+            ========================================
+        `;
 
-            // 11. تجميع تفاصيل الطلب
-            const orderDetails = cart.map(item => 
-                `\n - ${item.name} | الكمية: ${item.quantity} | السعر: ${formatCurrency(item.price)} | الإجمالي: ${formatCurrency(item.price * item.quantity)}`
-            ).join('');
-            
-            const finalTotal = formatCurrency(calculateCartTotal());
-            
-            const fullMessage = `
-                ========================================
-                🛒 تفاصيل الطلبية (المجموع: ${finalTotal}): 
-                ${orderDetails}
-                ========================================
-            `;
-            
-            // إعداد البيانات للإرسال
-            const formData = new FormData(checkoutForm);
-            // إضافة حقول إضافية للبيانات
-            formData.append('تفاصيل الطلب والمنتجات', fullMessage);
-            formData.append('المجموع النهائي', finalTotal);
-            
-            // 12. إرسال البيانات عبر Fetch API إلى Web3Forms
-            try {
-                const response = await fetch(checkoutForm.action, {
-                    method: checkoutForm.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json' 
-                    }
-                });
+        // 10. وضع الرسالة الكاملة في الحقل المخفي ليتم إرسالها مع النموذج (عبر HTML Form Action)
+        const hiddenInput = document.getElementById('order-details-for-html-form');
+        if (hiddenInput) {
+             hiddenInput.value = fullMessage;
+        }
 
-                if (response.ok) {
-                    // 13. نجاح الإرسال: مسح السلة وإعادة توجيه للتأكيد
+        // إضافة معالج لزر الإرسال لمسح السلة (يتم تشغيله قبل الإرسال التلقائي لـ HTML)
+        const confirmButton = checkoutForm.querySelector('.confirm-order-btn');
+        if (confirmButton) {
+             confirmButton.addEventListener('click', (e) => {
+                if (cart.length > 0) {
+                    // مسح السلة بعد نجاح الإرسال التلقائي من HTML
                     cart = [];
                     saveCart(); 
-                    
-                    // 🌟 إعادة توجيه إلى صفحة النجاح الخاصة بـ Web3Forms (علامة الصح الخضراء)
-                    window.location.href = 'https://web3forms.com/success'; 
                 } else {
-                     const data = await response.json();
-                     // ⚠️ تنبيه للزائر في حالة الفشل
-                     alert(`فشل إرسال الطلب: ${data.message || 'حدث خطأ غير معروف. يرجى مراجعة بياناتك والمحاولة مجدداً.'}`);
-                     confirmButton.disabled = false;
-                     confirmButton.innerHTML = '<i class="fas fa-money-check-alt"></i> تأكيد الطلب وإرساله';
+                    e.preventDefault(); // منع الإرسال إذا كانت السلة فارغة
                 }
-
-            } catch (error) {
-                // ⚠️ تنبيه للزائر في حالة خطأ الاتصال
-                alert('حدث خطأ في الاتصال بالشبكة. يرجى التحقق من اتصالك والمحاولة لاحقاً.');
-                confirmButton.disabled = false;
-                confirmButton.innerHTML = '<i class="fas fa-money-check-alt"></i> تأكيد الطلب وإرساله';
-            }
-        });
+            });
+        }
         
-        // تحديث الملخص عند تحميل الصفحة
-        updateCheckoutSummary();
-    }
+    };
 
-
-    // =======================================
-    // وظائف صفحة الاتصال بنا (contact.html) - تمت إضافتها للتأكيد
-    // =======================================
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => { 
-            e.preventDefault(); 
-            
-            const submitButton = contactForm.querySelector('.submit-button');
-            // ⚠️ تنبيه للزائر: تعطيل الزر وعرض رسالة "جاري الإرسال"
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جار الإرسال...';
-
-            const formData = new FormData(contactForm);
-            
-            // إرسال البيانات عبر Fetch API إلى Web3Forms
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: contactForm.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json' 
-                    }
-                });
-
-                if (response.ok) {
-                    // نجاح الإرسال: مسح الحقول وعرض رسالة نجاح
-                    alert('شكراً لك! تم استلام رسالتك بنجاح. سيتم الرد عليك قريباً.');
-                    contactForm.reset(); // مسح الحقول بعد النجاح
-                    submitButton.innerHTML = 'إرسال الرسالة <i class="fas fa-paper-plane"></i>';
-                    submitButton.disabled = false;
-                } else {
-                     const data = await response.json();
-                     // ⚠️ تنبيه للزائر في حالة الفشل
-                     alert(`فشل إرسال الرسالة: ${data.message || 'خطأ غير معروف. يرجى المحاولة مجدداً.'}`);
-                     submitButton.innerHTML = 'إرسال الرسالة <i class="fas fa-paper-plane"></i>';
-                     submitButton.disabled = false;
-                }
-
-            } catch (error) {
-                // ⚠️ تنبيه للزائر في حالة خطأ الاتصال
-                alert('حدث خطأ في الاتصال بالشبكة. يرجى التحقق من اتصالك والمحاولة لاحقاً.');
-                submitButton.innerHTML = 'إرسال الرسالة <i class="fas fa-paper-plane"></i>';
-                submitButton.disabled = false;
-            }
-        });
-    }
+    // 🔴 لا يوجد معالج لصفحة الاتصال هنا، الإرسال يعتمد على HTML فقط
+    
 
     /* =======================================
        وظائف عامة (UI/UX)
        ======================================= */
        
-    // 15. وظيفة زر العودة للأعلى
+    // 11. وظيفة زر العودة للأعلى
     const backToTopButton = document.getElementById("backToTop");
     if (backToTopButton) {
         const scrollFunction = () => {
@@ -373,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // 16. وظيفة فتح/إغلاق القائمة في وضع الجوال
+    // 12. وظيفة فتح/إغلاق القائمة في وضع الجوال
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.querySelector('.main-nav');
     
@@ -391,17 +317,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 17. تعيين السنة الحالية في الفوتر
+    // 13. تعيين السنة الحالية في الفوتر
     const currentYearSpan = document.getElementById('current-year');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
     
-    // 18. تحديث حالة السلة عند تحميل أي صفحة
+    // 14. تحديث حالة السلة عند تحميل أي صفحة
     updateCartCount();
     
-    // 19. تفعيل وظيفة عرض السلة إذا كنا في cart.html
+    // 15. تفعيل وظيفة عرض السلة إذا كنا في cart.html
     if (document.getElementById('cart-items')) {
         renderCartItems();
+    }
+    
+    // 16. تفعيل وظيفة تجهيز نموذج الشراء إذا كنا في checkout.html
+    if (document.querySelector('.checkout-container')) {
+        updateCheckoutSummary();
+        prepareCheckoutForm();
     }
 });
