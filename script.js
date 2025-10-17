@@ -1,6 +1,6 @@
 /* =========================================================
-   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (النسخة النهائية والموحدة)
-   يشمل جميع التصحيحات والتعديلات الأخيرة.
+   SCRIPT.JS - الوظائف الرئيسية لمتجر عالم الجوالات (الإصدار النهائي الموحد)
+   يشمل تصحيح الإرسال المباشر لـ Checkout و إضافة معالج Contact.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
-    // *** NEW: تفعيل زر "إتمام الشراء" في صفحة السلة للنقل إلى checkout.html ***
+    // *** تفعيل زر "إتمام الشراء" في صفحة السلة للنقل إلى checkout.html ***
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
@@ -226,73 +226,129 @@ document.addEventListener('DOMContentLoaded', () => {
         totalElement.textContent = formatCurrency(calculateCartTotal());
     };
     
-    // 9. معالج إرسال نموذج إتمام الشراء (في checkout.html)
+    // 9. معالج إرسال نموذج إتمام الشراء (في checkout.html) - تم تصحيحه لضمان الإرسال الموحد والتأكيد
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
-        checkoutForm.addEventListener('submit', (e) => {
+        checkoutForm.addEventListener('submit', async (e) => { 
             e.preventDefault(); 
+            
+            const confirmButton = checkoutForm.querySelector('.confirm-order-btn');
+            // ⚠️ تنبيه للزائر: تعطيل الزر وعرض رسالة "جاري الإرسال"
+            confirmButton.disabled = true;
+            confirmButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جار إرسال الطلب، من فضلك انتظر...';
 
             if (cart.length === 0) {
                 alert('سلة المشتريات فارغة، لا يمكن إتمام الطلب.');
+                confirmButton.disabled = false;
+                confirmButton.innerHTML = '<i class="fas fa-money-check-alt"></i> تأكيد الطلب وإرساله';
                 return;
             }
-            
-            // 10. جمع بيانات العميل
-            const customerData = {
-                name: document.getElementById('full-name').value,
-                phone: document.getElementById('phone-number').value,
-                email: document.getElementById('email').value,
-                city: document.getElementById('city').value,
-                address: document.getElementById('address').value,
-            };
 
             // 11. تجميع تفاصيل الطلب
-            const orderDetails = cart.map(item => ({
-                product: item.name,
-                quantity: item.quantity,
-                price: formatCurrency(item.price),
-                total: formatCurrency(item.price * item.quantity)
-            }));
+            const orderDetails = cart.map(item => 
+                `\n - ${item.name} | الكمية: ${item.quantity} | السعر: ${formatCurrency(item.price)} | الإجمالي: ${formatCurrency(item.price * item.quantity)}`
+            ).join('');
             
             const finalTotal = formatCurrency(calculateCartTotal());
-
-            // 12. بناء رسالة الطلب النهائية
-            let message = `
-========================================
-    🎉 طلب جديد من متجر عالم الجوالات 🎉
-========================================
-✅ بيانات العميل:
-الاسم: ${customerData.name}
-الهاتف: ${customerData.phone}
-البريد: ${customerData.email || 'لا يوجد'}
-المدينة: ${customerData.city}
-العنوان: ${customerData.address}
-
-🛒 تفاصيل الطلبات:
-${orderDetails.map(item => 
-    ` - ${item.product} | الكمية: ${item.quantity} | الإجمالي: ${item.total}`
-).join('\n')}
-
-💰 المجموع الكلي للطلبية: ${finalTotal}
-========================================
-`;
-
-            console.log(message); 
             
-            alert('تم تأكيد طلبك بنجاح! سيتم التواصل معك قريباً لتأكيد تفاصيل الشحن.');
-
-            // 14. مسح السلة بعد إتمام الطلب
-            cart = [];
-            saveCart(); 
+            const fullMessage = `
+                ========================================
+                🛒 تفاصيل الطلبية (المجموع: ${finalTotal}): 
+                ${orderDetails}
+                ========================================
+            `;
             
-            // إعادة توجيه لصفحة الاتصال بنا لتأكيد الطلب
-             setTimeout(() => window.location.href = 'contact.html', 2000); 
+            // إعداد البيانات للإرسال
+            const formData = new FormData(checkoutForm);
+            // إضافة حقول إضافية للبيانات
+            formData.append('تفاصيل الطلب والمنتجات', fullMessage);
+            formData.append('المجموع النهائي', finalTotal);
+            
+            // 12. إرسال البيانات عبر Fetch API إلى Web3Forms
+            try {
+                const response = await fetch(checkoutForm.action, {
+                    method: checkoutForm.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json' 
+                    }
+                });
+
+                if (response.ok) {
+                    // 13. نجاح الإرسال: مسح السلة وإعادة توجيه للتأكيد
+                    cart = [];
+                    saveCart(); 
+                    
+                    // 🌟 إعادة توجيه إلى صفحة النجاح الخاصة بـ Web3Forms (علامة الصح الخضراء)
+                    window.location.href = 'https://web3forms.com/success'; 
+                } else {
+                     const data = await response.json();
+                     // ⚠️ تنبيه للزائر في حالة الفشل
+                     alert(`فشل إرسال الطلب: ${data.message || 'حدث خطأ غير معروف. يرجى مراجعة بياناتك والمحاولة مجدداً.'}`);
+                     confirmButton.disabled = false;
+                     confirmButton.innerHTML = '<i class="fas fa-money-check-alt"></i> تأكيد الطلب وإرساله';
+                }
+
+            } catch (error) {
+                // ⚠️ تنبيه للزائر في حالة خطأ الاتصال
+                alert('حدث خطأ في الاتصال بالشبكة. يرجى التحقق من اتصالك والمحاولة لاحقاً.');
+                confirmButton.disabled = false;
+                confirmButton.innerHTML = '<i class="fas fa-money-check-alt"></i> تأكيد الطلب وإرساله';
+            }
         });
         
         // تحديث الملخص عند تحميل الصفحة
         updateCheckoutSummary();
     }
 
+
+    // =======================================
+    // وظائف صفحة الاتصال بنا (contact.html) - تمت إضافتها للتأكيد
+    // =======================================
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => { 
+            e.preventDefault(); 
+            
+            const submitButton = contactForm.querySelector('.submit-button');
+            // ⚠️ تنبيه للزائر: تعطيل الزر وعرض رسالة "جاري الإرسال"
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جار الإرسال...';
+
+            const formData = new FormData(contactForm);
+            
+            // إرسال البيانات عبر Fetch API إلى Web3Forms
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: contactForm.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json' 
+                    }
+                });
+
+                if (response.ok) {
+                    // نجاح الإرسال: مسح الحقول وعرض رسالة نجاح
+                    alert('شكراً لك! تم استلام رسالتك بنجاح. سيتم الرد عليك قريباً.');
+                    contactForm.reset(); // مسح الحقول بعد النجاح
+                    submitButton.innerHTML = 'إرسال الرسالة <i class="fas fa-paper-plane"></i>';
+                    submitButton.disabled = false;
+                } else {
+                     const data = await response.json();
+                     // ⚠️ تنبيه للزائر في حالة الفشل
+                     alert(`فشل إرسال الرسالة: ${data.message || 'خطأ غير معروف. يرجى المحاولة مجدداً.'}`);
+                     submitButton.innerHTML = 'إرسال الرسالة <i class="fas fa-paper-plane"></i>';
+                     submitButton.disabled = false;
+                }
+
+            } catch (error) {
+                // ⚠️ تنبيه للزائر في حالة خطأ الاتصال
+                alert('حدث خطأ في الاتصال بالشبكة. يرجى التحقق من اتصالك والمحاولة لاحقاً.');
+                submitButton.innerHTML = 'إرسال الرسالة <i class="fas fa-paper-plane"></i>';
+                submitButton.disabled = false;
+            }
+        });
+    }
 
     /* =======================================
        وظائف عامة (UI/UX)
