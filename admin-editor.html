@@ -1,0 +1,452 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية - CV</title>
+    <style>
+        /* ********************************************************* */
+        /* تنسيقات النموذج (صفحة الإدخال) - بدون تغيير */
+        /* ********************************************************* */
+        body {
+            font-family: 'Arial', 'Helvetica Neue', sans-serif; 
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 0; 
+            margin: 0;
+            direction: rtl; 
+        }
+        
+        input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="url"], textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            display: block;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        header {
+            background-color: #17202A;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+        }
+        footer {
+            background-color: #17202A;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px; 
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto; 
+            background: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cv-title {
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: #17202A;
+            margin-bottom: 5px;
+            letter-spacing: 5px;
+        }
+
+        .header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        #profile-image {
+            width: 100px !important;
+            height: 100px !important;
+            max-width: 100px !important; 
+            max-height: 100px !important; 
+            background-color: #e9ecef; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid #007bff;
+            display: block; 
+            margin: 0 auto 10px auto; 
+            opacity: 0.7; 
+        }
+        
+        #profile-image[src]:not([src=""]) {
+            opacity: 1; 
+            border: 2px solid #28a745; 
+        }
+
+        .image-upload-container input[type="file"] {
+            display: none;
+        }
+
+        .upload-label {
+            display: block;
+            cursor: pointer;
+            color: #007bff;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff; /* الخط الأزرق الذي سيتم تعديله في الطباعة */
+            padding-bottom: 5px;
+            margin-top: 25px;
+            font-size: 20px; 
+            font-weight: 600; 
+        }
+
+        .section-content {
+            margin-bottom: 20px;
+            padding-right: 15px;
+        }
+        
+        .print-button-on-form {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 25px;
+            transition: background-color 0.3s;
+        }
+
+        .print-area {
+             display: flex !important; 
+        }
+        form {
+             display: block !important; 
+        }
+        
+        #printable-cv {
+            display: none; 
+        }
+        
+        .skills-options div {
+             display: inline-block;
+             margin-left: 10px;
+             margin-bottom: 5px;
+        }
+
+        .language-entry, .reference-entry {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .language-entry input[type="text"], 
+        .language-entry input[type="number"] {
+            width: calc(50% - 15px);
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .reference-entry input {
+            margin-bottom: 10px;
+        }
+        
+        /* ********************************************************* */
+        /* تنسيقات صفحة الطباعة (الحل الهندسي لمشاكل التقطيع والوضوح) */
+        /* ********************************************************* */
+        @media print {
+            
+            @page {
+                margin: 0.5cm !important; 
+                padding: 0 !important;
+            }
+
+            body {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                font-family: 'Arial', 'Helvetica Neue', sans-serif !important; 
+                font-size: 12px !important; 
+            }
+            
+            /* إخفاء عناصر النموذج الأساسية */
+            .print-area, form, .print-actions, .print-button-on-form, header, footer { 
+                display: none !important;
+            }
+            
+            #printable-cv {
+                display: block !important; 
+                width: 100% !important; 
+                position: relative; 
+                background: white;
+                box-sizing: border-box;
+                padding: 0;
+                margin: 0;
+            }
+            
+            /* تفعيل طباعة الألوان */
+            .sidebar-column, .main-content-column h2, .lang-bar-fill, #cv-print-header {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            /* ********************************************************* */
+            /* 1. نظام الأعمدة ومنع التقطيع */
+            /* ********************************************************* */
+            
+            #print-content-columns {
+                display: grid !important; 
+                grid-template-columns: 35% 65% !important; 
+                gap: 0; 
+                position: relative;
+            }
+            
+            /* العمود الجانبي الملون (Sidebar - على اليمين) */
+            .sidebar-column {
+                background-color: #5B4F46 !important; 
+                color: #FFFFFF !important; /* النص العادي: أبيض ناصع لتباين ممتاز */
+                padding: 20px 10px 10px 10px !important; 
+                order: 1; 
+            }
+            
+            /* عمود المحتوى الرئيسي (على اليسار) */
+            .main-content-column {
+                padding: 20px 20px 20px 15px !important; 
+                order: 2; 
+                background: white;
+            }
+
+            /* منع قطع المحتوى داخل الأقسام (الحل الرئيسي لمشكلة التقطيع) */
+            .main-content-column h2, 
+            .sidebar-column h2,
+            .section-content,
+            .language-entry-print,
+            .reference-entry-print {
+                page-break-inside: avoid !important; /* للطباعة */
+                -webkit-column-break-inside: avoid !important; /* لمتصفحات كروم */
+                break-inside: avoid !important; /* للجميع */
+            }
+            
+            /* ********************************************************* */
+            /* 2. تحسين وضوح العناوين في العمود الرئيسي (اللون الأبيض) */
+            /* ********************************************************* */
+            
+            /* العناوين في العمود الرئيسي (أسود داكن مع خط رمادي) */
+            .main-content-column h2 {
+                color: #17202A !important; /* لون النص: أسود داكن */
+                border-bottom: 2px solid #6c757d !important; /* لون الخط السفلي: رمادي غامق احترافي */
+                padding-bottom: 3px !important; 
+                margin-top: 15px !important; 
+                font-size: 16px !important; 
+                font-weight: 700 !important;
+                display: block !important;
+                border-left: none !important; 
+                padding-left: 0 !important;
+            }
+            
+            .main-content-column h2::after {
+                display: none !important; 
+            }
+            
+            /* تنسيق عنوان "CV" في العمود الرئيسي (على اليسار) */
+            #cv-print-header {
+                 text-align: left !important; /* كلمة CV على اليسار */
+                 font-size: 30px !important; 
+                 margin-bottom: 10px !important;
+                 letter-spacing: 5px !important; 
+                 border-bottom: 2px solid #6c757d !important; /* رمادي غامق */
+                 padding-bottom: 5px;
+                 color: #17202A !important; /* أسود داكن */
+            }
+            
+            /* ********************************************************* */
+            /* 3. تنسيق العناوين داخل العمود الجانبي (البني الداكن) */
+            /* ********************************************************* */
+            
+            .header-sidebar-container-print {
+                text-align: center !important; 
+                margin-bottom: 20px !important;
+                color: white !important; 
+            }
+             
+            .sidebar-column h2 {
+                color: #f8f9fa !important; /* العناوين الفرعية داخل البني: رمادي فاتح (أنيق وجذاب) */
+                border-bottom: 1px solid #f8f9fa !important; /* خط فاصل رمادي فاتح */
+            }
+
+            .image-upload-container-print {
+                display: block !important;
+                width: 80px !important; 
+                height: 80px !important;
+                margin: 0 auto 8px auto !important; 
+            }
+
+            .image-upload-container-print img {
+                width: 100% !important;
+                height: 100% !important;
+                border-radius: 50% !important;
+                object-fit: cover !important;
+                border: 2px solid #fff !important; 
+            }
+            
+            .header-sidebar-container-print h1 {
+                font-size: 18px !important; 
+                margin: 5px 0 0 0 !important;
+            }
+            
+            .header-sidebar-container-print h3 {
+                font-size: 12px !important; 
+                margin: 2px 0 0 0 !important;
+            }
+            
+            .lang-bar-fill {
+                 background-color: #f8f9fa !important; /* لون ملء شريط اللغة: رمادي فاتح */
+            }
+             
+             .main-content-column .section-content {
+                margin-bottom: 10px !important;
+            }
+            .main-content-column p, .main-content-column li {
+                font-size: 12px !important;
+                line-height: 1.4 !important;
+                color: #333 !important; /* ضمان أن النص في العمود الأبيض أسود داكن */
+            }
+        }
+    </style>
+</head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة توليد كود تحذيرات الأمان</title>
+    <style>
+        body { font-family: Tahoma, Arial, sans-serif; padding: 20px; line-height: 1.6; background-color: #f4f4f9; color: #333; }
+        #controls { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        input[type="text"], textarea, select, input[type="date"] { width: 100%; padding: 10px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 10px; }
+        button:hover { background-color: #0056b3; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        #output-area { background: #e9e9e9; padding: 15px; border-radius: 4px; overflow-x: auto; margin-top: 15px; }
+        pre { white-space: pre-wrap; word-wrap: break-word; font-size: 14px; color: #000; }
+        h2 { border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="controls">
+        <h2>🚀 توليد كود بطاقة تحذير أمان جديدة</h2>
+        
+        <label for="title-input">عنوان التحذير:</label>
+        <input type="text" id="title-input" placeholder="مثال: ثغرة تنفيذ كود عن بعد في خوادم Exchange">
+        
+        <label for="cve-input">رقم الثغرة (CVE-XXXXX):</label>
+        <input type="text" id="cve-input" placeholder="مثال: CVE-2025-XXXXX">
+
+        <label for="summary-input">الملخص/الوصف القصير:</label>
+        <textarea id="summary-input" rows="3" placeholder="مثال: هذه الثغرة تسمح للمهاجمين بتنفيذ تعليمات برمجية دون مصادقة..."></textarea>
+        
+        <label for="solution-input">الحل/الإجراء المطلوب:</label>
+        <textarea id="solution-input" rows="2" placeholder="مثال: يجب تطبيق تحديث الأمان الأخير (KB504XXXX) فوراً."></textarea>
+
+        <label for="severity-select">درجة الخطورة:</label>
+        <select id="severity-select">
+            <option value="high">حرج جداً (أحمر)</option>
+            <option value="medium">متوسط (برتقالي)</option>
+            <option value="low">منخفض (أزرق)</option>
+        </select>
+        
+        <label for="date-input">تاريخ النشر (اختياري):</label>
+        <input type="date" id="date-input" value="2025-10-12">
+
+        <button onclick="generateCard()">توليد كود البطاقة</button>
+    </div>
+
+    <hr>
+    
+    <div id="output-area">
+        <h3>الكود الناتج (انسخه والصقه في ملف Security-alerts.html):</h3>
+        <pre id="output-code">سيظهر الكود هنا بعد التوليد.</pre>
+    </div>
+
+    <script>
+        function generateCard() {
+            // 1. جمع البيانات من الحقول
+            const title = document.getElementById('title-input').value.trim();
+            const cve = document.getElementById('cve-input').value.trim();
+            const summary = document.getElementById('summary-input').value.trim();
+            const solution = document.getElementById('solution-input').value.trim();
+            const severity = document.getElementById('severity-select').value;
+            const dateInput = document.getElementById('date-input').value;
+            
+            if (!title || !summary) {
+                alert('الرجاء تعبئة حقول العنوان والملخص.');
+                return;
+            }
+
+            // 2. تحديد الفئات والنصوص بناءً على الخطورة
+            let tagClass;
+            let tagText;
+            let icon = '🚨'; 
+            let cveDisplay = cve ? ` (${cve})` : ''; 
+            let solutionDisplay = solution ? `<p class="alert-solution">**الحل:** ${solution}</p>` : '';
+
+            if (severity === 'high') {
+                tagClass = 'tag-high';
+                tagText = 'حرج جداً';
+            } else if (severity === 'medium') {
+                tagClass = 'tag-medium';
+                tagText = 'متوسط';
+                icon = '⚠️';
+            } else {
+                tagClass = 'tag-low';
+                tagText = 'منخفض';
+                icon = 'ℹ️';
+            }
+
+            // تنسيق التاريخ
+            const formattedDate = dateInput ? `تاريخ النشر: ${dateInput}` : '';
+
+            // 3. بناء كود HTML الكامل للبطاقة الجديدة
+            // *** هذا الجزء تم تصحيحه لمعالجة إدخالات النصوص التجريبية***
+            const newCardHTML = `
+<div class="security-card ${tagClass}">
+    <div class="card-header">
+        <span class="alert-tag ${tagClass}">${icon} ${tagText}</span>
+    </div>
+    <div class="card-body">
+        <h3>${title}${cveDisplay}</h3>
+        <p class="alert-summary">${summary}</p>
+        ${solutionDisplay}
+        ${formattedDate ? `<p class="alert-date">${formattedDate}</p>` : ''}
+    </div>
+    <div class="card-footer">
+        <span class="level-indicator ${tagClass}">${tagText}</span>
+    </div>
+</div>
+`;
+
+            // 4. عرض الكود الناتج في منطقة الإخراج
+            document.getElementById('output-code').textContent = newCardHTML;
+        }
+    </script>
+
+</body>
+</html>

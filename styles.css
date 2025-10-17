@@ -1,0 +1,633 @@
+/* ========================================================== */
+/* === ملف التنسيقات الموحد (styles.css) === */
+/* ========================================================== */
+
+/* المتغيرات الأساسية للموقع (الألوان والخطوط) */
+:root {
+    --font-family-base: 'Cairo', sans-serif;
+    
+    /* الألوان الأساسية */
+    --color-bg-main: #FAF9F7;           
+    --color-bg-secondary: #FFFDF2;      
+    --color-text-light: #333333;        
+    --color-text-subtle: #666666;       
+    
+    /* ألوان العلامة التجارية (الذهبي/الأصفر) */
+    --color-brand-primary: #FFC300;     
+    --color-brand-secondary: #DAA520;   
+    --color-accent-secondary: #f39c12;  
+    
+    /* ظلال وأبعاد */
+    --shadow-main: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 18px rgba(0, 0, 0, 0.15);
+    
+    /* الأجهزة الخلفيات الخاصة */
+    --color-apple: #a2aaad;
+    --color-samsung: #124B9F;
+    --color-xiaomi: #FF6700;
+}
+
+/* ========================================================== */
+/* === التنسيقات العامة والهيكل الأساسي === */
+/* ========================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-base);
+    line-height: 1.6;
+    color: var(--color-text-light);
+    font-size: 16px;
+    background-color: var(--color-bg-main); 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.highlight-text {
+    color: var(--color-brand-primary);
+}
+
+/* ========================================================== */
+/* === الهيدر (Header) وقائمة التنقل (Navigation) === */
+/* ========================================================== */
+
+.main-header {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-light);
+    padding: 12px 0;
+    border-bottom: 3px solid var(--color-brand-primary);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-logo-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-text-light);
+    border-bottom: 3px solid transparent; 
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    color: var(--color-brand-primary);
+    border-bottom: 3px solid var(--color-brand-primary);
+}
+
+.main-nav ul li a i {
+    margin-left: 8px;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-brand-primary);
+    padding: 10px;
+}
+
+/* ========================================================== */
+/* === قسم الترويسة الرئيسي (Hero Section) === */
+/* ========================================================== */
+
+.store-hero {
+    padding: 50px 0;
+    background: linear-gradient(180deg, rgba(255, 253, 242, 0.5) 0%, rgba(255, 253, 242, 0.90) 70%), url('background-image.jpg');
+    background-size: cover; 
+    background-position: center top; 
+    border-bottom: 1px solid #ddd;
+}
+
+.hero-title {
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-weight: 900;
+}
+
+.hero-subtitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--color-text-subtle);
+}
+
+.hero-text {
+    font-size: 17px;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: var(--color-text-light);
+}
+
+/* ========================================================== */
+/* === بطاقات الأقسام (Home Page Grid) === */
+/* ========================================================== */
+
+.mobile-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.category-card {
+    background-color: var(--color-bg-secondary);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-main);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; 
+    border: 1px solid var(--color-brand-primary);
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-brand-primary);
+}
+
+.category-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 900;
+    color: var(--color-text-light);
+}
+
+.category-card p {
+    font-size: 14px;
+    color: var(--color-text-subtle);
+}
+
+.category-card i, .category-card .fas, .category-card .fab {
+    font-size: 45px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* تخصيص ألوان الأيقونات حسب القسم */
+.card-apple i { color: var(--color-apple); }
+.card-samsung i { color: var(--color-samsung); }
+.card-xiaomi i { color: var(--color-xiaomi); }
+.card-accessories i { color: var(--color-accent-secondary); }
+
+/* === تنسيق بطاقة الأخبار/card-news === */
+.category-card.card-news {
+    background-color: var(--color-bg-secondary); 
+    border-color: var(--color-brand-primary); 
+}
+
+.category-card.card-news i {
+    color: #2196f3; 
+}
+
+.category-card.card-news h3 {
+    color: #2196f3; 
+}
+
+.category-card.card-news p {
+    color: var(--color-text-subtle); 
+}
+
+/* ========================================================== */
+/* === تنسيقات صفحات المنتجات الفرعية (Category Pages) === */
+/* ========================================================== */
+
+.category-header {
+    padding: 40px 0 20px;
+    background-color: var(--color-bg-secondary);
+    border-bottom: 3px solid var(--color-brand-primary);
+    text-align: center;
+}
+
+.category-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 900;
+}
+
+.category-header p {
+    font-size: 18px;
+    color: var(--color-text-subtle);
+}
+
+.product-section {
+    padding: 40px 0;
+}
+
+.product-section h2 {
+    font-size: 28px;
+    color: var(--color-brand-primary);
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    font-weight: 900;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* ========================================================== */
+/* === بطاقات المنتجات (لصفحة Index وللصفحات الفرعية) === */
+/* ========================================================== */
+
+.product-card {
+    background-color: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-main);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    border: 1px solid var(--color-brand-primary);
+    text-align: center;
+    padding: 15px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-brand-primary);
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px; /* ارتفاع موحد لجميع البطاقات */
+    object-fit: contain; 
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.product-info {
+    padding: 15px;
+    text-align: center; /* تجميع العناصر في المنتصف */
+}
+
+.product-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.product-card .price-area,
+.product-info .price {
+    font-size: 20px;
+    font-weight: 900;
+    color: #c00; 
+    margin: 10px 0;
+}
+
+.quantity-control {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-control label {
+    font-weight: 700;
+}
+
+.quantity-control input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: var(--font-family-base);
+}
+
+.product-card .add-to-cart-btn {
+    /* تنسيق زر الإضافة إلى السلة */
+    display: block; 
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--color-brand-primary);
+    color: var(--color-text-light); 
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+.product-card .add-to-cart-btn:hover {
+    background-color: var(--color-brand-secondary);
+    color: white;
+}
+
+/* ========================================================== */
+/* === الفوتر (Footer) والأيقونات الاجتماعية === */
+/* ========================================================== */
+
+.main-footer {
+    background-color: var(--color-bg-secondary);
+    padding: 30px 0;
+    border-top: 1px solid #eee;
+}
+
+.social-icons a {
+    font-size: 20px;
+    margin: 0 10px;
+    color: var(--color-text-subtle);
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--color-brand-primary);
+}
+
+/* ========================================================== */
+/* === زر العودة للأعلى (Back To Top Button) === */
+/* ========================================================== */
+
+#backToTop {
+    display: none; 
+    position: fixed;
+    bottom: 30px;
+    left: 30px; 
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--color-brand-primary);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-main);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#backToTop:hover {
+    background-color: var(--color-brand-secondary);
+    transform: scale(1.05);
+}
+
+/* ========================================================== */
+/* === تنسيقات أيقونة السلة (Cart Widget) === */
+/* ========================================================== */
+
+.cart-widget {
+    margin-right: 15px;
+    position: relative;
+}
+
+/* تنسيق أيقونات إضافية قد تحتاجها بجانب السلة (مثل المستخدم أو الإشعارات) */
+.user-notification-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-notification-icons a {
+    font-size: 24px;
+    color: var(--color-text-light);
+    padding: 10px;
+}
+
+.user-notification-icons a:hover {
+    color: var(--color-brand-primary);
+}
+
+.cart-icon-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 24px;
+    color: var(--color-text-light);
+    transition: color 0.3s;
+}
+
+.cart-icon-link:hover {
+    color: var(--color-brand-primary);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #c00;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ========================================================== */
+/* === تنسيقات صفحة السلة (cart.html) === */
+/* ========================================================== */
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 15px;
+    gap: 15px;
+    background-color: var(--color-bg-secondary);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.cart-item .item-qty-control {
+    text-align: center;
+    width: 100px;
+}
+
+.cart-item .cart-qty-input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: var(--font-family-base);
+}
+
+.cart-item .remove-item-btn {
+    background: none;
+    border: none;
+    color: #c00;
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.cart-item .remove-item-btn:hover {
+    transform: scale(1.1);
+}
+
+#cart-summary {
+    border-top: 2px solid var(--color-brand-primary);
+    margin-top: 30px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+#cart-total-amount {
+    color: #c00;
+    font-size: 24px;
+}
+
+#checkout-btn {
+    background-color: var(--color-brand-primary);
+    color: var(--color-text-light);
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+#checkout-btn:hover {
+    background-color: var(--color-brand-secondary);
+    color: white;
+}
+
+#empty-cart-message a {
+    color: var(--color-brand-primary);
+    text-decoration: underline;
+}
+
+
+/* ========================================================== */
+/* === التجاوب (Media Queries for Mobile) === */
+/* ========================================================== */
+
+@media (max-width: 992px) {
+    /* تنسيق القائمة الجانبية (Hamburger Menu) */
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px; 
+        right: 0;
+        background-color: var(--color-bg-secondary);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        border-top: 1px solid #eee;
+    }
+    
+    /* هذا الكلاس يتم إضافته وإزالته بواسطة JavaScript لتشغيل القائمة */
+    .main-nav.active {
+        display: flex;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .main-nav ul li a {
+        padding: 12px 20px;
+        border-bottom: none;
+        text-align: right;
+    }
+
+    .main-nav ul li a:hover,
+    .main-nav ul li a.active {
+        background-color: #f7f7f7;
+        color: var(--color-brand-primary);
+        border-bottom: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-header .container {
+        padding: 0 15px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-subtitle {
+        font-size: 20px;
+    }
+}
+
+/* التجاوب لصفحة السلة */
+@media (max-width: 600px) {
+    .cart-item {
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+    }
+    .cart-item > * {
+        width: 100%;
+        text-align: center !important;
+    }
+    .cart-item img {
+        width: 100px;
+        height: 100px;
+    }
+    .cart-item .item-qty-control, 
+    .cart-item .remove-item-btn {
+        width: auto;
+    }
+    .cart-item .remove-item-btn {
+        margin-top: 10px;
+    }
+}

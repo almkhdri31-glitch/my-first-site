@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملحقات والكماليات - عالم الجوالات</title>
+    <meta name="description" content="أفضل سماعات الأذن، الشواحن اللاسلكية، وأغطية الحماية لجميع أنواع الهواتف الذكية.">
+    <link rel="icon" type="image/png" href="favicon-new.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css"> 
+    
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo-area">
+                <img src="logo.png" alt="Store Logo" class="main-logo-img">
+                <div class="titles-container">
+                    <span style="display: block; font-size: 15px; font-weight: 900; color: var(--color-brand-primary);">
+                        عالم الجوالات    
+                    </span> 
+                    <span style="display: block; font-size: 11px; font-weight: 700; color: var(--color-text-light); margin-top: -1px;"> 
+                        متجر الإلكترونيات والهواتف النقالة
+                    </span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-mobile-alt"></i>الأجهزة</a></li>
+                    <li><a href="accessories.html" class="active"><i class="fas fa-headphones"></i>الملحقات</a></li> 
+                    <li><a href="video-library.html" class="video-link"><i class="fas fa-video"></i>شروحات المنتجات</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cart-widget">
+                <a href="cart.html" class="cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i> 
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <section class="category-header">
+        <div class="container">
+            <h1>الملحقات <i class="fas fa-headphones" style="font-size: 38px; color: var(--color-accent-secondary);"></i> والكماليات</h1>
+            <p>سماعات، شواحن، أغطية حماية، وأجهزة تتبع. كل ما تحتاجه لجوالك بضمان أصلي.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        
+        <section class="product-section">
+            <h2>🎧 سماعات الأذن والرأس</h2>
+            <div class="products-grid">
+                
+                <div class="product-card" data-product-id="acc-airpods" data-price="250">
+                    <img src="AirPods-4.jpg" alt="AirPods Pro 2">
+                    <div class="product-info">
+                        <h3>Apple AirPods Pro 4</h3>
+                        <p class="description">ميزة إلغاء الضوضاء النشط، صوت مكاني مخصص.</p>
+                        <div class="price-area">السعر: 250.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-airpods">الكمية:</label>
+                            <input type="number" id="qty-airpods" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-product-id="acc-buds" data-price="180">
+                    <img src="galaxy-buds-3-pro.png" alt="Galaxy Buds 4 Pro">
+                    <div class="product-info">
+                        <h3>Samsung Galaxy Buds 3 Pro</h3>
+                        <p class="description">صوت Hi-Fi 24 بت، مريحة وخفيفة الوزن.</p>
+                        <div class="price-area">السعر: 180.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-buds">الكمية:</label>
+                            <input type="number" id="qty-buds" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-section">
+            <h2>🔌 الشواحن وأجهزة التتبع</h2>
+            <div class="products-grid">
+                
+                <div class="product-card" data-product-id="acc-charger" data-price="50">
+                    <img src="wireless-fast-charger-2025.jpg" alt="Wireless Fast Charger">
+                    <div class="product-info">
+                          <h3>شاحن لاسلكي (سريع)</h3>     
+                        <p class="description">شاحن يدعم الشحن السريع متوافق مع جميع سلسلة iPhone.</p>
+                        <div class="price-area">السعر: 50.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-charger">الكمية:</label>
+                            <input type="number" id="qty-charger" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-product-id="acc-airtag" data-price="35">
+                    <img src="apple-air-tag.jpeg" alt="Apple AirTag">
+                    <div class="product-info">
+                        <h3>Apple AirTag (جهاز تتبع)</h3>
+                        <p class="description">تتبع مفاتيحك وحقائبك بسهولة باستخدام شبكة Find My.</p>
+                        <div class="price-area">السعر: 35.00$</div>
+                        
+                        <div class="quantity-control">
+                            <label for="qty-airtag">الكمية:</label>
+                            <input type="number" id="qty-airtag" value="1" min="1" max="10">
+                        </div>
+                        
+                        <button class="add-to-cart-btn">
+                            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 30px auto 15px; opacity: 0.3;">
+    
+    <footer class="main-footer" id="contact-footer">
+        <div class="container text-center">
+             <div class="social-icons">
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/" target="_blank" title="X / Twitter Page"><i class="fab fa-twitter"></i></a>
+                 <a href="https://telegram.org/" target="_blank" title="Telegram Page"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube Channel"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="font-size: 14px; margin-bottom: 5px;">
+                <a href="privacy-policy.html" style="color: var(--color-text-subtle); text-decoration: none;">سياسة الخصوصية</a>
+                <span style="margin: 0 10px; color: var(--color-text-subtle);">|</span>
+                 <a href="contact.html" style="color: var(--color-text-subtle); text-decoration: none;">اتصل بنا</a>
+            </p>
+            <p class="mb-0" style="font-size: 14px; color: var(--color-text-subtle);">
+            جميع الحقوق محفوظة &copy;  <span id="current-year"></span>-M.M.S.ALMKHDRI
+            </p>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="backToTop" title="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script src="script.js"></script>
+</body>
+</html>

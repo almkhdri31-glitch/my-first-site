@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر عالم الجوالات - الأجهزة والملحقات</title>
+    <meta name="description" content="أحدث الهواتف الجوالة لجميع الشركات وجميع اكسسواراتها وملحقاتها بأفضل الأسعار.">
+    <meta name="keywords" content="هواتف جوالة, أجهزة نقالة, اكسسوارات جوال, سامسونج, آيفون, شاومي, أسعار جوالات">
+    <link rel="icon" type="image/png" href="favicon-new.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* تم الحفاظ على تنسيقات الـ CSS الأصلية الخاصة بالخلفية البيج والألوان الذهبية */
+        /* المتغيرات (Variables) */
+        :root {
+            --color-bg-main: #FAF0E6;    /* لون بيج فاتح (Linen) للخلفية الرئيسية */
+            --color-bg-secondary: #FFF8E1; /* لون أفتح قليلاً للخلفية الثانوية */
+            --color-bg-card: #F5F5DC;    /* لون بيج متوسط لبطاقات الخدمات */
+            --color-text-light: #333333;  /* لون داكن للنصوص الرئيسية */
+            --color-text-subtle: #555555; /* لون أغمق قليلاً للنصوص الثانوية */
+            --color-brand-primary: #DAA520;     /* الذهبي الداكن (Goldenrod) */
+            --color-brand-hover: #C5931D;       /* لون التمرير الذهبي الداكن */
+            --color-accent-secondary: #D2691E;  /* البني الداكن */
+            --color-tool-highlight-green: #38761D;    /* الأخضر الداكن */
+            --color-tool-highlight-blue: #0B5394;     /* الأزرق الداكن */
+            --color-video-highlight: #CC0000;         /* الأحمر الداكن (للفيديو) */
+        }
+        /* جميع التنسيقات العامة (body, a, ul, container, header, etc.) تم الاحتفاظ بها */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; line-height: 1.6; color: var(--color-text-light); background-color: var(--color-bg-main); overflow-x: hidden; font-size: 16px; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+        .container { width: 90%; max-width: 1200px; margin: auto; overflow: hidden; }
+        .text-center { text-align: center; }
+        .section-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; color: var(--color-text-light); position: relative; padding-bottom: 10px; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--color-brand-primary); margin: 10px auto 0; border-radius: 2px; }
+        .section-subtitle { font-size: 18px; color: var(--color-text-subtle); margin-bottom: 40px; }
+        .main-header { background: var(--color-bg-main); color: var(--color-text-light); padding: 15px 0; border-bottom: 1px solid #dcdcdc; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position: sticky; top: 0; z-index: 1000; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; }
+        .logo-area { display: flex; align-items: center; text-decoration: none; color: inherit; font-size: 24px; flex-shrink: 1; min-width: 0; }
+        .main-logo-img { height: 40px; width: auto; margin-left: 10px; }
+        .titles-container { line-height: 1.2; text-align: right; }
+        .main-nav ul { display: flex; gap: 20px; }
+        .main-nav ul li a { padding: 5px 0; transition: all 0.3s; color: var(--color-text-light); display: flex; align-items: center; gap: 5px; font-weight: 400; }
+        .main-nav ul li a:hover, .main-nav ul li a.active { color: var(--color-brand-primary); border-bottom: 3px solid var(--color-brand-primary); padding-bottom: 5px; }
+        .main-nav ul li a i { color: var(--color-text-light); transition: color 0.3s; }
+        .main-nav ul li a:hover i, .main-nav ul li a.active i { color: var(--color-brand-primary) !important; }
+        .menu-toggle { color: var(--color-text-light); font-size: 24px; cursor: pointer; display: none; }
+        
+        /* قسم البطل (Hero Section) - تم تغيير الـ ID من home إلى store-hero */
+        .store-hero {
+            padding: 100px 0;
+            min-height: 70vh; /* تقليل الارتفاع قليلاً */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-text-light);
+            background-color: var(--color-bg-secondary);
+            /* يُفضل استخدام صور خلفية احترافية ذات صلة بالهواتف */
+            background-image: url('background-hero.jpg'); 
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover; 
+            background-attachment: fixed;
+            position: relative;
+            z-index: 1;
+        }
+        .store-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2); /* تعتيم فاتح */
+            z-index: -1;
+        }
+        .hero-title { font-size: 34px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+        .hero-subtitle { font-size: 22px; color: var(--color-text-light); margin-bottom: 30px; }
+        .hero-text { font-size: 17px; color: var(--color-text-light); margin-bottom: 40px; }
+        .highlight-text { color: var(--color-brand-primary); }
+        
+        /* تنسيق بطاقات أقسام الجوالات الجديدة (Grid) */
+        .mobile-categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px; 
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .category-card {
+            background: var(--color-bg-card); 
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+            transition: all 0.3s ease;
+            color: var(--color-text-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 3px solid transparent; 
+            text-align: center;
+        }
+        .category-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+            background-color: #EDECE4;
+            border-color: var(--color-brand-primary);
+        }
+        .category-card i {
+            font-size: 45px; /* حجم أكبر لأيقونات الشعارات */
+            margin-bottom: 15px;
+            transition: color 0.3s;
+        }
+        .category-card h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .category-card p {
+            font-size: 14px;
+            color: var(--color-text-subtle);
+        }
+        
+        /* تنسيق الأيقونات (الشعارات الافتراضية) */
+        .card-apple i { color: #000000; } /* أسود */
+        .card-samsung i { color: #124B9F; } /* أزرق سامسونج */
+        .card-xiaomi i { color: #FF6700; } /* برتقالي شاومي */
+        .card-accessories i { color: var(--color-accent-secondary); } /* بني للإكسسوارات */
+        .card-video i { color: var(--color-video-highlight); } /* أحمر للفيديو */
+        
+        .main-footer {
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-light);
+            padding: 20px 0; 
+            border-top: 1px solid #dcdcdc; 
+        }
+        /* تنسيقات الاستجابة (Media Queries) تم الاحتفاظ بها */
+        @media (max-width: 768px) {
+            .mobile-categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo-area">
+                <img src="logo.png" alt="Store Logo" class="main-logo-img">
+                <div class="titles-container">
+                    <span style="display: block; font-size: 15px; font-weight: 900; color: var(--color-brand-primary);">
+               عالم الجوالات    
+                    </span> 
+                    <span style="display: block; font-size: 11px; font-weight: 700; color: var(--color-text-light); margin-top: -1px;"> 
+                    متجر الإلكترونيات والهواتف النقالة
+                    </span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#store-hero" class="active"><i class="fas fa-mobile-alt"></i>الأجهزة</a></li>
+                    <li><a href="accessories.html"><i class="fas fa-headphones"></i>الملحقات</a></li> 
+                    <li><a href="video-library.html" class="video-link"><i class="fas fa-video"></i>شروحات المنتجات</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i>الاتصال بنا</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <section id="store-hero" class="store-hero">
+        <div class="container text-center">
+            <h1 class="hero-title">
+                اكتشف أحدث <span class="highlight-text">الهواتف الذكية والملحقات</span>
+            </h1>
+            <h2 class="hero-subtitle">
+            الجودة والسعر المنافس في متجر واحد
+            </h2>
+            <p class="hero-text">
+                نوفر لكم جميع أنواع الأجهزة الجوالة لجميع الشركات وبأقل الأسعار، بالإضافة إلى تشكيلة واسعة من الملحقات الأصلية.
+            </p>
+            
+            <div class="mobile-categories-grid">
+                
+                <a href="category-apple.html" class="category-card card-apple">
+                    <i class="fab fa-apple"></i>
+                    <h3>أجهزة Apple (iPhone)</h3>
+                    <p>أحدث إصدارات آيفون والملحقات الأصلية</p>
+                </a>
+                
+                <a href="category-samsung.html" class="category-card card-samsung">
+                    <i class="fas fa-tablet-alt"></i> <h3>أجهزة Samsung (Galaxy)</h3>
+                    <p>تشكيلة واسعة من هواتف فئة Galaxy S و Note و A</p>
+                </a>
+                
+                <a href="category-xiaomi.html" class="category-card card-xiaomi">
+                    <i class="fas fa-mobile-alt"></i> <h3>أجهزة Xiaomi & Huawei</h3>
+                    <p>أجهزة بأسعار منافسة وإمكانيات قوية</p>
+                </a>
+
+                <a href="accessories.html" class="category-card card-accessories">
+                    <i class="fas fa-headphones"></i>
+                    <h3>الملحقات والكماليات</h3>
+                    <p>سماعات، شواحن، أغطية حماية والمزيد</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <hr style="border-top: 2px solid var(--color-brand-primary); width: 60%; margin: 0px auto 15px; opacity: 0.3;">
+    
+    <footer class="main-footer" id="contact-footer">
+        <div class="container text-center">
+             <div class="social-icons">
+                <a href="https://www.facebook.com/" target="_blank" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/" target="_blank" title="X / Twitter Page"><i class="fab fa-twitter"></i></a>
+                 <a href="https://telegram.org/" target="_blank" title="Telegram Page"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube Channel"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="font-size: 14px; margin-bottom: 5px;">
+                <a href="privacy-policy.html" style="color: var(--color-text-subtle); text-decoration: none;">سياسة الخصوصية</a>
+                <span style="margin: 0 10px; color: var(--color-text-subtle);">|</span>
+                 <a href="contact.html" style="color: var(--color-text-subtle); text-decoration: none;">اتصل بنا</a>
+            </p>
+            <p class="mb-0" style="font-size: 14px; color: var(--color-text-subtle);">
+            جميع الحقوق محفوظة &copy;  <span id="current-year"></span>-M.M.S.ALMKHDRI
+            </p>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="backToTop" title="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('.main-nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (href === '#store-hero' || href.startsWith('#')) {
+                    mainNav.classList.remove('active');
+                } 
+                else {
+                    setTimeout(() => {
+                       mainNav.classList.remove('active');
+                    }, 50); 
+                }
+            });
+        });
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        let mybutton = document.getElementById("backToTop");
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+          } else {
+            mybutton.style.display = "none";
+          }
+        }
+
+        function topFunction() {
+          document.body.scrollTop = 0; 
+          document.documentElement.scrollTop = 0; 
+        }
+    </script>
+</body>
+</html>
